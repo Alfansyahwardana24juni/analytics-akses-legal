@@ -36,6 +36,12 @@
       --shadow-h: 0 4px 14px rgba(15, 23, 42, .08);
     }
 
+    html,
+    body {
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif;
       background: var(--bg);
@@ -188,7 +194,9 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      min-height: 100vh
+      min-height: 100vh;
+      max-width: calc(100vw - var(--sb));
+      overflow-x: hidden;
     }
 
     .topbar {
@@ -449,6 +457,41 @@
     .sig-sub {
       font-size: 11px;
       color: var(--faint)
+    }
+
+    /* CARD SCROLL BOX & CUSTOM SCROLLBARS */
+    .card-scroll-box {
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #fff;
+      padding: 10px;
+      margin-top: 10px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .card-scroll-box::-webkit-scrollbar,
+    .tbl-scroll::-webkit-scrollbar {
+      height: 9px;
+    }
+
+    .card-scroll-box::-webkit-scrollbar-track,
+    .tbl-scroll::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 6px;
+    }
+
+    .card-scroll-box::-webkit-scrollbar-thumb,
+    .tbl-scroll::-webkit-scrollbar-thumb {
+      background: #3b5bdb;
+      border-radius: 6px;
+    }
+
+    .card-scroll-box::-webkit-scrollbar-thumb:hover,
+    .tbl-scroll::-webkit-scrollbar-thumb:hover {
+      background: #1d4ed8;
     }
 
     /* CHART CARDS */
@@ -887,7 +930,22 @@
       border-collapse: separate;
       border-spacing: 3px;
       font-size: 12px;
-      width: 100%
+      width: max-content;
+      min-width: 100%;
+    }
+
+    .heat-table th.rowh,
+    .heat-rowname,
+    .heat-totlbl:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 10;
+      background: var(--card) !important;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .heat-table th {
+      min-width: 65px;
     }
 
     .heat-table th {
@@ -942,6 +1000,29 @@
     .heat-totlbl {
       font-weight: 700;
       color: var(--txt)
+    }
+
+    .dk-chip {
+      font-size: 12px;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--muted);
+      border-radius: 99px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: .15s
+    }
+
+    .dk-chip:hover {
+      border-color: var(--accent);
+      color: var(--accent)
+    }
+
+    .dk-chip.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff
     }
 
     .sec-divider {
@@ -1036,11 +1117,11 @@
       <div class="sb-logo-sub">KPI Dashboard</div>
     </div>
     <nav class="sb-nav">
-      <div class="sb-section">Laporan</div>
-      <div class="sb-item active" data-page="overview"><span class="ico">📊</span>Overview</div>
+      <div class="sb-section">Divisi Admin</div>
+      <div class="sb-item active" data-page="overview"><span class="ico">📊</span>Overview Admin</div>
       <div class="sb-item" data-page="perorangan"><span class="ico">👤</span>Per Orang</div>
       <div class="sb-item" data-page="divisi"><span class="ico">🏢</span>Per Divisi</div>
-      <div class="sb-section" style="margin-top:8px">Tambahan</div>
+      <div class="sb-section" style="margin-top:8px">Divisi CS</div>
       <div class="sb-item" data-page="cs"><span class="ico">📞</span>Data CS</div>
     </nav>
     <div class="sb-footer">
@@ -1291,18 +1372,44 @@
         <div class="sec-divider">Skala Pekerjaan — Divisi × Kategori</div>
         <div class="chart-card" style="margin-bottom:18px">
           <div
-            style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px">
+            style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px">
             <div>
               <div class="cc-title">Sebaran pekerjaan tiap divisi per kategori</div>
               <div class="cc-sub" style="margin:0">Semakin pekat = semakin banyak. Sumber: rekap_harian.</div>
             </div>
-            <div style="display:flex;gap:4px;background:#f1f5f9;padding:3px;border-radius:8px">
-              <button class="hm-tab active" id="hmVol" onclick="setHeatMode('vol')">Volume</button>
-              <button class="hm-tab" id="hmRate" onclick="setHeatMode('rate')">% Selesai</button>
+            <div style="display:flex;align-items:center;gap:10px">
+              <span
+                style="font-size:11px;color:var(--accent);font-weight:600;background:var(--accent-l);padding:4px 10px;border-radius:99px">↔
+                Scroll ke samping untuk melihat semua kategori</span>
+              <div style="display:flex;gap:4px;background:#f1f5f9;padding:3px;border-radius:8px">
+                <button class="hm-tab active" id="hmVol" onclick="setHeatMode('vol')">Volume</button>
+                <button class="hm-tab" id="hmRate" onclick="setHeatMode('rate')">% Selesai</button>
+              </div>
             </div>
           </div>
-          <div class="tbl-scroll">
+          <div class="card-scroll-box">
             <div id="heatmap"></div>
+          </div>
+        </div>
+
+        <div class="sec-divider">Kategori &amp; Produktivitas per Divisi</div>
+        <div class="chart-card" style="margin-bottom:18px">
+          <div
+            style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px">
+            <div>
+              <div class="cc-title">Sebaran kategori &amp; tingkat penyelesaian</div>
+              <div class="cc-sub" style="margin:0">Batang = jumlah · garis = % selesai. Pilih divisi untuk
+                membandingkan.</div>
+            </div>
+            <span
+              style="font-size:11px;color:var(--accent);font-weight:600;background:var(--accent-l);padding:4px 10px;border-radius:99px">↔
+              Scroll ke samping untuk melihat semua kategori</span>
+          </div>
+          <div id="divKatChips" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px"></div>
+          <div class="card-scroll-box">
+            <div id="cDivKatWrapper" style="position:relative;height:320px;min-width:100%">
+              <canvas id="cDivKat" role="img" aria-label="Kategori produktivitas per divisi"></canvas>
+            </div>
           </div>
         </div>
 
@@ -1332,10 +1439,94 @@
 
       <!-- CS -->
       <div class="page" id="page-cs">
-        <div class="empty" style="padding:50px">
-          <div style="font-size:46px;margin-bottom:14px">📞</div>
-          <div style="font-size:16px;font-weight:600;color:var(--txt);margin-bottom:6px">Data CS belum dihubungkan</div>
-          <div>Tambahkan sheet CS lalu hubungkan di sini untuk menampilkan metrik layanan pelanggan.</div>
+        <div id="csNote" style="display:none"></div>
+        <div id="csMain">
+          <div id="csWarn"></div>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px">
+            <span
+              style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em">Filter
+              Periode</span>
+            <select class="fsel" id="csMonthSel" onchange="setCsMonth(this.value)" style="min-width:150px"></select>
+          </div>
+
+          <div class="sec-divider">Perbandingan Performa Antar-CS</div>
+          <div class="kpi-grid" id="csKpiGrid"></div>
+          <div class="cg2">
+            <div class="chart-card">
+              <div class="cc-title">Total interaksi (skor) per CS</div>
+              <div class="cc-sub">Jumlah pelanggan yang dinilai</div>
+              <div style="position:relative;height:240px"><canvas id="cCsCust" role="img"
+                  aria-label="Interaksi per CS"></canvas></div>
+            </div>
+            <div class="chart-card">
+              <div class="cc-title">Status bayar per CS</div>
+              <div class="cc-sub">DP vs Lunas (jumlah deal)</div>
+              <div id="lgCsPay" class="legend"></div>
+              <div style="position:relative;height:240px"><canvas id="cCsPay" role="img"
+                  aria-label="Status bayar per CS"></canvas></div>
+            </div>
+          </div>
+          <div class="cg1">
+            <div class="chart-card">
+              <div class="cc-title">Harga vs Nominal per CS</div>
+              <div class="cc-sub">Batang = nilai (Rp) · garis = % tertagih (nominal ÷ harga)</div>
+              <div style="position:relative;height:290px"><canvas id="cCsRev" role="img"
+                  aria-label="Harga vs nominal per CS"></canvas></div>
+            </div>
+          </div>
+          <div class="tbl-card">
+            <div class="tbl-hdr"><span class="tbl-title">Ringkasan per CS</span><span class="tbl-cnt"
+                id="csTblCnt"></span></div>
+            <div class="tbl-scroll">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>CS</th>
+                    <th>Interaksi</th>
+                    <th>DP</th>
+                    <th>Lunas</th>
+                    <th>% Lunas</th>
+                    <th>Harga</th>
+                    <th>Nominal</th>
+                    <th>% Tertagih</th>
+                    <th>Skor Rata²</th>
+                  </tr>
+                </thead>
+                <tbody id="csTblBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="sec-divider">Detail per CS</div>
+          <div id="csChips" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px"></div>
+          <div id="csDetail" style="display:none">
+            <div
+              style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px"
+              id="csStats"></div>
+            <div class="cg2">
+              <div class="chart-card">
+                <div class="cc-title" id="csScoreTitle">Distribusi skor</div>
+                <div class="cc-sub">Jumlah pelanggan per nilai skor (1–7)</div>
+                <div style="position:relative;height:230px"><canvas id="cCsScore" role="img"
+                    aria-label="Distribusi skor CS"></canvas></div>
+              </div>
+              <div class="chart-card">
+                <div class="cc-title">Status bayar</div>
+                <div class="cc-sub">DP vs Lunas</div>
+                <div id="lgCsStatus" class="legend"></div>
+                <div style="position:relative;height:230px"><canvas id="cCsStatus" role="img"
+                    aria-label="Status bayar CS"></canvas></div>
+              </div>
+            </div>
+            <div class="cg1">
+              <div class="chart-card">
+                <div class="cc-title">Harga vs Nominal</div>
+                <div class="cc-sub">Nilai transaksi vs nominal yang masuk</div>
+                <div style="position:relative;height:240px"><canvas id="cCsNom" role="img"
+                    aria-label="Harga vs nominal CS"></canvas></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1347,8 +1538,20 @@
     const SHEET_REKAP = 'rekap_harian';
     const SHEET_TRELLO = 'trello_board';
 
+    // CS data sources (spreadsheet terpisah per CS, sheet "count")
+    const CS_SHEET_TAB = 'export_kpi';
+    const CS_SHEETS = [
+      { name: 'Julia', id: '1gZq8PDQvxtNzMb3bRJ0dVyDpj1HWVwl9-RWrQ8rEBlY', gid: '516681424' },
+      { name: 'Devi', id: '1MlF7F_E6QkrI-IXXk1p77s7bEepTw3hvBWkvuIlqReM', gid: '2028414982' },
+      { name: 'Dewi', id: '1QeDEK9KIWBY4AdXsn6qy0Q6v8mON0MewZWcC4kXT_yA', gid: '994930126' },
+      { name: 'Dedes', id: '1zftlA_FTA60EvEEr3snWWH1Uzf9S_UjtOCTyNe6i5ag', gid: '1942550243' },
+    ];
+    const ID_MONTHS = ['JANUARI', 'FEBRUARI', 'MARET', 'APRIL', 'MEI', 'JUNI', 'JULI', 'AGUSTUS', 'SEPTEMBER', 'OKTOBER', 'NOVEMBER', 'DESEMBER'];
+    const CS_COLORS = { 'Julia': '#3b5bdb', 'Devi': '#15803d', 'Dewi': '#b45309', 'Dedes': '#5b21b6' };
+
     // STATE
     let dataRekap = [], dataTrello = [];
+    let dataCS = {}, csMonth = null, csSel = null, csDiag = [];
     let personTableRows = [], trelloTableRows = [], overviewTableRows = [];
     let chartInst = {};
     let selectedPerson = null, curPage = 'overview', firstLoad = true;
@@ -1357,6 +1560,39 @@
     function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
     function pct(n, d) { return d > 0 ? Math.round(n / d * 100) : 0; }
     function daysAgo(dateStr) { const t = Date.parse(dateStr); if (isNaN(t)) return null; return Math.floor((Date.now() - t) / 864e5); }
+
+    function normalizeDate(dStr) {
+      if (!dStr) return '';
+      dStr = String(dStr).trim();
+      if (!dStr) return '';
+      if (/^\d{4}-\d{2}-\d{2}/.test(dStr)) return dStr.slice(0, 10);
+      const parts = dStr.split(/[\/\.-]/);
+      if (parts.length === 3) {
+        if (parts[0].length === 4) return `${parts[0]}-${parts[1].padStart(2, '0')}-${parts[2].padStart(2, '0')}`;
+        if (parts[2].length === 4) return `${parts[2]}-${parts[1].padStart(2, '0')}-${parts[0].padStart(2, '0')}`;
+      }
+      return dStr;
+    }
+
+    function normalizeStatus(row) {
+      const rawS = String(row['Status'] || '').trim().toLowerCase();
+      const rawD = String(row['Detail'] || '').trim().toLowerCase();
+      const rawK = String(row['Kategori'] || '').trim().toLowerCase();
+
+      if (rawS) {
+        if (/done|selesai|completed|terbit|lunas|finish|sukses|ok|berhasil/.test(rawS)) return 'Done';
+        if (/progress|proses|doing|dikerjakan|revisi|upload|cek|konsul|draft|tambah|peta/.test(rawS)) return 'On Progress';
+        if (/pending|menunggu|hold|list|berkas|antri/.test(rawS)) return 'Pending';
+      }
+
+      if (/terbit|selesai|lunas|penyerahan|ttd|berhasil|sukses/.test(rawD) || /terbit|lunas|penyerahan/.test(rawK)) {
+        return 'Done';
+      }
+      if (/menunggu|pending|hold|antri|antrian/.test(rawD)) {
+        return 'Pending';
+      }
+      return 'On Progress';
+    }
 
     // CSV PARSER
     function parseCSV(txt) {
@@ -1382,6 +1618,56 @@
     // FETCH
     function csvUrl(id, sheet) { return `https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheet)}`; }
     async function fetchSheet(id, sheet) { const r = await fetch(csvUrl(id, sheet)); if (!r.ok) throw new Error(`HTTP ${r.status} — sheet "${sheet}"`); return csvToObj(await r.text()); }
+    async function fetchRaw(url) { const r = await fetch(url); if (!r.ok) throw new Error('HTTP ' + r.status); return await r.text(); }
+    function csvUrlGid(id, gid) { return `https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:csv&gid=${gid}`; }
+
+    async function loadCSData() {
+      const out = {}; csDiag = [];
+      await Promise.allSettled(CS_SHEETS.map(async cs => {
+        const info = { name: cs.name, ok: false, msg: '', sample: '' };
+        // PRIMER: tab export_kpi (ambil mentah lalu parse header)
+        let exTxt = '';
+        try { exTxt = await fetchRaw(csvUrl(cs.id, CS_SHEET_TAB)); } catch (e) { info.msg = 'export_kpi tak diakses: ' + (e.message || e); }
+        if (exTxt && exTxt.trim()) {
+          if (/<html|<!doctype|accounts\.google|signin/i.test(exTxt.slice(0, 400))) {
+            info.msg = 'export_kpi: butuh login / belum publik'; info.sample = exTxt.slice(0, 140); csDiag.push(info); return;
+          }
+          const months = parseExportKpi(exTxt);
+          if (Object.keys(months).length) {
+            out[cs.name] = { months }; info.ok = true;
+            info.msg = 'bulan: ' + Object.keys(months).map(m => m.charAt(0) + m.slice(1).toLowerCase()).join(', ');
+            csDiag.push(info); return;
+          }
+          info.msg = 'export_kpi terbaca, tapi bulan tak dikenali. Cuplikan:';
+          info.sample = exTxt.slice(0, 240);
+        }
+        // CADANGAN: sheet count (format lama)
+        try {
+          const txt = await fetchRaw(csvUrl(cs.id, 'count'));
+          const months = parseCountSheet(txt);
+          if (Object.keys(months).length) { out[cs.name] = { months }; info.ok = true; info.msg = '(fallback count) ' + Object.keys(months).join(', '); }
+        } catch (e) { }
+        csDiag.push(info);
+      }));
+      dataCS = out;
+    }
+
+    // Baca export_kpi BERDASARKAN POSISI kolom (kebal masalah header gviz)
+    // Urutan kolom: 0=CS 1=Bulan 2..8=Skor1..7 9=DP 10=Lunas 11=Nominal 12=Harga
+    function parseExportKpi(text) {
+      const rows = parseCSV(text); const months = {};
+      rows.forEach(r => {
+        const bln = String(r[1] || '').trim().toUpperCase();
+        if (!ID_MONTHS.includes(bln)) return;            // lewati baris header & non-data
+        const scores = {};
+        for (let k = 0; k < 7; k++) { const v = r[2 + k]; if (v !== undefined && String(v).trim() !== '') scores[k + 1] = csNum(v); }
+        const dp = csNum(r[9]), lunas = csNum(r[10]), nominal = csNum(r[11]), harga = csNum(r[12]);
+        const tot = Object.values(scores).reduce((a, c) => a + c, 0);
+        if (tot === 0 && dp === 0 && lunas === 0 && nominal === 0 && harga === 0) return;   // lewati bulan kosong (mis. JULI)
+        months[bln] = { scores, dp, lunas, nominal, harga };
+      });
+      return months;
+    }
 
     async function loadAllData(silent) {
       const dot = document.getElementById('updDot');
@@ -1392,7 +1678,13 @@
       dot.classList.add('busy');
       try {
         const [rk, tr] = await Promise.all([fetchSheet(SHEET_ID, SHEET_REKAP), fetchSheet(SHEET_ID, SHEET_TRELLO)]);
-        dataRekap = rk; dataTrello = tr;
+        dataRekap = rk.map(d => ({
+          ...d,
+          'Tanggal': normalizeDate(d['Tanggal']) || d['Tanggal'],
+          'Status': normalizeStatus(d)
+        }));
+        dataTrello = tr;
+        await loadCSData();
         populateMonthFilter();
         document.getElementById('lastUpd').textContent = new Date().toLocaleString('id-ID', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
         document.getElementById('loadingView').style.display = 'none';
@@ -1454,6 +1746,7 @@
       if (curPage === 'overview') renderOverview();
       if (curPage === 'perorangan') renderPerOrang();
       if (curPage === 'divisi') renderDivisi();
+      if (curPage === 'cs') renderCS();
     }
 
     // ===== OVERVIEW =====
@@ -1538,7 +1831,7 @@
             scales: {
               y: { position: 'left', beginAtZero: true, title: { display: true, text: 'Jumlah tugas', font: { size: 10 } }, ticks: { font: { size: 10 } } },
               y1: { position: 'right', beginAtZero: true, max: 100, grid: { drawOnChartArea: false }, title: { display: true, text: '% selesai', font: { size: 10 } }, ticks: { font: { size: 10 }, callback: v => v + '%' } },
-              x: { ticks: { font: { size: 10 } } }
+              x: { ticks: { font: { size: 9 }, maxRotation: 45, minRotation: 30, autoSkip: false } }
             }
           }
         });
@@ -1562,7 +1855,7 @@
       dc('cTrend');
       chartInst['cTrend'] = new Chart(document.getElementById('cTrend'), {
         type: 'line', data: { labels: dates.map(d => d.slice(5)), datasets: [{ data: dates.map(d => byDate[d]), borderColor: '#3b5bdb', backgroundColor: 'rgba(59,91,219,.1)', borderWidth: 2, pointRadius: 3, fill: true, tension: .3 }] },
-        options: { ...baseOpts, scales: { x: { ticks: { font: { size: 10 } } }, y: { beginAtZero: true, ticks: { font: { size: 10 } } } } }
+        options: { ...baseOpts, scales: { x: { ticks: { font: { size: 9 }, maxRotation: 45, minRotation: 30, autoSkip: true, maxTicksLimit: 20 } }, y: { beginAtZero: true, ticks: { font: { size: 10 } } } } }
       });
 
       // category doughnut
@@ -1794,9 +2087,47 @@
       el.innerHTML = html;
     }
 
+    // Kategori & produktivitas per divisi (independen, pakai filter bulan saja)
+    let divKatSel = '__all__';
+    function rekapMonthOnly() { const mo = document.getElementById('fMonth').value; return dataRekap.filter(d => !mo || (d['Tanggal'] || '').startsWith(mo)); }
+    function setDivKat(d) { divKatSel = d; renderDivKat(); }
+    function renderDivKat() {
+      const base = rekapMonthOnly();
+      const divs = [...new Set(base.map(d => d['Divisi']).filter(Boolean))].sort();
+      if (divKatSel !== '__all__' && !divs.includes(divKatSel)) divKatSel = '__all__';
+      // chips
+      const chips = [{ k: '__all__', label: 'Semua divisi' }, ...divs.map(d => ({ k: d, label: d }))];
+      document.getElementById('divKatChips').innerHTML = chips.map(c => `<button class="dk-chip${divKatSel === c.k ? ' active' : ''}" onclick="setDivKat('${esc(c.k).replace(/'/g, "\\'")}')">${esc(c.label)}</button>`).join('');
+      const rows = divKatSel === '__all__' ? base : base.filter(d => d['Divisi'] === divKatSel);
+      const byCat = {}; rows.forEach(d => { const k = d['Kategori']; if (k) byCat[k] = (byCat[k] || 0) + 1; });
+      const cKeys = Object.keys(byCat).sort((a, b) => byCat[b] - byCat[a]);
+      const catDone = cKeys.map(k => rows.filter(d => d['Kategori'] === k && d['Status'] === 'Done').length);
+      dc('cDivKat');
+      if (!cKeys.length) { return; }
+      chartInst['cDivKat'] = new Chart(document.getElementById('cDivKat'), {
+        data: {
+          labels: cKeys, datasets: [
+            { type: 'bar', label: 'Jumlah', data: cKeys.map(k => byCat[k]), backgroundColor: cKeys.map((k, i) => catColor(k, i)), borderRadius: 6, borderSkipped: false, yAxisID: 'y', order: 2 },
+            { type: 'line', label: '% selesai', data: cKeys.map((k, i) => pct(catDone[i], byCat[k])), borderColor: '#3b5bdb', backgroundColor: '#fff', borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#3b5bdb', pointBorderColor: '#fff', pointBorderWidth: 2, tension: .3, yAxisID: 'y1', order: 1 }]
+        },
+        options: {
+          ...baseOpts, plugins: {
+            legend: { display: true, position: 'top', labels: { font: { size: 11 }, usePointStyle: true, boxWidth: 8 } },
+            tooltip: { callbacks: { label: c => c.dataset.yAxisID === 'y1' ? ` ${c.dataset.label}: ${c.parsed.y}%` : ` ${c.dataset.label}: ${c.parsed.y} tugas` } }
+          },
+          scales: {
+            y: { position: 'left', beginAtZero: true, title: { display: true, text: 'Jumlah tugas', font: { size: 10 } }, ticks: { font: { size: 10 }, precision: 0 } },
+            y1: { position: 'right', beginAtZero: true, max: 100, grid: { drawOnChartArea: false }, title: { display: true, text: '% selesai', font: { size: 10 } }, ticks: { font: { size: 10 }, callback: v => v + '%' } },
+            x: { ticks: { font: { size: 10 } } }
+          }
+        }
+      });
+    }
+
     function renderDivisi() {
       const rk = fRekap(), tr = fTrello();
       renderHeatmap(rk);
+      renderDivKat();
       // rekap aggregate per divisi
       const divs = [...new Set([...rk.map(d => d['Divisi']), ...tr.map(d => d['Board Divisi'])].filter(Boolean))].sort();
       const cards = divs.map((dv, i) => {
@@ -1841,6 +2172,207 @@
     function filterTrelloTable() {
       const q = document.getElementById('trelloSearch').value.toLowerCase();
       renderTrelloTable(trelloTableRows.filter(r => Object.values(r).some(v => String(v).toLowerCase().includes(q))));
+    }
+
+    // ===== CS (KPI per Customer Service) =====
+    function csNum(s) { const d = String(s == null ? '' : s).replace(/[^\d-]/g, ''); return d ? parseInt(d, 10) : 0; }
+    function fmtRp(n) { return 'Rp' + Math.round(n || 0).toLocaleString('id-ID'); }
+    function fmtJt(n) { return (n / 1e6).toLocaleString('id-ID', { maximumFractionDigits: 1 }) + ' jt'; }
+
+    // Parser sheet "count": blok per bulan, tabel SKOR / STATUS BAYAR / JENIS bersebelahan
+    function parseCountSheet(text) {
+      const rows = parseCSV(text);
+      const anchors = [];
+      rows.forEach((r, ri) => { const c0 = (r[0] || '').trim().toUpperCase(); if (ID_MONTHS.includes(c0)) anchors.push({ m: c0, ri }); });
+      const months = {};
+      anchors.forEach((a, idx) => {
+        const end = idx + 1 < anchors.length ? anchors[idx + 1].ri : rows.length;
+        months[a.m] = parseCountBlock(rows.slice(a.ri, end));
+      });
+      return months;
+    }
+    function parseCountBlock(block) {
+      const out = { scores: {}, dp: 0, lunas: 0, nominal: 0, harga: 0 };
+      let skorCol = -1, skorRow = -1, sbCol = -1, jenisCol = -1;
+      block.forEach((r, ri) => (r || []).forEach((cell, ci) => {
+        const c = (cell || '').trim().toUpperCase();
+        if (c === 'SKOR') { skorCol = ci; skorRow = ri; }
+        else if (c === 'STATUS BAYAR') { sbCol = ci; }
+        else if (c === 'JENIS') { jenisCol = ci; }
+      }));
+      if (skorCol >= 0) for (let ri = skorRow + 1; ri < block.length; ri++) {
+        const lbl = ((block[ri] || [])[skorCol] || '').trim();
+        if (/^[1-9]$/.test(lbl)) out.scores[lbl] = csNum((block[ri] || [])[skorCol + 1]);
+      }
+      if (sbCol >= 0) block.forEach(r => {
+        const l = ((r || [])[sbCol] || '').trim().toUpperCase();
+        if (l === 'DP') out.dp = csNum(r[sbCol + 1]); else if (l === 'LUNAS') out.lunas = csNum(r[sbCol + 1]);
+      });
+      if (jenisCol >= 0) block.forEach(r => {
+        const l = ((r || [])[jenisCol] || '').trim().toUpperCase();
+        if (l === 'NOMINAL') out.nominal = csNum(r[jenisCol + 1]); else if (l === 'HARGA') out.harga = csNum(r[jenisCol + 1]);
+      });
+      return out;
+    }
+
+    function csMonthsAvailable() { const set = new Set(); Object.values(dataCS).forEach(c => Object.keys(c.months).forEach(m => set.add(m))); return ID_MONTHS.filter(m => set.has(m)); }
+    function csAgg(name, month) {
+      const cm = dataCS[name]?.months; if (!cm) return null;
+      let blocks;
+      if (!month) { blocks = Object.values(cm); }        // '' / null = semua bulan (gabungan)
+      else { const b = cm[month]; if (!b) return null; blocks = [b]; }
+      if (!blocks.length) return null;
+      const scores = {}; let dp = 0, lunas = 0, nominal = 0, harga = 0;
+      blocks.forEach(b => {
+        Object.entries(b.scores).forEach(([s, c]) => scores[s] = (scores[s] || 0) + c);
+        dp += b.dp; lunas += b.lunas; nominal += b.nominal; harga += b.harga;
+      });
+      const interaksi = Object.values(scores).reduce((a, c) => a + c, 0);
+      const deal = dp + lunas;
+      const sumScore = Object.entries(scores).reduce((a, [s, c]) => a + (+s) * c, 0);
+      return {
+        name, scores, dp, lunas, nominal, harga, interaksi, deal,
+        lunasRate: deal > 0 ? pct(lunas, deal) : 0, collect: harga > 0 ? pct(nominal, harga) : 0,
+        avgScore: interaksi > 0 ? (sumScore / interaksi) : 0
+      };
+    }
+    function setCsMonth(m) { csMonth = m; renderCS(); }
+    function setCsSel(n) { csSel = n; renderCS(); }
+
+    function renderCS() {
+      const note = document.getElementById('csNote'), main = document.getElementById('csMain');
+      const names = Object.keys(dataCS);
+      if (!names.length) {
+        main.style.display = 'none'; note.style.display = 'block';
+        const rows = (csDiag.length ? csDiag : CS_SHEETS.map(c => ({ name: c.name, ok: false, msg: 'belum dicoba' }))).map(d => `
+      <tr><td><strong>${esc(d.name)}</strong></td>
+      <td>${d.ok ? '<span class="badge b-done">OK</span>' : '<span class="badge b-pend">Gagal</span>'}</td>
+      <td style="color:var(--muted)">${esc(d.msg)}${d.sample ? `<div style="margin-top:4px;font-family:monospace;font-size:10px;color:var(--faint);white-space:pre-wrap;word-break:break-all">${esc(d.sample)}…</div>` : ''}</td></tr>`).join('');
+        note.innerHTML = `<div class="tbl-card" style="max-width:760px;margin:10px auto">
+      <div class="tbl-hdr"><span class="tbl-title">🔒 Data CS belum dapat dimuat</span></div>
+      <div style="padding:16px 18px;font-size:13px;color:var(--muted);line-height:1.6">
+        Dashboard membaca tab rapi bernama <b>export_kpi</b> di tiap spreadsheet CS (1 baris per bulan: CS, Bulan, Skor1–Skor7, DP, Lunas, Nominal, Harga). Pakai templat <b>export_kpi_template.xlsx</b> yang saya kirim sebagai contoh formatnya.
+        <div style="margin-top:8px">Pastikan juga tiap file diset <b>Bagikan → "Siapa saja yang memiliki link" → Pelihat</b>, lalu klik <b>Perbarui sekarang</b>.</div>
+        <div style="margin-top:8px">Tes akses manual (kalau ter-download = sudah publik):</div>
+        <div style="margin-top:4px">${CS_SHEETS.map(c => `<a href="${csvUrl(c.id, CS_SHEET_TAB)}" target="_blank" style="color:var(--accent);font-size:12px;display:block">Tes ${esc(c.name)} (tab export_kpi) ↗</a>`).join('')}</div>
+      </div>
+      <div class="tbl-scroll"><table class="data-table">
+        <thead><tr><th>CS</th><th>Status</th><th>Keterangan</th></tr></thead><tbody>${rows}</tbody>
+      </table></div>
+    </div>`;
+        return;
+      }
+      note.style.display = 'none'; main.style.display = 'block';
+
+      const failed = csDiag.filter(d => !d.ok);
+      document.getElementById('csWarn').innerHTML = failed.length ? `<div class="kpi-card bad" style="margin-bottom:14px"><div style="font-size:12px;color:var(--muted)">⚠️ ${failed.length} CS belum termuat: <b>${failed.map(d => esc(d.name)).join(', ')}</b>. Pastikan aksesnya publik lalu klik Perbarui.</div></div>` : '';
+
+      const months = csMonthsAvailable();
+      if (csMonth == null || (csMonth !== '' && !months.includes(csMonth))) csMonth = months[months.length - 1] || '';
+      const sel = document.getElementById('csMonthSel');
+      sel.innerHTML = '<option value="">Semua bulan (gabungan)</option>' + months.map(m => `<option value="${m}">${m.charAt(0) + m.slice(1).toLowerCase()}</option>`).join('');
+      sel.value = csMonth;
+      const periodeLbl = csMonth ? (csMonth.charAt(0) + csMonth.slice(1).toLowerCase()) : 'Semua bulan';
+
+      const aggs = names.map(n => csAgg(n, csMonth)).filter(Boolean);
+      const tot = aggs.reduce((a, x) => ({ interaksi: a.interaksi + x.interaksi, deal: a.deal + x.deal, nominal: a.nominal + x.nominal, harga: a.harga + x.harga }), { interaksi: 0, deal: 0, nominal: 0, harga: 0 });
+      const totCollect = tot.harga > 0 ? pct(tot.nominal, tot.harga) : 0;
+
+      document.getElementById('csKpiGrid').innerHTML = `
+    <div class="kpi-card"><div class="kpi-lbl">👥 Total Interaksi</div><div class="kpi-val">${tot.interaksi}</div><div class="kpi-foot"><span class="kpi-sub">${aggs.length} CS · ${tot.deal} deal</span></div></div>
+    <div class="kpi-card ok"><div class="kpi-lbl">💰 Total Nominal Masuk</div><div class="kpi-val" style="font-size:20px">${fmtRp(tot.nominal)}</div><div class="kpi-foot"><span class="kpi-sub">dari ${fmtRp(tot.harga)} nilai</span></div></div>
+    <div class="kpi-card warn"><div class="kpi-lbl">📊 % Tertagih</div><div class="kpi-val">${totCollect}%</div><div class="kpi-foot"><span class="kpi-sub">nominal ÷ harga</span></div></div>
+    <div class="kpi-card"><div class="kpi-lbl">✅ Total Lunas</div><div class="kpi-val">${aggs.reduce((a, x) => a + x.lunas, 0)}</div><div class="kpi-foot"><span class="kpi-sub">${aggs.reduce((a, x) => a + x.dp, 0)} DP</span></div></div>`;
+
+      const labels = aggs.map(a => a.name);
+      const cols = labels.map(n => CS_COLORS[n] || '#3b5bdb');
+
+      dc('cCsCust');
+      chartInst['cCsCust'] = new Chart(document.getElementById('cCsCust'), {
+        type: 'bar', data: { labels, datasets: [{ label: 'Interaksi', data: aggs.map(a => a.interaksi), backgroundColor: cols, borderRadius: 6, borderSkipped: false }] },
+        options: { ...baseOpts, scales: { x: { ticks: { font: { size: 11 } } }, y: { beginAtZero: true, ticks: { font: { size: 10 } } } } }
+      });
+
+      document.getElementById('lgCsPay').innerHTML = `<span class="li"><span class="ld" style="background:#f59e0b"></span>DP</span><span class="li"><span class="ld" style="background:#15803d"></span>Lunas</span>`;
+      dc('cCsPay');
+      chartInst['cCsPay'] = new Chart(document.getElementById('cCsPay'), {
+        type: 'bar', data: {
+          labels, datasets: [
+            { label: 'DP', data: aggs.map(a => a.dp), backgroundColor: '#f59e0b', borderSkipped: false },
+            { label: 'Lunas', data: aggs.map(a => a.lunas), backgroundColor: '#15803d', borderRadius: 6, borderSkipped: false }]
+        },
+        options: { ...baseOpts, scales: { x: { stacked: true, ticks: { font: { size: 11 } } }, y: { stacked: true, beginAtZero: true, ticks: { font: { size: 10 } } } } }
+      });
+
+      dc('cCsRev');
+      chartInst['cCsRev'] = new Chart(document.getElementById('cCsRev'), {
+        data: {
+          labels, datasets: [
+            { type: 'bar', label: 'Harga', data: aggs.map(a => a.harga), backgroundColor: '#cbd5e1', borderRadius: 5, borderSkipped: false, yAxisID: 'y', order: 3 },
+            { type: 'bar', label: 'Nominal', data: aggs.map(a => a.nominal), backgroundColor: '#3b5bdb', borderRadius: 5, borderSkipped: false, yAxisID: 'y', order: 2 },
+            { type: 'line', label: '% tertagih', data: aggs.map(a => a.collect), borderColor: '#15803d', backgroundColor: '#15803d', borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#15803d', tension: .3, yAxisID: 'y1', order: 1 }]
+        },
+        options: {
+          ...baseOpts, plugins: {
+            legend: { display: true, position: 'top', labels: { font: { size: 11 }, usePointStyle: true, boxWidth: 8 } },
+            tooltip: { callbacks: { label: c => c.dataset.yAxisID === 'y1' ? ` ${c.dataset.label}: ${c.parsed.y}%` : ` ${c.dataset.label}: ${fmtRp(c.parsed.y)}` } }
+          },
+          scales: {
+            y: { position: 'left', beginAtZero: true, ticks: { font: { size: 10 }, callback: v => fmtJt(v) } },
+            y1: { position: 'right', beginAtZero: true, max: 100, grid: { drawOnChartArea: false }, ticks: { font: { size: 10 }, callback: v => v + '%' } },
+            x: { ticks: { font: { size: 11 } } }
+          }
+        }
+      });
+
+      document.getElementById('csTblCnt').textContent = `${aggs.length} CS · ${periodeLbl}`;
+      document.getElementById('csTblBody').innerHTML = aggs.slice().sort((a, b) => b.nominal - a.nominal).map(a => `
+    <tr><td><strong style="color:${CS_COLORS[a.name] || '#3b5bdb'}">${esc(a.name)}</strong></td>
+    <td>${a.interaksi}</td><td>${a.dp}</td><td style="color:var(--green);font-weight:600">${a.lunas}</td>
+    <td>${a.lunasRate}%</td><td>${fmtRp(a.harga)}</td><td><strong>${fmtRp(a.nominal)}</strong></td>
+    <td><span class="badge ${a.collect >= 80 ? 'b-done' : a.collect >= 60 ? 'b-prog' : 'b-pend'}">${a.collect}%</span></td>
+    <td>${a.avgScore ? a.avgScore.toFixed(1) : '-'}</td></tr>`).join('');
+
+      if (!csSel || !names.includes(csSel)) csSel = names[0];
+      document.getElementById('csChips').innerHTML = names.map(n => `<button class="dk-chip${csSel === n ? ' active' : ''}" onclick="setCsSel('${esc(n).replace(/'/g, "\\'")}')">${esc(n)}</button>`).join('');
+      renderCsDetail(csAgg(csSel, csMonth));
+    }
+
+    function renderCsDetail(a) {
+      const wrap = document.getElementById('csDetail');
+      if (!a) { wrap.style.display = 'none'; return; }
+      wrap.style.display = 'block';
+      document.getElementById('csScoreTitle').textContent = `Distribusi skor — ${csSel}`;
+      document.getElementById('csStats').innerHTML = `
+    <div class="stat-box"><div class="stat-box-label">Interaksi</div><div class="stat-box-value">${a.interaksi}</div></div>
+    <div class="stat-box"><div class="stat-box-label">Lunas</div><div class="stat-box-value" style="color:var(--green)">${a.lunas}</div></div>
+    <div class="stat-box"><div class="stat-box-label">DP</div><div class="stat-box-value" style="color:var(--amber)">${a.dp}</div></div>
+    <div class="stat-box"><div class="stat-box-label">% Lunas</div><div class="stat-box-value" style="color:var(--accent)">${a.lunasRate}%</div></div>
+    <div class="stat-box"><div class="stat-box-label">Nominal Masuk</div><div class="stat-box-value" style="font-size:16px">${fmtRp(a.nominal)}</div></div>
+    <div class="stat-box"><div class="stat-box-label">% Tertagih</div><div class="stat-box-value" style="color:${a.collect >= 80 ? 'var(--green)' : a.collect >= 60 ? 'var(--amber)' : 'var(--red)'}">${a.collect}%</div></div>`;
+
+      const sKeys = Object.keys(a.scores).sort((x, y) => (+x) - (+y));
+      dc('cCsScore');
+      chartInst['cCsScore'] = new Chart(document.getElementById('cCsScore'), {
+        type: 'bar', data: { labels: sKeys.map(k => 'Skor ' + k), datasets: [{ label: 'Jumlah', data: sKeys.map(k => a.scores[k]), backgroundColor: CS_COLORS[a.name] || '#3b5bdb', borderRadius: 6, borderSkipped: false }] },
+        options: { ...baseOpts, scales: { x: { ticks: { font: { size: 10 } } }, y: { beginAtZero: true, ticks: { font: { size: 10 } } } } }
+      });
+
+      document.getElementById('lgCsStatus').innerHTML = `<span class="li"><span class="ld" style="background:#f59e0b"></span>DP ${a.dp}</span><span class="li"><span class="ld" style="background:#15803d"></span>Lunas ${a.lunas}</span>`;
+      dc('cCsStatus');
+      chartInst['cCsStatus'] = new Chart(document.getElementById('cCsStatus'), {
+        type: 'doughnut', data: { labels: ['DP', 'Lunas'], datasets: [{ data: [a.dp, a.lunas], backgroundColor: ['#f59e0b', '#15803d'], borderWidth: 0 }] },
+        options: { ...baseOpts, cutout: '62%' }
+      });
+
+      dc('cCsNom');
+      chartInst['cCsNom'] = new Chart(document.getElementById('cCsNom'), {
+        type: 'bar', data: { labels: ['Harga', 'Nominal'], datasets: [{ data: [a.harga, a.nominal], backgroundColor: ['#cbd5e1', '#3b5bdb'], borderRadius: 6, borderSkipped: false }] },
+        options: {
+          ...baseOpts, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ` ${fmtRp(c.parsed.y)}` } } },
+          scales: { x: { ticks: { font: { size: 11 } } }, y: { beginAtZero: true, ticks: { font: { size: 10 }, callback: v => fmtJt(v) } } }
+        }
+      });
     }
 
     // NAV
