@@ -1038,6 +1038,35 @@
       gap: 8px
     }
 
+    .fin-filter {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin: 4px 0 12px;
+      padding: 8px 10px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px
+    }
+
+    .fin-flbl {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 600
+    }
+
+    .fin-sel {
+      font-size: 11px;
+      padding: 5px 9px;
+      min-width: 120px
+    }
+
+    .fin-date {
+      font-size: 11px;
+      padding: 5px 9px
+    }
+
     .sec-divider::after {
       content: "";
       flex: 1;
@@ -1142,11 +1171,9 @@
         </select>
         <select class="fsel" id="fDivisi" onchange="renderAll()">
           <option value="">Semua divisi</option>
-          <option>HKI</option>
-          <option>Perizinan</option>
-          <option>Admin</option>
-          <option>Pajak</option>
-          <option>Lainnya</option>
+          <option>Admin Draft</option>
+          <option>Admin Perizinan</option>
+          <option>Admin Pajak</option>
         </select>
         <button class="btn-ghost" onclick="window.print()">🖨 Cetak / PDF</button>
       </div>
@@ -1527,13 +1554,15 @@
       <div class="page" id="page-finance">
         <div id="finNote" style="display:none"></div>
         <div id="finMain">
-          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px">
-            <span
-              style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em">Filter
-              Periode</span>
-            <select class="fsel" id="finPeriodSel" onchange="setFinPeriod(this.value)" style="min-width:170px"></select>
-            <span class="cc-sub" style="margin:0">Memfilter KPI, sorotan, tren mingguan &amp; akumulasi. Tren per bulan
-              tetap menampilkan semua bulan.</span>
+          <div class="fin-filter" style="margin-bottom:16px">
+            <span class="fin-flbl" style="text-transform:uppercase;letter-spacing:.05em">🔎 Filter Ringkasan (KPI &amp;
+              Sorotan)</span>
+            <span class="fin-flbl">Dari tanggal</span>
+            <input type="date" class="fsel fin-date" id="fDateFrom_summary"
+              onchange="setFinDateRange('summary','from',this.value)">
+            <span class="fin-flbl">sampai</span>
+            <input type="date" class="fsel fin-date" id="fDateTo_summary"
+              onchange="setFinDateRange('summary','to',this.value)">
           </div>
           <div class="kpi-grid" id="finKpiGrid"></div>
 
@@ -1544,9 +1573,14 @@
           <div class="cg1">
             <div class="chart-card">
               <div class="cc-title">Omset, pengeluaran &amp; laba per bulan</div>
-              <div class="cc-sub">Batang omset = <span style="color:var(--green);font-weight:600">hijau bila naik</span>
-                / <span style="color:var(--red);font-weight:600">merah bila turun</span> dibanding bulan sebelumnya ·
-                garis = laba</div>
+              <div class="cc-sub">Tiga garis: Dana Masuk (hijau), Dana Keluar (merah), Laba Usaha (biru) · label nilai
+                di tiap titik</div>
+              <div class="fin-filter">
+                <span class="fin-flbl">Dari bulan</span>
+                <select class="fsel fin-sel" id="fMonthFrom_month" onchange="setFinMonthRange('month','from',this.value)"></select>
+                <span class="fin-flbl">sampai</span>
+                <select class="fsel fin-sel" id="fMonthTo_month" onchange="setFinMonthRange('month','to',this.value)"></select>
+              </div>
               <div id="lgFinMonth" class="legend"></div>
               <div style="position:relative;height:330px"><canvas id="cFinMonth" role="img"
                   aria-label="Tren bulanan finance"></canvas></div>
@@ -1557,12 +1591,24 @@
             <div class="chart-card">
               <div class="cc-title">Pertumbuhan omset (bulan ke bulan)</div>
               <div class="cc-sub">% kenaikan/penurunan omset vs bulan sebelumnya</div>
+              <div class="fin-filter">
+                <span class="fin-flbl">Dari</span>
+                <select class="fsel fin-sel" id="fMonthFrom_growth" onchange="setFinMonthRange('growth','from',this.value)"></select>
+                <span class="fin-flbl">sampai</span>
+                <select class="fsel fin-sel" id="fMonthTo_growth" onchange="setFinMonthRange('growth','to',this.value)"></select>
+              </div>
               <div style="position:relative;height:280px"><canvas id="cFinGrowth" role="img"
                   aria-label="Pertumbuhan omset"></canvas></div>
             </div>
             <div class="chart-card">
               <div class="cc-title">Uang masuk vs uang keluar per bulan</div>
               <div class="cc-sub">Perbandingan pemasukan dan pengeluaran tiap bulan</div>
+              <div class="fin-filter">
+                <span class="fin-flbl">Dari</span>
+                <select class="fsel fin-sel" id="fMonthFrom_mk" onchange="setFinMonthRange('mk','from',this.value)"></select>
+                <span class="fin-flbl">sampai</span>
+                <select class="fsel fin-sel" id="fMonthTo_mk" onchange="setFinMonthRange('mk','to',this.value)"></select>
+              </div>
               <div id="lgFinMK" class="legend"></div>
               <div style="position:relative;height:280px"><canvas id="cFinMK" role="img"
                   aria-label="Masuk vs keluar"></canvas></div>
@@ -1575,31 +1621,34 @@
               <div class="cc-title">Omset &amp; laba mingguan</div>
               <div class="cc-sub">Batang omset hijau/merah mengikuti naik-turun vs minggu sebelumnya · garis = laba
               </div>
+              <div class="fin-filter">
+                <span class="fin-flbl">Dari tanggal</span>
+                <input type="date" class="fsel fin-date" id="fDateFrom_week" onchange="setFinDateRange('week','from',this.value)">
+                <span class="fin-flbl">sampai</span>
+                <input type="date" class="fsel fin-date" id="fDateTo_week" onchange="setFinDateRange('week','to',this.value)">
+              </div>
               <div id="lgFinWeek" class="legend"></div>
               <div style="position:relative;height:300px"><canvas id="cFinWeek" role="img"
                   aria-label="Tren mingguan finance"></canvas></div>
             </div>
           </div>
 
-          <div class="sec-divider">📊 Tren per Hari</div>
+          <div class="sec-divider">📊 Tren per Hari — Pergerakan Harian</div>
           <div class="cg1">
             <div class="chart-card">
               <div
                 style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:6px">
                 <div>
-                  <div class="cc-title">Pergerakan harian</div>
-                  <div class="cc-sub" style="margin:0">Garis <span
-                      style="color:var(--green);font-weight:600">hijau</span> saat naik, <span
-                      style="color:var(--red);font-weight:600">merah</span> saat turun dari hari sebelumnya</div>
+                  <div class="cc-title">Pergerakan harian: Uang Masuk, Uang Keluar &amp; Laba</div>
+                  <div class="cc-sub" style="margin:0"><b>Tiap titik = 1 hari.</b> <span
+                      style="color:var(--green);font-weight:600">Hijau</span> = uang masuk,
+                    <span style="color:var(--red);font-weight:600">merah</span> = uang keluar,
+                    <span style="color:#2563eb;font-weight:600">biru</span> = laba (area). Atur rentang tanggal di kanan →</div>
                 </div>
                 <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-                  <select class="fsel" id="finDayMonthSel" onchange="setFinDayMonth(this.value)"
-                    style="font-size:11px;padding:5px 9px"></select>
-                  <div style="display:flex;gap:4px;background:#f1f5f9;padding:3px;border-radius:8px">
-                    <button class="hm-tab active" id="finDayOmset" onclick="setFinDayMetric('masuk')">Omset</button>
-                    <button class="hm-tab" id="finDayLaba" onclick="setFinDayMetric('laba')">Laba</button>
-                    <button class="hm-tab" id="finDayKeluar" onclick="setFinDayMetric('keluar')">Pengeluaran</button>
-                  </div>
+                  <input type="date" class="fsel fin-date" id="fDateFrom_day" onchange="setFinDateRange('day','from',this.value)">
+                  <span class="fin-flbl">s/d</span>
+                  <input type="date" class="fsel fin-date" id="fDateTo_day" onchange="setFinDateRange('day','to',this.value)">
                 </div>
               </div>
               <div style="position:relative;height:300px"><canvas id="cFinDay" role="img"
@@ -1611,6 +1660,12 @@
             <div class="chart-card">
               <div class="cc-title">Akumulasi laba (kumulatif)</div>
               <div class="cc-sub">Total laba yang menumpuk dari hari ke hari — makin menanjak makin sehat</div>
+              <div class="fin-filter">
+                <span class="fin-flbl">Dari tanggal</span>
+                <input type="date" class="fsel fin-date" id="fDateFrom_cum" onchange="setFinDateRange('cum','from',this.value)">
+                <span class="fin-flbl">sampai</span>
+                <input type="date" class="fsel fin-date" id="fDateTo_cum" onchange="setFinDateRange('cum','to',this.value)">
+              </div>
               <div style="position:relative;height:260px"><canvas id="cFinCum" role="img"
                   aria-label="Akumulasi laba"></canvas></div>
             </div>
@@ -1649,6 +1704,8 @@
     const SHEET_ID = '1AeE4MOMGiX8vpPc4_W39C5BVq7m3fJ9BbHHbaQfd26E';
     const SHEET_REKAP = 'rekap_harian';
     const SHEET_TRELLO = 'trello_board';
+    // Sumber baru: 3 sheet admin (Divisi = nama sheet). Kolom: NO, Tanggal, NAMA PERUSAHAAN, ORDER, STATUS, PIC, KETERANGAN
+    const ADMIN_SHEETS = ['Admin Draft', 'Admin Perizinan', 'Admin Pajak'];
     const FINANCE_ID = '18iTRMXITMd_-VQlRLdZQULMrwqPPuj3sChTud8O_jf4';
     const CS_SHEET_TAB = 'export_kpi';
     const CS_SHEETS = [
@@ -1658,12 +1715,14 @@
       { name: 'Dedes', id: '1zftlA_FTA60EvEEr3snWWH1Uzf9S_UjtOCTyNe6i5ag', gid: '1942550243' },
     ];
     const ID_MONTHS = ['JANUARI', 'FEBRUARI', 'MARET', 'APRIL', 'MEI', 'JUNI', 'JULI', 'AGUSTUS', 'SEPTEMBER', 'OKTOBER', 'NOVEMBER', 'DESEMBER'];
-    const CS_COLORS = { 'Julia': '#3b5bdb', 'Devi': '#15803d', 'Dewi': '#b45309', 'Dedes': '#5b21b6' };
+    const CS_COLORS = { 'Julia': '#F43F5E', 'Devi': '#14B8A6', 'Dewi': '#F59E0B', 'Dedes': '#7C3AED' };
     const FIN_UP = '#15803d', FIN_DOWN = '#b91c1c', FIN_NEU = '#3b5bdb', FIN_GREY = '#cbd5e1';
 
     let dataRekap = [], dataTrello = [];
     let dataCS = {}, csMonth = null, csSel = null, csDiag = [];
-    let dataFinance = [], finDiag = { ok: false, msg: '' }, finDayMetric = 'masuk', finPeriod = '', finDayMonth = null;
+    let dataFinance = [], finDiag = { ok: false, msg: '' }, finDayMetric = 'masuk';
+    let finFilters = { summary: { from: '', to: '' }, month: { from: '', to: '' }, growth: { from: '', to: '' }, mk: { from: '', to: '' }, week: { from: '', to: '' }, day: { from: '', to: '' }, cum: { from: '', to: '' } };
+    let finPopulated = false;
     let personTableRows = [], trelloTableRows = [], overviewTableRows = [];
     let chartInst = {};
     let selectedPerson = null, curPage = 'overview', firstLoad = true;
@@ -1677,10 +1736,19 @@
       dStr = String(dStr).trim();
       if (!dStr) return '';
       if (/^\d{4}-\d{2}-\d{2}/.test(dStr)) return dStr.slice(0, 10);
-      const parts = dStr.split(/[\/\.-]/);
-      if (parts.length === 3) {
-        if (parts[0].length === 4) return `${parts[0]}-${parts[1].padStart(2, '0')}-${parts[2].padStart(2, '0')}`;
-        if (parts[2].length === 4) return `${parts[2]}-${parts[1].padStart(2, '0')}-${parts[0].padStart(2, '0')}`;
+      const slash = dStr.includes('/');                 // slash → format admin (M/D/Y)
+      const p = dStr.split(/[\/.\-]/);
+      if (p.length === 3) {
+        if (p[0].length === 4) return `${p[0]}-${p[1].padStart(2, '0')}-${p[2].padStart(2, '0')}`;
+        let a = +p[0], b = +p[1], y = p[2];
+        let mo, da;
+        if (a > 12) { da = a; mo = b; }            // jelas D/M/Y
+        else if (b > 12) { mo = a; da = b; }       // jelas M/D/Y (mis. 6/29/2026)
+        else if (slash) { mo = a; da = b; }        // ambigu + slash → M/D/Y (gviz/admin)
+        else { da = a; mo = b; }                   // ambigu + strip/titik → D/M/Y (finance dd-mm-yyyy)
+        if (String(y).length === 2) y = '20' + y;
+        if (!mo || !da || mo > 12 || da > 31) return dStr;
+        return `${y}-${String(mo).padStart(2, '0')}-${String(da).padStart(2, '0')}`;
       }
       return dStr;
     }
@@ -1724,6 +1792,51 @@
     async function fetchSheet(id, sheet) { const r = await fetch(csvUrl(id, sheet)); if (!r.ok) throw new Error(`HTTP ${r.status} — sheet "${sheet}"`); return csvToObj(await r.text()); }
     async function fetchRaw(url) { const r = await fetch(url); if (!r.ok) throw new Error('HTTP ' + r.status); return await r.text(); }
 
+    // === Sheet Admin (Admin Draft / Admin Perizinan / Admin Pajak) ===
+    // Petakan STATUS mentah -> Done / On Progress / Pending. Urutan cek penting.
+    function normalizeAdminStatus(raw) {
+      const s = String(raw || '').toUpperCase().trim();
+      if (!s) return 'Pending';
+      if (/SELESAI|TERBIT|LUNAS|DONE|SUDAH|BERHASIL|SIAP KIRIM|^OK$/.test(s)) return 'Done';
+      if (/BELUM|EROR|ERROR|NIHIL|HOLD|BATAL|PENDING|ANTRI|GAGAL|TOLAK/.test(s)) return 'Pending';
+      if (/PROSES|VERIF|WAIT|CONFIRM|MENUNGGU|BUTUH|REVIEW|CEK|PROGRESS|DRAFT|PENGAJUAN|ON GOING/.test(s)) return 'On Progress';
+      return 'On Progress';
+    }
+    // Baca posisi kolom: 0=NO,1=Tanggal,2=NAMA PERUSAHAAN,3=ORDER,4=STATUS,5=PIC,6=KETERANGAN
+    function parseAdminSheet(txt, divisi) {
+      const rows = parseCSV(txt);
+      const out = [];
+      rows.forEach(r => {
+        const no = String(r[0] || '').trim();
+        const tgl = String(r[1] || '').trim();
+        const perusahaan = String(r[2] || '').trim();
+        if (!perusahaan) return;                                   // baris kosong
+        if (/nama perusahaan/i.test(perusahaan)) return;           // baris header
+        if (/^no$/i.test(no) && /tanggal/i.test(tgl)) return;      // header lain
+        const order = String(r[3] || '').trim();
+        const statusRaw = String(r[4] || '').trim();
+        const pic = String(r[5] || '').trim();
+        const ket = String(r[6] || '').trim();
+        out.push({
+          'Tanggal': normalizeDate(tgl) || tgl,
+          'Nama': pic || '(tanpa PIC)',
+          'Divisi': divisi,
+          'No': no,
+          'Nama Kerjaan': perusahaan,
+          'Kategori': order || '(tanpa order)',
+          'Detail': ket,
+          'Status': normalizeAdminStatus(statusRaw),
+          '_statusRaw': statusRaw
+        });
+      });
+      return out;
+    }
+    async function fetchAdminSheet(id, sheetName) {
+      const txt = await fetchRaw(csvUrl(id, sheetName));
+      if (/<!doctype|<html|accounts\.google|signin|sign in/i.test(txt.slice(0, 500))) return [];
+      return parseAdminSheet(txt, sheetName);
+    }
+
     function finNum(v) {
       if (v == null) return 0;
       let s = String(v).trim(); if (!s) return 0;
@@ -1749,7 +1862,7 @@
     function finMonthKey(iso) { return iso.slice(0, 7); }
     function finMonthLabel(iso, bulan) {
       const [y, m] = iso.split('-');
-      const nm = bulan || ID_MONTHS[(+m) - 1];
+      const nm = ID_MONTHS[(+m) - 1] || '';
       return `${nm.charAt(0).toUpperCase() + nm.slice(1).toLowerCase()} ${y}`;
     }
     function finGroupMonthly(rows) {
@@ -1789,6 +1902,10 @@
       return Object.keys(map).sort().map(k => ({ key: k, label: map[k] }));
     }
     function finRowsFor(key) { return key ? dataFinance.filter(d => d.iso.slice(0, 7) === key) : dataFinance.slice(); }
+    function finRowsMonthRange(fromK, toK) { return dataFinance.filter(d => { const k = d.iso.slice(0, 7); return (!fromK || k >= fromK) && (!toK || k <= toK); }); }
+    function finRowsDateRange(fromD, toD) { return dataFinance.filter(d => (!fromD || d.iso >= fromD) && (!toD || d.iso <= toD)); }
+    function finDateBounds() { return dataFinance.length ? { min: dataFinance[0].iso, max: dataFinance[dataFinance.length - 1].iso } : { min: '', max: '' }; }
+    function finRecentStart(b, days) { if (!b.max) return b.min; const d = new Date(b.max + 'T00:00:00'); d.setDate(d.getDate() - (days || 44)); const iso = d.toISOString().slice(0, 10); return iso > b.min ? iso : b.min; }
     // plugin label nilai di tiap titik garis (opt-in via ds._showLabel)
     const lineLabelPlugin = {
       id: 'lineLabels',
@@ -1878,8 +1995,12 @@
       }
       dot.classList.add('busy');
       try {
-        const [rk, tr] = await Promise.all([fetchSheet(SHEET_ID, SHEET_REKAP), fetchSheet(SHEET_ID, SHEET_TRELLO)]);
-        dataRekap = rk.map(d => ({ ...d, 'Tanggal': normalizeDate(d['Tanggal']) || d['Tanggal'], 'Status': normalizeStatus(d) }));
+        // Sumber utama sekarang: gabungan 3 sheet admin (Divisi = nama sheet)
+        const adminResults = await Promise.all(
+          ADMIN_SHEETS.map(s => fetchAdminSheet(SHEET_ID, s).catch(() => []))
+        );
+        dataRekap = adminResults.flat();
+        const tr = await fetchSheet(SHEET_ID, SHEET_TRELLO).catch(() => []);
         dataTrello = tr;
         await Promise.allSettled([loadCSData(), loadFinanceData()]);
         populateMonthFilter();
@@ -1918,7 +2039,7 @@
 
     function dc(id) { if (chartInst[id]) { chartInst[id].destroy(); delete chartInst[id]; } }
     const CAT_COLORS = { 'Merek': '#5b21b6', 'Akta': '#065f46', 'NIB/OSS': '#1e40af', 'Draf': '#b45309', 'Revisi': '#991b1b', 'Revisi Draft': '#c2410c', 'NPWP': '#047857', 'SPT': '#9d174d', 'Pajak Lainnya': '#7c3aed', 'Perizinan Lainnya': '#475569', 'Konsultasi': '#0369a1', 'Lainnya': '#64748b' };
-    const DIV_COLORS = { 'HKI': '#5b21b6', 'Perizinan': '#1e40af', 'Admin': '#0369a1', 'Pajak': '#047857', 'Lainnya': '#64748b' };
+    const DIV_COLORS = { 'Admin Draft': '#3b5bdb', 'Admin Perizinan': '#15803d', 'Admin Pajak': '#b45309', 'HKI': '#5b21b6', 'Perizinan': '#1e40af', 'Admin': '#0369a1', 'Pajak': '#047857', 'Lainnya': '#64748b' };
     const PALETTE = ['#3b5bdb', '#15803d', '#a32d2d', '#b45309', '#5b21b6', '#0369a1', '#9d174d', '#047857'];
     function catColor(k, i = 0) { return CAT_COLORS[k] || PALETTE[i % PALETTE.length]; }
     function divColor(k, i = 0) { return DIV_COLORS[k] || PALETTE[i % PALETTE.length]; }
@@ -2337,15 +2458,40 @@
     }
 
     // ===== FINANCE =====
-    function setFinDayMetric(m) {
-      finDayMetric = m;
-      document.getElementById('finDayOmset').classList.toggle('active', m === 'masuk');
-      document.getElementById('finDayLaba').classList.toggle('active', m === 'laba');
-      document.getElementById('finDayKeluar').classList.toggle('active', m === 'keluar');
-      if (!firstLoad) renderFinDay();
+    function setFinMonthRange(which, end, val) { finFilters[which][end] = val; reRenderFinChart(which); }
+    function setFinDateRange(which, end, val) { finFilters[which][end] = val; reRenderFinChart(which); }
+    function reRenderFinChart(which) {
+      if (which === 'summary') renderFinSummary();
+      else if (which === 'month') renderFinMonth(finGroupMonthly(finRowsMonthRange(finFilters.month.from, finFilters.month.to)));
+      else if (which === 'growth') renderFinGrowth(finGroupMonthly(finRowsMonthRange(finFilters.growth.from, finFilters.growth.to)));
+      else if (which === 'mk') renderFinMK(finGroupMonthly(finRowsMonthRange(finFilters.mk.from, finFilters.mk.to)));
+      else if (which === 'week') renderFinWeek(finGroupWeekly(finRowsDateRange(finFilters.week.from, finFilters.week.to)));
+      else if (which === 'day') renderFinDay();
+      else if (which === 'cum') renderFinCum(finRowsDateRange(finFilters.cum.from, finFilters.cum.to));
     }
-    function setFinPeriod(v) { finPeriod = v; if (!firstLoad) renderFinance(); }
-    function setFinDayMonth(v) { finDayMonth = v; if (!firstLoad) renderFinDay(); }
+    // isi dropdown bulan & input tanggal tiap chart; set default penuh hanya sekali
+    function populateFinFilters() {
+      const months = finMonthsList();
+      const b = finDateBounds();
+      const firstK = months.length ? months[0].key : '', lastK = months.length ? months[months.length - 1].key : '';
+      const monthOpts = months.map(m => `<option value="${m.key}">${esc(m.label)}</option>`).join('');
+      ['month', 'growth', 'mk'].forEach(w => {
+        if (!finFilters[w].from) finFilters[w].from = firstK;
+        if (!finFilters[w].to) finFilters[w].to = lastK;
+        const f = document.getElementById('fMonthFrom_' + w), t = document.getElementById('fMonthTo_' + w);
+        if (f) { f.innerHTML = monthOpts; f.value = finFilters[w].from; }
+        if (t) { t.innerHTML = monthOpts; t.value = finFilters[w].to; }
+      });
+      ['summary', 'week', 'day', 'cum'].forEach(w => {
+        const defFrom = b.min;
+        if (!finFilters[w].from) finFilters[w].from = defFrom;
+        if (!finFilters[w].to) finFilters[w].to = b.max;
+        const f = document.getElementById('fDateFrom_' + w), t = document.getElementById('fDateTo_' + w);
+        if (f) { f.min = b.min; f.max = b.max; f.value = finFilters[w].from; }
+        if (t) { t.min = b.min; t.max = b.max; t.value = finFilters[w].to; }
+      });
+      finPopulated = true;
+    }
     function renderFinance() {
       const note = document.getElementById('finNote'), main = document.getElementById('finMain');
       if (!dataFinance.length) {
@@ -2354,60 +2500,50 @@
         return;
       }
       note.style.display = 'none'; main.style.display = 'block';
-
-      // dropdown periode (atas) + dropdown bulan harian (kartu harian)
-      const months = finMonthsList();
-      if (finPeriod && !months.find(m => m.key === finPeriod)) finPeriod = '';
-      const pSel = document.getElementById('finPeriodSel');
-      if (pSel) { pSel.innerHTML = '<option value="">Semua periode</option>' + months.map(m => `<option value="${m.key}">${esc(m.label)}</option>`).join(''); pSel.value = finPeriod; }
-      if (finDayMonth === null || (finDayMonth && !months.find(m => m.key === finDayMonth))) finDayMonth = months.length ? months[months.length - 1].key : '';
-      const dSel = document.getElementById('finDayMonthSel');
-      if (dSel) { dSel.innerHTML = '<option value="">Semua hari</option>' + months.map(m => `<option value="${m.key}">${esc(m.label)}</option>`).join(''); dSel.value = finDayMonth; }
-
-      const periodRows = finRowsFor(finPeriod);
-      const monthlyAll = finGroupMonthly(dataFinance);          // tren bulanan = selalu semua bulan
-      const monthlyP = finGroupMonthly(periodRows);             // untuk sinyal sesuai periode
-      const totMasuk = periodRows.reduce((a, d) => a + d.masuk, 0);
-      const totKeluar = periodRows.reduce((a, d) => a + d.keluar, 0);
-      const totLaba = periodRows.reduce((a, d) => a + d.laba, 0);
+      populateFinFilters();
+      renderFinSummary();
+      renderFinMonth(finGroupMonthly(finRowsMonthRange(finFilters.month.from, finFilters.month.to)));
+      renderFinGrowth(finGroupMonthly(finRowsMonthRange(finFilters.growth.from, finFilters.growth.to)));
+      renderFinMK(finGroupMonthly(finRowsMonthRange(finFilters.mk.from, finFilters.mk.to)));
+      renderFinWeek(finGroupWeekly(finRowsDateRange(finFilters.week.from, finFilters.week.to)));
+      renderFinDay();
+      renderFinCum(finRowsDateRange(finFilters.cum.from, finFilters.cum.to));
+      renderFinTable(finGroupMonthly(dataFinance));
+    }
+    function fmtTgl(iso) { return iso ? new Date(iso + 'T00:00:00').toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) : '—'; }
+    function renderFinSummary() {
+      const rows = finRowsDateRange(finFilters.summary.from, finFilters.summary.to);
+      const monthly = finGroupMonthly(rows);
+      const totMasuk = rows.reduce((a, d) => a + d.masuk, 0);
+      const totKeluar = rows.reduce((a, d) => a + d.keluar, 0);
+      const totLaba = rows.reduce((a, d) => a + d.laba, 0);
       const margin = totMasuk > 0 ? pct(totLaba, totMasuk) : 0;
-      const periodLbl = finPeriod ? (months.find(m => m.key === finPeriod)?.label || '') : 'Semua periode';
-
-      const lastM = monthlyAll[monthlyAll.length - 1], prevM = monthlyAll[monthlyAll.length - 2];
+      const rangeLbl = `${fmtTgl(finFilters.summary.from)} – ${fmtTgl(finFilters.summary.to)}`;
+      const lastM = monthly[monthly.length - 1], prevM = monthly[monthly.length - 2];
       function fdelta(now, was, goodUp = true) {
-        if (was == null || was === 0) return '<span class="kpi-sub">— vs bln lalu</span>';
+        if (was == null || was === 0) return `<span class="kpi-sub">${esc(rangeLbl)}</span>`;
         const diff = now - was, d = Math.round(diff / Math.abs(was) * 100);
         const good = goodUp ? diff >= 0 : diff <= 0;
         const cls = diff === 0 ? 'flat' : (good ? 'up' : 'down');
         const arr = diff > 0 ? '▲' : diff < 0 ? '▼' : '■';
-        return `<span class="delta ${cls}">${arr} ${Math.abs(d)}%</span><span class="kpi-sub">vs bln lalu</span>`;
+        return `<span class="delta ${cls}">${arr} ${Math.abs(d)}%</span><span class="kpi-sub">bln terakhir vs sebelumnya</span>`;
       }
-      const kpiFoot = finPeriod ? `<span class="kpi-sub">${esc(periodLbl)}</span>` : null;
       document.getElementById('finKpiGrid').innerHTML = `
-    <div class="kpi-card ok"><div class="kpi-lbl">💵 Total Omset (Uang Masuk)</div><div class="kpi-val" style="font-size:20px">${fmtRp(totMasuk)}</div><div class="kpi-foot">${kpiFoot || (lastM && prevM ? fdelta(lastM.masuk, prevM.masuk, true) : '<span class="kpi-sub">—</span>')}</div></div>
-    <div class="kpi-card bad"><div class="kpi-lbl">💸 Total Pengeluaran</div><div class="kpi-val" style="font-size:20px">${fmtRp(totKeluar)}</div><div class="kpi-foot">${kpiFoot || (lastM && prevM ? fdelta(lastM.keluar, prevM.keluar, false) : '<span class="kpi-sub">—</span>')}</div></div>
-    <div class="kpi-card"><div class="kpi-lbl">📈 Total Laba</div><div class="kpi-val" style="font-size:20px;color:${totLaba >= 0 ? 'var(--green)' : 'var(--red)'}">${fmtRp(totLaba)}</div><div class="kpi-foot">${kpiFoot || (lastM && prevM ? fdelta(lastM.laba, prevM.laba, true) : '<span class="kpi-sub">—</span>')}</div></div>
+    <div class="kpi-card ok"><div class="kpi-lbl">💵 Total Omset (Uang Masuk)</div><div class="kpi-val" style="font-size:20px">${fmtRp(totMasuk)}</div><div class="kpi-foot">${lastM && prevM ? fdelta(lastM.masuk, prevM.masuk, true) : `<span class="kpi-sub">${esc(rangeLbl)}</span>`}</div></div>
+    <div class="kpi-card bad"><div class="kpi-lbl">💸 Total Pengeluaran</div><div class="kpi-val" style="font-size:20px">${fmtRp(totKeluar)}</div><div class="kpi-foot">${lastM && prevM ? fdelta(lastM.keluar, prevM.keluar, false) : `<span class="kpi-sub">${esc(rangeLbl)}</span>`}</div></div>
+    <div class="kpi-card"><div class="kpi-lbl">📈 Total Laba (Untung)</div><div class="kpi-val" style="font-size:20px;color:${totLaba >= 0 ? 'var(--green)' : 'var(--red)'}">${fmtRp(totLaba)}</div><div class="kpi-foot">${lastM && prevM ? fdelta(lastM.laba, prevM.laba, true) : `<span class="kpi-sub">${esc(rangeLbl)}</span>`}</div></div>
     <div class="kpi-card warn"><div class="kpi-lbl">🎯 Margin Laba</div><div class="kpi-val">${margin}%</div><div class="kpi-foot"><span class="kpi-sub">laba ÷ omset</span></div></div>`;
 
-      const sigMonthly = monthlyP.length ? monthlyP : monthlyAll;
-      const bestMonth = sigMonthly.slice().sort((a, b) => b.masuk - a.masuk)[0];
-      const bestDay = (periodRows.length ? periodRows : dataFinance).slice().sort((a, b) => b.masuk - a.masuk)[0];
-      const avgDay = periodRows.length ? totMasuk / periodRows.length : 0;
-      const bestLabaMonth = sigMonthly.slice().sort((a, b) => b.laba - a.laba)[0];
-      function dLabel(iso) { return new Date(iso + 'T00:00:00').toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }); }
+      if (!rows.length) { document.getElementById('finSigGrid').innerHTML = '<div class="empty">Tidak ada data pada rentang ini.</div>'; return; }
+      const bestOmsetMonth = monthly.slice().sort((a, b) => b.masuk - a.masuk)[0];
+      const bestLabaMonth = monthly.slice().sort((a, b) => b.laba - a.laba)[0];
+      const bestOmsetDay = rows.slice().sort((a, b) => b.masuk - a.masuk)[0];
+      const avgDay = rows.length ? totMasuk / rows.length : 0;
       document.getElementById('finSigGrid').innerHTML = `
-    <div class="sig-card"><div class="sig-ico green">🏆</div><div><div class="sig-lbl">Bulan omset tertinggi</div><div class="sig-val">${esc(bestMonth.label)}</div><div class="sig-sub">${fmtRp(bestMonth.masuk)}</div></div></div>
-    <div class="sig-card"><div class="sig-ico blue">📆</div><div><div class="sig-lbl">Hari omset tertinggi</div><div class="sig-val">${fmtRp(bestDay.masuk)}</div><div class="sig-sub">${dLabel(bestDay.iso)}</div></div></div>
-    <div class="sig-card"><div class="sig-ico amber">📊</div><div><div class="sig-lbl">Rata-rata omset / hari</div><div class="sig-val">${fmtRp(avgDay)}</div><div class="sig-sub">${periodRows.length} hari · ${esc(periodLbl)}</div></div></div>
-    <div class="sig-card"><div class="sig-ico green">💎</div><div><div class="sig-lbl">Bulan laba tertinggi</div><div class="sig-val">${esc(bestLabaMonth.label)}</div><div class="sig-sub">${fmtRp(bestLabaMonth.laba)}</div></div></div>`;
-
-      renderFinMonth(monthlyAll);
-      renderFinGrowth(monthlyAll);
-      renderFinMK(monthlyAll);
-      renderFinWeek(finGroupWeekly(periodRows));
-      renderFinDay();
-      renderFinCum(periodRows);
-      renderFinTable(monthlyAll);
+    <div class="sig-card"><div class="sig-ico green">🏆</div><div><div class="sig-lbl">Bulan OMSET tertinggi (pemasukan)</div><div class="sig-val">${esc(bestOmsetMonth.label)}</div><div class="sig-sub">${fmtRp(bestOmsetMonth.masuk)} masuk</div></div></div>
+    <div class="sig-card"><div class="sig-ico green">💎</div><div><div class="sig-lbl">Bulan LABA tertinggi (untung bersih)</div><div class="sig-val">${esc(bestLabaMonth.label)}</div><div class="sig-sub">${fmtRp(bestLabaMonth.laba)} laba</div></div></div>
+    <div class="sig-card"><div class="sig-ico blue">📆</div><div><div class="sig-lbl">Hari omset tertinggi</div><div class="sig-val">${fmtRp(bestOmsetDay.masuk)}</div><div class="sig-sub">${fmtTgl(bestOmsetDay.iso)}</div></div></div>
+    <div class="sig-card"><div class="sig-ico amber">📊</div><div><div class="sig-lbl">Rata-rata omset / hari</div><div class="sig-val">${fmtRp(avgDay)}</div><div class="sig-sub">${rows.length} hari tercatat</div></div></div>`;
     }
     function renderFinMonth(monthly) {
       const labels = monthly.map(m => m.label);
@@ -2468,29 +2604,38 @@
       });
     }
     function renderFinDay() {
-      const rows = finRowsFor(finDayMonth);
+      const rows = finRowsDateRange(finFilters.day.from, finFilters.day.to);
       if (!rows.length) { dc('cFinDay'); return; }
-      const labels = rows.map(d => finDayMonth ? d.iso.slice(8) : d.iso.slice(5));
-      const key = finDayMetric;
-      const series = rows.map(d => d[key]);
-      const titleMap = { masuk: 'Omset', laba: 'Laba', keluar: 'Pengeluaran' };
-      const baseCol = key === 'keluar' ? FIN_DOWN : FIN_UP;
-      const tickLimit = finDayMonth ? 31 : 24;
+      const labels = rows.map(d => new Date(d.iso + 'T00:00:00').toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }));
+      const dense = rows.length > 60;
       dc('cFinDay');
       chartInst['cFinDay'] = new Chart(document.getElementById('cFinDay'), {
         type: 'line',
-        data: { labels, datasets: [{
-          label: titleMap[key], data: series, borderWidth: 2, pointRadius: finDayMonth ? 2 : 0, pointHoverRadius: 4, tension: .25, fill: true,
-          backgroundColor: 'rgba(21,128,61,.07)',
-          segment: { borderColor: ctx => (ctx.p1.parsed.y >= ctx.p0.parsed.y) ? FIN_UP : FIN_DOWN },
-          borderColor: baseCol
-        }] },
-        options: { ...baseOpts, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ` ${titleMap[key]}: ${fmtRp(c.parsed.y)}` } } }, scales: { x: { ticks: { font: { size: 9 }, maxRotation: 45, minRotation: 45, autoSkip: true, maxTicksLimit: tickLimit } }, y: { ticks: { font: { size: 10 }, callback: v => fmtJt(v) } } } }
+        data: {
+          labels,
+          datasets: [
+            { label: 'Uang Masuk', data: rows.map(d => d.masuk), borderColor: FIN_UP, backgroundColor: 'transparent', borderWidth: 1.4, pointRadius: 0, pointHoverRadius: 4, tension: .25, fill: false, order: 2 },
+            { label: 'Uang Keluar', data: rows.map(d => d.keluar), borderColor: FIN_DOWN, backgroundColor: 'transparent', borderWidth: 1.4, pointRadius: 0, pointHoverRadius: 4, tension: .25, fill: false, order: 1 },
+            { label: 'Laba', data: rows.map(d => d.laba), borderColor: '#2563eb', backgroundColor: 'rgba(37,99,235,.10)', borderWidth: 1.8, pointRadius: 0, pointHoverRadius: 4, tension: .25, fill: 'origin', order: 3 }
+          ]
+        },
+        options: {
+          ...baseOpts,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { display: true, position: 'top', labels: { usePointStyle: true, pointStyle: 'line', boxWidth: 22, font: { size: 11 } } },
+            tooltip: { mode: 'index', intersect: false, callbacks: { title: items => items[0].label, label: c => ` ${c.dataset.label}: ${fmtRp(c.parsed.y)}` } }
+          },
+          scales: {
+            x: { ticks: { font: { size: 9 }, maxRotation: 60, minRotation: 45, autoSkip: true, maxTicksLimit: dense ? 22 : 16 }, grid: { display: false } },
+            y: { ticks: { font: { size: 10 }, callback: v => fmtJt(v) }, grid: { color: ctx => ctx.tick.value === 0 ? '#475569' : '#eef2f7', lineWidth: ctx => ctx.tick.value === 0 ? 1.2 : 1 } }
+          }
+        }
       });
     }
     function renderFinCum(rows) {
       let run = 0;
-      const labels = rows.map(d => d.iso.slice(5));
+      const labels = rows.map(d => new Date(d.iso + 'T00:00:00').toLocaleDateString('id-ID', { day: '2-digit', month: 'short' }));
       const cum = rows.map(d => (run += d.laba));
       dc('cFinCum');
       chartInst['cFinCum'] = new Chart(document.getElementById('cFinCum'), {
