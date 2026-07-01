@@ -1094,6 +1094,242 @@
       font-weight: 700
     }
 
+    /* DATE RANGE PICKER */
+    .drp-btn {
+      font-size: 12px;
+      padding: 7px 11px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--txt);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap
+    }
+
+    .drp-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent)
+    }
+
+    .drp-pop {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 6px);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, .16);
+      z-index: 200;
+      display: flex;
+      overflow: hidden;
+      min-width: 320px
+    }
+
+    .drp-presets {
+      display: flex;
+      flex-direction: column;
+      padding: 8px;
+      border-right: 1px solid var(--border);
+      background: #f8fafc;
+      min-width: 132px
+    }
+
+    .drp-preset {
+      text-align: left;
+      font-size: 12px;
+      padding: 7px 10px;
+      border: none;
+      background: transparent;
+      color: var(--txt);
+      border-radius: 7px;
+      cursor: pointer;
+      white-space: nowrap
+    }
+
+    .drp-preset:hover {
+      background: var(--accent-l);
+      color: var(--accent)
+    }
+
+    .drp-preset.active {
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600
+    }
+
+    .drp-right {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 178px
+    }
+
+    .drp-field label {
+      font-size: 10px;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      display: block;
+      margin-bottom: 3px
+    }
+
+    .drp-field input {
+      width: 100%;
+      font-size: 12px;
+      padding: 6px 8px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      outline: none
+    }
+
+    .drp-field input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-l)
+    }
+
+    .drp-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: space-between;
+      margin-top: 2px
+    }
+
+    .drp-clear {
+      font-size: 12px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 6px 4px
+    }
+
+    .drp-clear:hover {
+      color: var(--red)
+    }
+
+    .drp-apply {
+      font-size: 12px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 7px 14px;
+      cursor: pointer;
+      font-weight: 600
+    }
+
+    .drp-apply:hover {
+      background: #2f49b3
+    }
+
+    /* PIN GATE */
+    .pin-wrap {
+      max-width: 380px;
+      margin: 8vh auto 0;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow-h);
+      padding: 32px 28px;
+      text-align: center
+    }
+
+    .pin-ico {
+      font-size: 34px;
+      margin-bottom: 6px
+    }
+
+    .pin-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 4px
+    }
+
+    .pin-sub {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-bottom: 20px;
+      line-height: 1.5
+    }
+
+    .pin-boxes {
+      display: flex;
+      gap: 9px;
+      justify-content: center;
+      margin-bottom: 16px
+    }
+
+    .pin-boxes input {
+      width: 44px;
+      height: 52px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 700;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      outline: none;
+      color: var(--txt);
+      transition: .15s
+    }
+
+    .pin-boxes input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-l)
+    }
+
+    .pin-boxes input.filled {
+      border-color: var(--accent)
+    }
+
+    .pin-err {
+      font-size: 12px;
+      color: var(--red);
+      min-height: 18px;
+      margin-bottom: 12px;
+      font-weight: 500
+    }
+
+    .pin-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 9px;
+      padding: 11px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%
+    }
+
+    .pin-btn:hover {
+      background: #2f49b3
+    }
+
+    .pin-shake {
+      animation: shake .4s
+    }
+
+    @keyframes shake {
+
+      0%,
+      100% {
+        transform: translateX(0)
+      }
+
+      25% {
+        transform: translateX(-7px)
+      }
+
+      75% {
+        transform: translateX(7px)
+      }
+    }
+
     @media(max-width:980px) {
 
       .kpi-grid,
@@ -1150,7 +1386,9 @@
       <div class="sb-section">Divisi Admin</div>
       <div class="sb-item active" data-page="overview"><span class="ico">📊</span>Overview Admin</div>
       <div class="sb-item" data-page="perorangan"><span class="ico">👤</span>Per Orang</div>
-      <div class="sb-item" data-page="divisi"><span class="ico">🏢</span>Per Divisi</div>
+      <div class="sb-item" data-page="divisi"><span class="ico">🏢</span>Per Divisi Admin</div>
+            <div class="sb-section">Divisi Desain</div>
+      <div class="sb-item" data-page="desain"><span class="ico">🎨</span>Desain</div>
       <div class="sb-section" style="margin-top:8px">Divisi CS</div>
       <div class="sb-item" data-page="cs"><span class="ico">📞</span>Data CS</div>
       <div class="sb-section" style="margin-top:8px">Keuangan</div>
@@ -1166,9 +1404,10 @@
     <div class="topbar">
       <div class="page-title" id="pgTitle">Overview</div>
       <div class="topbar-right">
-        <select class="fsel" id="fMonth" onchange="renderAll()">
+        <select class="fsel" id="fMonth" onchange="renderAll()" style="display:none">
           <option value="">Semua bulan</option>
         </select>
+        <div id="drp_admin" style="position:relative"></div>
         <select class="fsel" id="fDivisi" onchange="renderAll()">
           <option value="">Semua divisi</option>
           <option>Admin Draft</option>
@@ -1457,6 +1696,71 @@
         </div>
       </div>
 
+      <!-- DESAIN -->
+      <div class="page" id="page-desain">
+        <div class="cc-sub" style="margin-bottom:14px">Rekap pekerjaan tim <b>Desain</b> — sumber: sheet <b>Desain</b>
+          (kolom: NO, Tanggal, NAMA PERUSAHAAN, ORDER, STATUS, PIC, KETERANGAN).</div>
+        <div id="desEmpty" style="display:none"></div>
+        <div id="desMain">
+          <div class="kpi-grid" id="desKpiGrid"></div>
+
+          <div class="sec-divider">Status &amp; Jenis Order</div>
+          <div class="cg2">
+            <div class="chart-card">
+              <div class="cc-title">Status pekerjaan</div>
+              <div class="cc-sub">Selesai vs dikerjakan vs menunggu</div>
+              <div id="lgDesStatus" class="legend"></div>
+              <div style="position:relative;height:230px"><canvas id="cDesStatus" role="img"
+                  aria-label="Status desain"></canvas></div>
+            </div>
+            <div class="chart-card">
+              <div class="cc-title">Jenis order (ORDER)</div>
+              <div class="cc-sub">Distribusi jenis pekerjaan desain</div>
+              <div id="lgDesOrder" class="legend"></div>
+              <div style="position:relative;height:230px"><canvas id="cDesOrder" role="img"
+                  aria-label="Jenis order desain"></canvas></div>
+            </div>
+          </div>
+
+          <div class="sec-divider">Beban per PIC</div>
+          <div class="cg1">
+            <div class="chart-card">
+              <div class="cc-title">Beban kerja per PIC berdasarkan status</div>
+              <div class="cc-sub">Tinggi batang = total tugas · warna = status</div>
+              <div id="lgDesPic" class="legend"></div>
+              <div style="position:relative;height:290px"><canvas id="cDesPic" role="img"
+                  aria-label="Beban PIC desain"></canvas></div>
+            </div>
+          </div>
+
+          <div class="tbl-card">
+            <div class="tbl-hdr">
+              <span class="tbl-title">Detail pekerjaan desain</span>
+              <div style="display:flex;align-items:center;gap:8px">
+                <input class="tbl-search" id="desSearch" placeholder="Cari…" oninput="filterDesainTable()">
+                <span class="tbl-cnt" id="desTblCnt"></span>
+              </div>
+            </div>
+            <div class="tbl-scroll">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Nama Perusahaan</th>
+                    <th>Order</th>
+                    <th>PIC</th>
+                    <th>Keterangan</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="desTblBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- CS -->
       <div class="page" id="page-cs">
         <div id="csNote" style="display:none"></div>
@@ -1552,17 +1856,24 @@
 
       <!-- FINANCE -->
       <div class="page" id="page-finance">
+        <div id="finLock" style="display:none"></div>
         <div id="finNote" style="display:none"></div>
         <div id="finMain">
-          <div class="fin-filter" style="margin-bottom:16px">
-            <span class="fin-flbl" style="text-transform:uppercase;letter-spacing:.05em">🔎 Filter Ringkasan (KPI &amp;
-              Sorotan)</span>
-            <span class="fin-flbl">Dari tanggal</span>
-            <input type="date" class="fsel fin-date" id="fDateFrom_summary"
-              onchange="setFinDateRange('summary','from',this.value)">
-            <span class="fin-flbl">sampai</span>
-            <input type="date" class="fsel fin-date" id="fDateTo_summary"
-              onchange="setFinDateRange('summary','to',this.value)">
+          <div class="fin-filter" style="margin-bottom:16px;background:#eff6ff;border-color:#bfdbfe">
+            <span class="fin-flbl" style="text-transform:uppercase;letter-spacing:.05em">🔎 Rentang tanggal</span>
+            <span class="fin-flbl" style="font-weight:400">diatur dari tombol 📅 di kanan atas — berlaku untuk semua grafik.</span>
+          </div>
+          <div class="fin-filter" style="margin-bottom:16px;background:#fffbeb;border:1px dashed #f59e0b">
+            <span class="fin-flbl" style="text-transform:uppercase;letter-spacing:.05em">🎯 Target Bulanan</span>
+            <span class="fin-flbl">Omset / bulan</span>
+            <input type="number" min="0" step="10" class="fsel fin-date" id="finTgtOmset" style="width:96px"
+              onchange="setFinTarget('omset',this.value)">
+            <span class="fin-flbl">juta</span>
+            <span class="fin-flbl" style="margin-left:8px">Laba / bulan</span>
+            <input type="number" min="0" step="10" class="fsel fin-date" id="finTgtLaba" style="width:96px"
+              onchange="setFinTarget('laba',this.value)">
+            <span class="fin-flbl">juta</span>
+            <span class="fin-flbl" style="color:var(--faint)">— tersimpan otomatis di browser ini</span>
           </div>
           <div class="kpi-grid" id="finKpiGrid"></div>
 
@@ -1575,12 +1886,6 @@
               <div class="cc-title">Omset, pengeluaran &amp; laba per bulan</div>
               <div class="cc-sub">Tiga garis: Dana Masuk (hijau), Dana Keluar (merah), Laba Usaha (biru) · label nilai
                 di tiap titik</div>
-              <div class="fin-filter">
-                <span class="fin-flbl">Dari bulan</span>
-                <select class="fsel fin-sel" id="fMonthFrom_month" onchange="setFinMonthRange('month','from',this.value)"></select>
-                <span class="fin-flbl">sampai</span>
-                <select class="fsel fin-sel" id="fMonthTo_month" onchange="setFinMonthRange('month','to',this.value)"></select>
-              </div>
               <div id="lgFinMonth" class="legend"></div>
               <div style="position:relative;height:330px"><canvas id="cFinMonth" role="img"
                   aria-label="Tren bulanan finance"></canvas></div>
@@ -1591,24 +1896,12 @@
             <div class="chart-card">
               <div class="cc-title">Pertumbuhan omset (bulan ke bulan)</div>
               <div class="cc-sub">% kenaikan/penurunan omset vs bulan sebelumnya</div>
-              <div class="fin-filter">
-                <span class="fin-flbl">Dari</span>
-                <select class="fsel fin-sel" id="fMonthFrom_growth" onchange="setFinMonthRange('growth','from',this.value)"></select>
-                <span class="fin-flbl">sampai</span>
-                <select class="fsel fin-sel" id="fMonthTo_growth" onchange="setFinMonthRange('growth','to',this.value)"></select>
-              </div>
               <div style="position:relative;height:280px"><canvas id="cFinGrowth" role="img"
                   aria-label="Pertumbuhan omset"></canvas></div>
             </div>
             <div class="chart-card">
               <div class="cc-title">Uang masuk vs uang keluar per bulan</div>
               <div class="cc-sub">Perbandingan pemasukan dan pengeluaran tiap bulan</div>
-              <div class="fin-filter">
-                <span class="fin-flbl">Dari</span>
-                <select class="fsel fin-sel" id="fMonthFrom_mk" onchange="setFinMonthRange('mk','from',this.value)"></select>
-                <span class="fin-flbl">sampai</span>
-                <select class="fsel fin-sel" id="fMonthTo_mk" onchange="setFinMonthRange('mk','to',this.value)"></select>
-              </div>
               <div id="lgFinMK" class="legend"></div>
               <div style="position:relative;height:280px"><canvas id="cFinMK" role="img"
                   aria-label="Masuk vs keluar"></canvas></div>
@@ -1620,12 +1913,6 @@
             <div class="chart-card">
               <div class="cc-title">Omset &amp; laba mingguan</div>
               <div class="cc-sub">Batang omset hijau/merah mengikuti naik-turun vs minggu sebelumnya · garis = laba
-              </div>
-              <div class="fin-filter">
-                <span class="fin-flbl">Dari tanggal</span>
-                <input type="date" class="fsel fin-date" id="fDateFrom_week" onchange="setFinDateRange('week','from',this.value)">
-                <span class="fin-flbl">sampai</span>
-                <input type="date" class="fsel fin-date" id="fDateTo_week" onchange="setFinDateRange('week','to',this.value)">
               </div>
               <div id="lgFinWeek" class="legend"></div>
               <div style="position:relative;height:300px"><canvas id="cFinWeek" role="img"
@@ -1643,12 +1930,7 @@
                   <div class="cc-sub" style="margin:0"><b>Tiap titik = 1 hari.</b> <span
                       style="color:var(--green);font-weight:600">Hijau</span> = uang masuk,
                     <span style="color:var(--red);font-weight:600">merah</span> = uang keluar,
-                    <span style="color:#2563eb;font-weight:600">biru</span> = laba (area). Atur rentang tanggal di kanan →</div>
-                </div>
-                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-                  <input type="date" class="fsel fin-date" id="fDateFrom_day" onchange="setFinDateRange('day','from',this.value)">
-                  <span class="fin-flbl">s/d</span>
-                  <input type="date" class="fsel fin-date" id="fDateTo_day" onchange="setFinDateRange('day','to',this.value)">
+                    <span style="color:#2563eb;font-weight:600">biru</span> = laba (area). Rentang tanggal diatur dari tombol 📅 di kanan atas.</div>
                 </div>
               </div>
               <div style="position:relative;height:300px"><canvas id="cFinDay" role="img"
@@ -1660,12 +1942,6 @@
             <div class="chart-card">
               <div class="cc-title">Akumulasi laba (kumulatif)</div>
               <div class="cc-sub">Total laba yang menumpuk dari hari ke hari — makin menanjak makin sehat</div>
-              <div class="fin-filter">
-                <span class="fin-flbl">Dari tanggal</span>
-                <input type="date" class="fsel fin-date" id="fDateFrom_cum" onchange="setFinDateRange('cum','from',this.value)">
-                <span class="fin-flbl">sampai</span>
-                <input type="date" class="fsel fin-date" id="fDateTo_cum" onchange="setFinDateRange('cum','to',this.value)">
-              </div>
               <div style="position:relative;height:260px"><canvas id="cFinCum" role="img"
                   aria-label="Akumulasi laba"></canvas></div>
             </div>
@@ -1688,6 +1964,7 @@
                     <th>Laba</th>
                     <th>Margin</th>
                     <th>Pertumbuhan Omset</th>
+                    <th>vs Target Omset</th>
                   </tr>
                 </thead>
                 <tbody id="finTblBody"></tbody>
@@ -1706,7 +1983,14 @@
     const SHEET_TRELLO = 'trello_board';
     // Sumber baru: 3 sheet admin (Divisi = nama sheet). Kolom: NO, Tanggal, NAMA PERUSAHAAN, ORDER, STATUS, PIC, KETERANGAN
     const ADMIN_SHEETS = ['Admin Draft', 'Admin Perizinan', 'Admin Pajak'];
+    // Sheet Desain (struktur kolom sama dengan sheet admin)
+    const DESAIN_SHEET = 'Desain';
+    // ====== PIN TAB FINANCE — ubah 6 digit di sini ======
+    const FINANCE_PIN = '112233';
+    // ====================================================
     const FINANCE_ID = '18iTRMXITMd_-VQlRLdZQULMrwqPPuj3sChTud8O_jf4';
+    // Sheet bulanan khusus (angka bulanan yang dipelihara manual) — jadi sumber grafik/tabel bulanan
+    const FINANCE_MONTHLY_SHEET = 'TREND PER BULAN';
     const CS_SHEET_TAB = 'export_kpi';
     const CS_SHEETS = [
       { name: 'Julia', id: '1gZq8PDQvxtNzMb3bRJ0dVyDpj1HWVwl9-RWrQ8rEBlY', gid: '516681424' },
@@ -1715,21 +1999,102 @@
       { name: 'Dedes', id: '1zftlA_FTA60EvEEr3snWWH1Uzf9S_UjtOCTyNe6i5ag', gid: '1942550243' },
     ];
     const ID_MONTHS = ['JANUARI', 'FEBRUARI', 'MARET', 'APRIL', 'MEI', 'JUNI', 'JULI', 'AGUSTUS', 'SEPTEMBER', 'OKTOBER', 'NOVEMBER', 'DESEMBER'];
-    const CS_COLORS = { 'Julia': '#F43F5E', 'Devi': '#14B8A6', 'Dewi': '#F59E0B', 'Dedes': '#7C3AED' };
+    const CS_COLORS = { 'Julia': '#3b5bdb', 'Devi': '#15803d', 'Dewi': '#b45309', 'Dedes': '#5b21b6' };
     const FIN_UP = '#15803d', FIN_DOWN = '#b91c1c', FIN_NEU = '#3b5bdb', FIN_GREY = '#cbd5e1';
 
-    let dataRekap = [], dataTrello = [];
+    let dataRekap = [], dataTrello = [], dataDesain = [];
+    let financeUnlocked = false;
+    let adminRange = { from: '', to: '' };
     let dataCS = {}, csMonth = null, csSel = null, csDiag = [];
-    let dataFinance = [], finDiag = { ok: false, msg: '' }, finDayMetric = 'masuk';
+    let dataFinance = [], dataFinanceMonthly = [], finDiag = { ok: false, msg: '' }, finDayMetric = 'masuk';
     let finFilters = { summary: { from: '', to: '' }, month: { from: '', to: '' }, growth: { from: '', to: '' }, mk: { from: '', to: '' }, week: { from: '', to: '' }, day: { from: '', to: '' }, cum: { from: '', to: '' } };
     let finPopulated = false;
-    let personTableRows = [], trelloTableRows = [], overviewTableRows = [];
+    const FIN_TARGET_DEFAULT = { omset: 500000000, laba: 150000000 };
+    let finTarget = (function () { try { const s = JSON.parse(localStorage.getItem('akses_fin_target') || 'null'); if (s && typeof s.omset === 'number' && typeof s.laba === 'number') return s; } catch (e) { } return { ...FIN_TARGET_DEFAULT }; })();
+    let personTableRows = [], trelloTableRows = [], overviewTableRows = [], desainTableRows = [];
     let chartInst = {};
     let selectedPerson = null, curPage = 'overview', firstLoad = true;
 
     function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
     function pct(n, d) { return d > 0 ? Math.round(n / d * 100) : 0; }
     function daysAgo(dateStr) { const t = Date.parse(dateStr); if (isNaN(t)) return null; return Math.floor((Date.now() - t) / 864e5); }
+
+    // ===== DATE RANGE PICKER (dipakai di Admin & Finance) =====
+    const DRP = {};
+    const DRP_PRESETS = [['today', 'Hari ini'], ['yesterday', 'Kemarin'], ['week', 'Minggu ini'], ['month', 'Bulan ini'], ['quarter', 'Kuartal ini'], ['year', 'Tahun ini'], ['l7', '7 hari terakhir'], ['l14', '14 hari terakhir'], ['l30', '30 hari terakhir'], ['l90', '90 hari terakhir'], ['all', 'Semua tanggal']];
+    function isoOf(d) { return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; }
+    function drpFmt(iso) { return iso ? new Date(iso + 'T00:00:00').toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) : ''; }
+    function drpLabel(id) { const s = DRP[id]; if (!s || (!s.from && !s.to)) return 'Semua tanggal'; if (s.from && s.to && s.from === s.to) return drpFmt(s.from); return `${drpFmt(s.from) || '…'} – ${drpFmt(s.to) || '…'}`; }
+    function drpPresetRange(key) {
+      const now = new Date(); now.setHours(0, 0, 0, 0);
+      const today = isoOf(now);
+      const mk = dd => { const x = new Date(now); x.setDate(x.getDate() + dd); return isoOf(x); };
+      if (key === 'today') return [today, today];
+      if (key === 'yesterday') { const y = mk(-1); return [y, y]; }
+      if (key === 'week') { const wd = (now.getDay() + 6) % 7; const s = new Date(now); s.setDate(now.getDate() - wd); const e = new Date(s); e.setDate(s.getDate() + 6); return [isoOf(s), isoOf(e)]; }
+      if (key === 'month') return [isoOf(new Date(now.getFullYear(), now.getMonth(), 1)), isoOf(new Date(now.getFullYear(), now.getMonth() + 1, 0))];
+      if (key === 'quarter') { const q = Math.floor(now.getMonth() / 3); return [isoOf(new Date(now.getFullYear(), q * 3, 1)), isoOf(new Date(now.getFullYear(), q * 3 + 3, 0))]; }
+      if (key === 'year') return [isoOf(new Date(now.getFullYear(), 0, 1)), isoOf(new Date(now.getFullYear(), 11, 31))];
+      if (key === 'l7') return [mk(-6), today];
+      if (key === 'l14') return [mk(-13), today];
+      if (key === 'l30') return [mk(-29), today];
+      if (key === 'l90') return [mk(-89), today];
+      return ['', ''];
+    }
+    function initDRP(id, applyFn, initial) {
+      DRP[id] = { from: (initial && initial.from) || '', to: (initial && initial.to) || '', dfrom: '', dto: '', applyFn, open: false };
+      const host = document.getElementById('drp_' + id); if (!host) return;
+      host.innerHTML = `<button type="button" class="drp-btn" onclick="drpToggle('${id}')">📅 <span id="drpLbl_${id}">${esc(drpLabel(id))}</span> <span style="color:var(--faint)">▾</span></button><div class="drp-pop" id="drpPop_${id}" style="display:none"></div>`;
+    }
+    function syncDRP(id, from, to) { const s = DRP[id]; if (!s) return; s.from = from || ''; s.to = to || ''; const l = document.getElementById('drpLbl_' + id); if (l) l.textContent = drpLabel(id); }
+    function drpToggle(id) {
+      const s = DRP[id]; if (!s) return; s.open = !s.open;
+      const pop = document.getElementById('drpPop_' + id);
+      if (s.open) { s.dfrom = s.from; s.dto = s.to; drpRenderPop(id); pop.style.display = 'flex'; } else pop.style.display = 'none';
+    }
+    function drpRenderPop(id) {
+      const s = DRP[id];
+      const presets = DRP_PRESETS.map(([k, l]) => {
+        const [f, t] = drpPresetRange(k);
+        const act = (k === 'all' ? (!s.dfrom && !s.dto) : (f === s.dfrom && t === s.dto)) ? ' active' : '';
+        return `<button type="button" class="drp-preset${act}" onclick="drpPreset('${id}','${k}')">${l}</button>`;
+      }).join('');
+      document.getElementById('drpPop_' + id).innerHTML = `
+    <div class="drp-presets">${presets}</div>
+    <div class="drp-right">
+      <div class="drp-field"><label>Dari tanggal</label><input type="date" id="drpFrom_${id}" value="${s.dfrom}" onchange="DRP['${id}'].dfrom=this.value;drpRefreshActive('${id}')"></div>
+      <div class="drp-field"><label>Sampai tanggal</label><input type="date" id="drpTo_${id}" value="${s.dto}" onchange="DRP['${id}'].dto=this.value;drpRefreshActive('${id}')"></div>
+      <div class="drp-actions"><button type="button" class="drp-clear" onclick="drpPreset('${id}','all')">Bersihkan</button><button type="button" class="drp-apply" onclick="drpApply('${id}')">Terapkan</button></div>
+    </div>`;
+    }
+    function drpRefreshActive(id) {
+      const s = DRP[id];
+      document.querySelectorAll('#drpPop_' + id + ' .drp-preset').forEach((btn, i) => {
+        const k = DRP_PRESETS[i][0]; const [f, t] = drpPresetRange(k);
+        btn.classList.toggle('active', (k === 'all') ? (!s.dfrom && !s.dto) : (f === s.dfrom && t === s.dto));
+      });
+    }
+    function drpPreset(id, key) {
+      const s = DRP[id]; const [f, t] = drpPresetRange(key);
+      s.from = f; s.to = t; s.dfrom = f; s.dto = t;
+      const lbl = document.getElementById('drpLbl_' + id); if (lbl) lbl.textContent = drpLabel(id);
+      s.open = false; const p = document.getElementById('drpPop_' + id); if (p) p.style.display = 'none';
+      if (s.applyFn) s.applyFn(s.from, s.to);
+    }
+    function drpApply(id) {
+      const s = DRP[id]; let f = s.dfrom || '', t = s.dto || '';
+      if (f && t && t < f) t = f;
+      s.from = f; s.to = t;
+      document.getElementById('drpLbl_' + id).textContent = drpLabel(id);
+      s.open = false; document.getElementById('drpPop_' + id).style.display = 'none';
+      if (s.applyFn) s.applyFn(s.from, s.to);
+    }
+    document.addEventListener('click', e => {
+      Object.keys(DRP).forEach(id => {
+        const host = document.getElementById('drp_' + id);
+        if (host && DRP[id].open && !host.contains(e.target)) { DRP[id].open = false; const p = document.getElementById('drpPop_' + id); if (p) p.style.display = 'none'; }
+      });
+    });
 
     function normalizeDate(dStr) {
       if (!dStr) return '';
@@ -1793,13 +2158,14 @@
     async function fetchRaw(url) { const r = await fetch(url); if (!r.ok) throw new Error('HTTP ' + r.status); return await r.text(); }
 
     // === Sheet Admin (Admin Draft / Admin Perizinan / Admin Pajak) ===
-    // Petakan STATUS mentah -> Done / On Progress / Pending. Urutan cek penting.
+    // Petakan STATUS mentah -> 3 keadaan seragam. Urutan cek penting.
+    // FINISH/PIRT DONE/SELESAI -> Done · DOING/PROSES/VERIF/AMDAL -> On Progress · LIST/EROR/TO BE CONFIRM/MENUNGGU/MINUS -> Pending
     function normalizeAdminStatus(raw) {
       const s = String(raw || '').toUpperCase().trim();
       if (!s) return 'Pending';
-      if (/SELESAI|TERBIT|LUNAS|DONE|SUDAH|BERHASIL|SIAP KIRIM|^OK$/.test(s)) return 'Done';
-      if (/BELUM|EROR|ERROR|NIHIL|HOLD|BATAL|PENDING|ANTRI|GAGAL|TOLAK/.test(s)) return 'Pending';
-      if (/PROSES|VERIF|WAIT|CONFIRM|MENUNGGU|BUTUH|REVIEW|CEK|PROGRESS|DRAFT|PENGAJUAN|ON GOING/.test(s)) return 'On Progress';
+      if (/FINISH|SELESAI|DONE|TERBIT|LUNAS|SIAP KIRIM|BERHASIL|^OK$/.test(s)) return 'Done';
+      if (/^LIST$|EROR|ERROR|MINUS|TO BE CONFIRM|MENUN|BELUM|NIHIL|HOLD|BATAL|ANTRI|GAGAL|TOLAK|PENDING/.test(s)) return 'Pending';
+      if (/DOING|PROSES|VERIF|PKKPR|AMDAL|WAIT|REVIEW|CEK|PROGRESS|DRAFT|PENGAJUAN|CONFIRM|BUTUH|ON GOING/.test(s)) return 'On Progress';
       return 'On Progress';
     }
     // Baca posisi kolom: 0=NO,1=Tanggal,2=NAMA PERUSAHAAN,3=ORDER,4=STATUS,5=PIC,6=KETERANGAN
@@ -1860,6 +2226,36 @@
       return out;
     }
     function finMonthKey(iso) { return iso.slice(0, 7); }
+    // Parser sheet "TREND PER BULAN": A=Tanggal (bln/thn, mis. /05/25), B=Dana Masuk, C=Dana Keluar, D=Laba Usaha
+    function parseFinanceMonthly(text) {
+      const rows = parseCSV(text); const out = [];
+      rows.forEach(r => {
+        const raw = String(r[0] || '').trim();
+        if (!raw || /tanggal/i.test(raw)) return;
+        let y, m;
+        const iso = normalizeDate(raw);
+        if (/^\d{4}-\d{2}/.test(iso)) { y = iso.slice(0, 4); m = iso.slice(5, 7); }
+        else {
+          const nums = raw.split(/[\/.\-\s]/).map(x => x.trim()).filter(x => /^\d+$/.test(x));
+          if (nums.length < 2) return;
+          let mm = nums[nums.length - 2], yy = nums[nums.length - 1];
+          if (+mm < 1 || +mm > 12) return;
+          m = String(mm).padStart(2, '0'); y = yy.length === 2 ? ('20' + yy) : yy;
+        }
+        if (!y || !m) return;
+        const masuk = finNum(r[1]), keluar = finNum(r[2]);
+        let laba = (r[3] !== undefined && String(r[3]).trim() !== '') ? finNum(r[3]) : (masuk - keluar);
+        const key = `${y}-${m}`;
+        out.push({ key, iso: `${key}-01`, label: finMonthLabel(`${key}-01`, ''), masuk, keluar, laba, days: 0 });
+      });
+      out.sort((a, b) => a.key < b.key ? -1 : 1);
+      return out;
+    }
+    // Sumber bulanan: pakai sheet TREND PER BULAN bila ada, jika tidak fallback jumlah harian
+    function finMonthlyInRange(fromK, toK) {
+      const src = (dataFinanceMonthly && dataFinanceMonthly.length) ? dataFinanceMonthly : finGroupMonthly(dataFinance);
+      return src.filter(m => (!fromK || m.key >= fromK) && (!toK || m.key <= toK));
+    }
     function finMonthLabel(iso, bulan) {
       const [y, m] = iso.split('-');
       const nm = ID_MONTHS[(+m) - 1] || '';
@@ -1970,6 +2366,18 @@
         finDiag.ok = parsed.length > 0;
         finDiag.msg = parsed.length ? `${parsed.length} baris harian terbaca` : 'Sheet terbaca tapi tak ada baris tanggal valid.';
       } catch (e) { finDiag.msg = 'Gagal memuat FINANCE: ' + (e.message || e); dataFinance = []; }
+      // Sumber bulanan khusus: sheet TREND PER BULAN
+      try {
+        const mtxt = await fetchRaw(csvUrl(FINANCE_ID, FINANCE_MONTHLY_SHEET));
+        if (!/<html|<!doctype|accounts\.google|signin/i.test(mtxt.slice(0, 400))) {
+          dataFinanceMonthly = parseFinanceMonthly(mtxt);
+        } else dataFinanceMonthly = [];
+      } catch (e) { dataFinanceMonthly = []; }
+      // isi jumlah hari tercatat per bulan dari data harian (untuk kolom tabel)
+      if (dataFinanceMonthly.length && dataFinance.length) {
+        const cnt = {}; dataFinance.forEach(d => { const k = d.iso.slice(0, 7); cnt[k] = (cnt[k] || 0) + 1; });
+        dataFinanceMonthly.forEach(m => { if (cnt[m.key]) m.days = cnt[m.key]; });
+      }
     }
 
     function parseExportKpi(text) {
@@ -2000,10 +2408,16 @@
           ADMIN_SHEETS.map(s => fetchAdminSheet(SHEET_ID, s).catch(() => []))
         );
         dataRekap = adminResults.flat();
-        const tr = await fetchSheet(SHEET_ID, SHEET_TRELLO).catch(() => []);
-        dataTrello = tr;
+        const [tr, des] = await Promise.all([
+          fetchSheet(SHEET_ID, SHEET_TRELLO).catch(() => []),
+          fetchAdminSheet(SHEET_ID, DESAIN_SHEET).catch(() => [])
+        ]);
+        dataTrello = tr; dataDesain = des;
         await Promise.allSettled([loadCSData(), loadFinanceData()]);
         populateMonthFilter();
+        if (firstLoad || !DRP.admin) {
+          initDRP('admin', (from, to) => { adminRange = { from, to }; renderAll(); }, adminRange);
+        }
         document.getElementById('lastUpd').textContent = new Date().toLocaleString('id-ID', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
         document.getElementById('loadingView').style.display = 'none';
         firstLoad = false;
@@ -2023,8 +2437,14 @@
       sel.value = cur || '';
     }
     function fRekap() {
-      const mo = document.getElementById('fMonth').value, dv = document.getElementById('fDivisi').value;
-      return dataRekap.filter(d => (!mo || (d['Tanggal'] || '').startsWith(mo)) && (!dv || d['Divisi'] === dv));
+      const dv = document.getElementById('fDivisi').value;
+      return dataRekap.filter(d => {
+        if (dv && d['Divisi'] !== dv) return false;
+        const t = d['Tanggal'] || '';
+        if (adminRange.from && t < adminRange.from) return false;
+        if (adminRange.to && t > adminRange.to) return false;
+        return true;
+      });
     }
     function fTrello() { const dv = document.getElementById('fDivisi').value; return dataTrello.filter(d => !dv || d['Board Divisi'] === dv); }
     function prevMonthStr(m) { const [y, mo] = m.split('-').map(Number); const d = new Date(y, mo - 2, 1); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0'); }
@@ -2044,8 +2464,10 @@
     function catColor(k, i = 0) { return CAT_COLORS[k] || PALETTE[i % PALETTE.length]; }
     function divColor(k, i = 0) { return DIV_COLORS[k] || PALETTE[i % PALETTE.length]; }
     const STATUS_BG = { 'Done': '#15803d', 'On Progress': '#f59e0b', 'Pending': '#cbd5e1' };
+    const STATUS_LABEL = { 'Done': 'Selesai', 'On Progress': 'Dikerjakan', 'Pending': 'Menunggu', 'Belum diisi': 'Belum diisi' };
     const BADGE = { 'Done': 'b-done', 'On Progress': 'b-prog', 'Pending': 'b-pend' };
-    function bdg(v) { return `<span class="badge ${BADGE[v] || 'b-pend'}">${esc(v) || '-'}</span>`; }
+    function stLbl(v) { return STATUS_LABEL[v] || v; }
+    function bdg(v) { return `<span class="badge ${BADGE[v] || 'b-pend'}">${esc(STATUS_LABEL[v] || v || '-')}</span>`; }
     const baseOpts = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, animation: { duration: 400 } };
 
     function renderAll() {
@@ -2053,6 +2475,7 @@
       if (curPage === 'overview') renderOverview();
       if (curPage === 'perorangan') renderPerOrang();
       if (curPage === 'divisi') renderDivisi();
+      if (curPage === 'desain') renderDesain();
       if (curPage === 'cs') renderCS();
       if (curPage === 'finance') renderFinance();
     }
@@ -2118,7 +2541,7 @@
       const STAT_BG2 = { ...STATUS_BG, 'Belum diisi': '#e2e8f0' };
       const byO = {}; rk.forEach(d => { const n = d['Nama']; if (!n) return; byO[n] = byO[n] || { Done: 0, 'On Progress': 0, Pending: 0, 'Belum diisi': 0 }; const s = STAT_KEYS.includes(d['Status']) ? d['Status'] : 'Belum diisi'; byO[n][s]++; });
       const usedStat = STAT_KEYS.filter(s => oKeys.some(k => byO[k][s] > 0));
-      document.getElementById('lgWork').innerHTML = usedStat.map(s => `<span class="li"><span class="ld" style="background:${STAT_BG2[s]}"></span>${s}</span>`).join('');
+      document.getElementById('lgWork').innerHTML = usedStat.map(s => `<span class="li"><span class="ld" style="background:${STAT_BG2[s]}"></span>${stLbl(s)}</span>`).join('');
       dc('cWorkload');
       if (oKeys.length) {
         chartInst['cWorkload'] = new Chart(document.getElementById('cWorkload'), {
@@ -2192,7 +2615,7 @@
       const byStatus = { 'Done': done, 'On Progress': onprog, 'Pending': pending, 'Belum diisi': belum };
       const STAT_BG2 = { ...STATUS_BG, 'Belum diisi': '#e2e8f0' };
       const sKeys = Object.keys(byStatus).filter(k => byStatus[k] > 0);
-      document.getElementById('lgPStatus').innerHTML = sKeys.map(k => `<span class="li"><span class="ld" style="background:${STAT_BG2[k]}"></span>${k} ${byStatus[k]}</span>`).join('');
+      document.getElementById('lgPStatus').innerHTML = sKeys.map(k => `<span class="li"><span class="ld" style="background:${STAT_BG2[k]}"></span>${stLbl(k)} ${byStatus[k]}</span>`).join('');
       dc('cPStatus');
       if (sKeys.length) chartInst['cPStatus'] = new Chart(document.getElementById('cPStatus'), { type: 'doughnut', data: { labels: sKeys, datasets: [{ data: sKeys.map(k => byStatus[k]), backgroundColor: sKeys.map(k => STAT_BG2[k]), borderWidth: 0 }] }, options: { ...baseOpts, cutout: '60%' } });
 
@@ -2223,9 +2646,11 @@
     }
     function filterPersonTable() { const q = document.getElementById('pSearch').value.toLowerCase(); renderPersonTable(personTableRows.filter(r => Object.values(r).some(v => String(v).toLowerCase().includes(q)))); }
 
-    let targetPct = 85;
-    function setTarget(v) { targetPct = +v; document.getElementById('targetVal').textContent = v + '%'; if (curPage === 'overview' && !firstLoad) renderTarget(fRekap()); }
+    let targetPct = (function () { try { const v = parseInt(localStorage.getItem('akses_target_pct'), 10); if (v >= 0 && v <= 100) return v; } catch (e) { } return 85; })();
+    function setTarget(v) { targetPct = +v; try { localStorage.setItem('akses_target_pct', String(targetPct)); } catch (e) { } document.getElementById('targetVal').textContent = v + '%'; if (curPage === 'overview' && !firstLoad) renderTarget(fRekap()); }
     function renderTarget(rk) {
+      const ti = document.getElementById('targetInput'); if (ti && +ti.value !== targetPct) ti.value = targetPct;
+      const tv = document.getElementById('targetVal'); if (tv) tv.textContent = targetPct + '%';
       const done = rk.filter(d => d['Status'] === 'Done').length;
       const rate = pct(done, rk.length);
       const col = rate >= targetPct ? '#15803d' : rate >= targetPct - 15 ? '#f59e0b' : '#b91c1c';
@@ -2356,6 +2781,55 @@
     }
     function filterTrelloTable() { const q = document.getElementById('trelloSearch').value.toLowerCase(); renderTrelloTable(trelloTableRows.filter(r => Object.values(r).some(v => String(v).toLowerCase().includes(q)))); }
 
+    // ===== DESAIN =====
+    function renderDesain() {
+      const rows = dataDesain.filter(d => {
+        const t = d['Tanggal'] || '';
+        if (adminRange.from && t < adminRange.from) return false;
+        if (adminRange.to && t > adminRange.to) return false;
+        return true;
+      });
+      const empty = document.getElementById('desEmpty'), main = document.getElementById('desMain');
+      if (!rows.length) {
+        main.style.display = 'none'; empty.style.display = 'block';
+        empty.innerHTML = `<div class="tbl-card" style="max-width:640px;margin:10px auto"><div class="tbl-hdr"><span class="tbl-title">🎨 Belum ada data Desain</span></div><div style="padding:16px 18px;font-size:13px;color:var(--muted);line-height:1.6">Sheet <b>Desain</b> masih kosong atau belum bisa diakses. Pastikan sheet dibagikan <b>"Siapa saja yang memiliki link → Pelihat"</b> dan sudah berisi baris data, lalu klik <b>Perbarui sekarang</b>.</div></div>`;
+        return;
+      }
+      empty.style.display = 'none'; main.style.display = 'block';
+      const total = rows.length;
+      const done = rows.filter(d => d['Status'] === 'Done').length;
+      const prog = rows.filter(d => d['Status'] === 'On Progress').length;
+      const pend = rows.filter(d => d['Status'] === 'Pending').length;
+      const pics = [...new Set(rows.map(d => d['Nama']).filter(Boolean))].length;
+      document.getElementById('desKpiGrid').innerHTML = `
+    <div class="kpi-card"><div class="kpi-lbl">🎨 Total Order Desain</div><div class="kpi-val">${total}</div><div class="kpi-foot"><span class="kpi-sub">${pics} PIC</span></div></div>
+    <div class="kpi-card ok"><div class="kpi-lbl">✅ Selesai</div><div class="kpi-val">${done}</div><div class="kpi-foot"><span class="kpi-sub">${pct(done, total)}% dari total</span></div></div>
+    <div class="kpi-card warn"><div class="kpi-lbl">⚙️ Dikerjakan</div><div class="kpi-val">${prog}</div><div class="kpi-foot"><span class="kpi-sub">on progress</span></div></div>
+    <div class="kpi-card bad"><div class="kpi-lbl">⏳ Menunggu</div><div class="kpi-val">${pend}</div><div class="kpi-foot"><span class="kpi-sub">pending</span></div></div>`;
+      const byStat = { 'Done': done, 'On Progress': prog, 'Pending': pend };
+      const sKeys = Object.keys(byStat).filter(k => byStat[k] > 0);
+      document.getElementById('lgDesStatus').innerHTML = sKeys.map(k => `<span class="li"><span class="ld" style="background:${STATUS_BG[k]}"></span>${stLbl(k)} ${byStat[k]}</span>`).join('');
+      dc('cDesStatus');
+      if (sKeys.length) chartInst['cDesStatus'] = new Chart(document.getElementById('cDesStatus'), { type: 'doughnut', data: { labels: sKeys, datasets: [{ data: sKeys.map(k => byStat[k]), backgroundColor: sKeys.map(k => STATUS_BG[k]), borderWidth: 0 }] }, options: { ...baseOpts, cutout: '60%' } });
+      const byOrder = {}; rows.forEach(d => { const k = d['Kategori']; if (k) byOrder[k] = (byOrder[k] || 0) + 1; });
+      const oKeys = Object.keys(byOrder).sort((a, b) => byOrder[b] - byOrder[a]);
+      document.getElementById('lgDesOrder').innerHTML = '';
+      dc('cDesOrder');
+      if (oKeys.length) chartInst['cDesOrder'] = new Chart(document.getElementById('cDesOrder'), { type: 'bar', data: { labels: oKeys, datasets: [{ label: 'Jumlah', data: oKeys.map(k => byOrder[k]), backgroundColor: oKeys.map((k, i) => catColor(k, i)), borderRadius: 6, borderSkipped: false }] }, options: { ...baseOpts, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, ticks: { font: { size: 10 }, precision: 0 } }, y: { ticks: { font: { size: 10 } } } } } });
+      const STAT_KEYS = ['Done', 'On Progress', 'Pending'];
+      const byPic = {}; rows.forEach(d => { const n = d['Nama']; if (!n) return; byPic[n] = byPic[n] || { 'Done': 0, 'On Progress': 0, 'Pending': 0 }; if (byPic[n][d['Status']] != null) byPic[n][d['Status']]++; });
+      const pKeys = Object.keys(byPic).sort((a, b) => { const tb = byPic[b].Done + byPic[b]['On Progress'] + byPic[b].Pending, ta = byPic[a].Done + byPic[a]['On Progress'] + byPic[a].Pending; return tb - ta; });
+      document.getElementById('lgDesPic').innerHTML = STAT_KEYS.map(s => `<span class="li"><span class="ld" style="background:${STATUS_BG[s]}"></span>${stLbl(s)}</span>`).join('');
+      dc('cDesPic');
+      if (pKeys.length) chartInst['cDesPic'] = new Chart(document.getElementById('cDesPic'), { type: 'bar', data: { labels: pKeys, datasets: STAT_KEYS.map((s, idx) => ({ label: s, data: pKeys.map(k => byPic[k][s]), backgroundColor: STATUS_BG[s], borderRadius: idx === STAT_KEYS.length - 1 ? 6 : 0, borderSkipped: false })) }, options: { ...baseOpts, scales: { x: { stacked: true, ticks: { font: { size: 10 } } }, y: { stacked: true, beginAtZero: true, ticks: { font: { size: 10 } } } } } });
+      desainTableRows = rows; renderDesainTable(rows);
+    }
+    function renderDesainTable(rows) {
+      document.getElementById('desTblCnt').textContent = `${rows.length} order`;
+      document.getElementById('desTblBody').innerHTML = rows.length ? rows.map(r => `<tr><td>${esc(r['No'])}</td><td>${esc(r['Tanggal'])}</td><td>${esc(r['Nama Kerjaan'])}</td><td><span class="chip">${esc(r['Kategori'])}</span></td><td><strong>${esc(r['Nama'])}</strong></td><td style="max-width:280px;word-break:break-word">${esc(r['Detail'])}</td><td>${bdg(r['Status'])}</td></tr>`).join('') : '<tr><td colspan="7" class="empty">Tidak ada data.</td></tr>';
+    }
+    function filterDesainTable() { const q = document.getElementById('desSearch').value.toLowerCase(); renderDesainTable(desainTableRows.filter(r => Object.values(r).some(v => String(v).toLowerCase().includes(q)))); }
+
     // ===== CS =====
     function csNum(s) { const d = String(s == null ? '' : s).replace(/[^\d-]/g, ''); return d ? parseInt(d, 10) : 0; }
     function fmtRp(n) { return 'Rp' + Math.round(n || 0).toLocaleString('id-ID'); }
@@ -2458,6 +2932,15 @@
     }
 
     // ===== FINANCE =====
+    function fmtJtInput(rp) { return Math.round((rp || 0) / 1000000); }
+    function saveFinTarget() { try { localStorage.setItem('akses_fin_target', JSON.stringify(finTarget)); } catch (e) { } }
+    function syncFinTargetInputs() { const o = document.getElementById('finTgtOmset'), l = document.getElementById('finTgtLaba'); if (o) o.value = fmtJtInput(finTarget.omset); if (l) l.value = fmtJtInput(finTarget.laba); }
+    function setFinTarget(which, val) {
+      const jt = Math.max(0, parseFloat(String(val).replace(/[^\d.]/g, '')) || 0);
+      finTarget[which] = Math.round(jt * 1000000);
+      saveFinTarget();
+      if (!firstLoad && financeUnlocked) renderFinance();
+    }
     function setFinMonthRange(which, end, val) { finFilters[which][end] = val; reRenderFinChart(which); }
     function setFinDateRange(which, end, val) { finFilters[which][end] = val; reRenderFinChart(which); }
     function reRenderFinChart(which) {
@@ -2491,34 +2974,69 @@
         if (t) { t.min = b.min; t.max = b.max; t.value = finFilters[w].to; }
       });
       finPopulated = true;
+      syncFinTargetInputs();
+    }
+    function renderFinLock(err) {
+      const lock = document.getElementById('finLock');
+      lock.innerHTML = `<div class="pin-wrap${err ? ' pin-shake' : ''}">
+    <div class="pin-ico">🔒</div>
+    <div class="pin-title">Tab Finance terkunci</div>
+    <div class="pin-sub">Masukkan PIN 6 digit untuk membuka data keuangan.</div>
+    <div class="pin-boxes" id="pinBoxes">${[0, 1, 2, 3, 4, 5].map(i => `<input type="password" inputmode="numeric" maxlength="1" data-i="${i}" oninput="pinInput(event,${i})" onkeydown="pinKey(event,${i})">`).join('')}</div>
+    <div class="pin-err" id="pinErr">${err ? 'PIN salah, coba lagi.' : ''}</div>
+    <button class="pin-btn" onclick="submitPin()">Buka</button>`;
+      setTimeout(() => { const f = lock.querySelector('.pin-boxes input'); if (f) f.focus(); }, 60);
+    }
+    function pinInput(e, i) {
+      const v = e.target.value.replace(/[^0-9]/g, ''); e.target.value = v.slice(-1);
+      e.target.classList.toggle('filled', !!e.target.value);
+      if (e.target.value && i < 5) { const nx = document.querySelector(`.pin-boxes input[data-i="${i + 1}"]`); if (nx) nx.focus(); }
+      if (i === 5 && e.target.value) submitPin();
+    }
+    function pinKey(e, i) {
+      if (e.key === 'Backspace' && !e.target.value && i > 0) { const pv = document.querySelector(`.pin-boxes input[data-i="${i - 1}"]`); if (pv) { pv.focus(); pv.value = ''; pv.classList.remove('filled'); } }
+      else if (e.key === 'Enter') submitPin();
+    }
+    function submitPin() {
+      const boxes = [...document.querySelectorAll('.pin-boxes input')];
+      const pin = boxes.map(b => b.value).join('');
+      if (pin === String(FINANCE_PIN)) { financeUnlocked = true; renderFinance(); }
+      else { renderFinLock(true); }
     }
     function renderFinance() {
+      const lock = document.getElementById('finLock');
       const note = document.getElementById('finNote'), main = document.getElementById('finMain');
+      if (!financeUnlocked) { note.style.display = 'none'; main.style.display = 'none'; lock.style.display = 'block'; renderFinLock(false); return; }
+      lock.style.display = 'none';
       if (!dataFinance.length) {
         main.style.display = 'none'; note.style.display = 'block';
         note.innerHTML = `<div class="tbl-card" style="max-width:720px;margin:10px auto"><div class="tbl-hdr"><span class="tbl-title">🔒 Data Finance belum dapat dimuat</span></div><div style="padding:16px 18px;font-size:13px;color:var(--muted);line-height:1.6">${esc(finDiag.msg || 'Belum ada data.')}<div style="margin-top:8px">Pastikan spreadsheet FINANCE diset <b>Bagikan → "Siapa saja yang memiliki link" → Pelihat</b>, dan sheet pertama memuat kolom <b>Tanggal, Bulan, Uang Masuk, Uang Keluar, Laba</b>. Lalu klik <b>Perbarui sekarang</b>.</div><div style="margin-top:8px"><a href="${csvUrlDefault(FINANCE_ID)}" target="_blank" style="color:var(--accent);font-size:12px">Tes akses CSV ↗</a></div></div></div>`;
         return;
       }
       note.style.display = 'none'; main.style.display = 'block';
-      populateFinFilters();
-      renderFinSummary();
-      renderFinMonth(finGroupMonthly(finRowsMonthRange(finFilters.month.from, finFilters.month.to)));
-      renderFinGrowth(finGroupMonthly(finRowsMonthRange(finFilters.growth.from, finFilters.growth.to)));
-      renderFinMK(finGroupMonthly(finRowsMonthRange(finFilters.mk.from, finFilters.mk.to)));
-      renderFinWeek(finGroupWeekly(finRowsDateRange(finFilters.week.from, finFilters.week.to)));
-      renderFinDay();
-      renderFinCum(finRowsDateRange(finFilters.cum.from, finFilters.cum.to));
-      renderFinTable(finGroupMonthly(dataFinance));
+      const rows = finRowsDateRange(adminRange.from, adminRange.to);
+      const fromK = adminRange.from ? adminRange.from.slice(0, 7) : '';
+      const toK = adminRange.to ? adminRange.to.slice(0, 7) : '';
+      const monthly = finMonthlyInRange(fromK, toK);
+      renderFinSummary(rows, monthly);
+      renderFinMonth(monthly);
+      renderFinGrowth(monthly);
+      renderFinMK(monthly);
+      renderFinWeek(finGroupWeekly(rows));
+      renderFinDay(rows);
+      renderFinCum(rows);
+      renderFinTable(monthly);
     }
     function fmtTgl(iso) { return iso ? new Date(iso + 'T00:00:00').toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) : '—'; }
-    function renderFinSummary() {
-      const rows = finRowsDateRange(finFilters.summary.from, finFilters.summary.to);
-      const monthly = finGroupMonthly(rows);
-      const totMasuk = rows.reduce((a, d) => a + d.masuk, 0);
-      const totKeluar = rows.reduce((a, d) => a + d.keluar, 0);
-      const totLaba = rows.reduce((a, d) => a + d.laba, 0);
+    function renderFinSummary(rows, monthly) {
+      rows = rows || finRowsDateRange(adminRange.from, adminRange.to);
+      monthly = monthly || finMonthlyInRange(adminRange.from ? adminRange.from.slice(0, 7) : '', adminRange.to ? adminRange.to.slice(0, 7) : '');
+      // KPI total dari sumber bulanan (TREND PER BULAN) agar cocok dengan spreadsheet
+      const totMasuk = monthly.reduce((a, m) => a + m.masuk, 0);
+      const totKeluar = monthly.reduce((a, m) => a + m.keluar, 0);
+      const totLaba = monthly.reduce((a, m) => a + m.laba, 0);
       const margin = totMasuk > 0 ? pct(totLaba, totMasuk) : 0;
-      const rangeLbl = `${fmtTgl(finFilters.summary.from)} – ${fmtTgl(finFilters.summary.to)}`;
+      const rangeLbl = (adminRange.from || adminRange.to) ? `${fmtTgl(adminRange.from) || 'awal'} – ${fmtTgl(adminRange.to) || 'akhir'}` : 'Semua tanggal';
       const lastM = monthly[monthly.length - 1], prevM = monthly[monthly.length - 2];
       function fdelta(now, was, goodUp = true) {
         if (was == null || was === 0) return `<span class="kpi-sub">${esc(rangeLbl)}</span>`;
@@ -2534,12 +3052,32 @@
     <div class="kpi-card"><div class="kpi-lbl">📈 Total Laba (Untung)</div><div class="kpi-val" style="font-size:20px;color:${totLaba >= 0 ? 'var(--green)' : 'var(--red)'}">${fmtRp(totLaba)}</div><div class="kpi-foot">${lastM && prevM ? fdelta(lastM.laba, prevM.laba, true) : `<span class="kpi-sub">${esc(rangeLbl)}</span>`}</div></div>
     <div class="kpi-card warn"><div class="kpi-lbl">🎯 Margin Laba</div><div class="kpi-val">${margin}%</div><div class="kpi-foot"><span class="kpi-sub">laba ÷ omset</span></div></div>`;
 
-      if (!rows.length) { document.getElementById('finSigGrid').innerHTML = '<div class="empty">Tidak ada data pada rentang ini.</div>'; return; }
-      const bestOmsetMonth = monthly.slice().sort((a, b) => b.masuk - a.masuk)[0];
-      const bestLabaMonth = monthly.slice().sort((a, b) => b.laba - a.laba)[0];
-      const bestOmsetDay = rows.slice().sort((a, b) => b.masuk - a.masuk)[0];
-      const avgDay = rows.length ? totMasuk / rows.length : 0;
+      if (!monthly.length && !rows.length) { document.getElementById('finSigGrid').innerHTML = '<div class="empty">Tidak ada data pada rentang ini.</div>'; return; }
+      const bestOmsetMonth = monthly.slice().sort((a, b) => b.masuk - a.masuk)[0] || { label: '—', masuk: 0 };
+      const bestLabaMonth = monthly.slice().sort((a, b) => b.laba - a.laba)[0] || { label: '—', laba: 0 };
+      const bestOmsetDay = rows.slice().sort((a, b) => b.masuk - a.masuk)[0] || { masuk: 0, iso: '' };
+      const dailyMasuk = rows.reduce((a, d) => a + d.masuk, 0);
+      const avgDay = rows.length ? dailyMasuk / rows.length : 0;
+      // Sinyal pencapaian target (hanya bulan penuh dihitung; abaikan bulan berjalan jika harinya sedikit)
+      let tgtCards = '';
+      if (finTarget.omset > 0 || finTarget.laba > 0) {
+        const full = monthly.filter(m => m.days >= 20);
+        const base = full.length ? full : monthly;
+        if (finTarget.omset > 0) {
+          const hitO = base.filter(m => m.masuk >= finTarget.omset).length;
+          const rateO = pct(hitO, base.length);
+          const okO = rateO >= 50;
+          tgtCards += `<div class="sig-card"><div class="sig-ico ${okO ? 'green' : 'red'}">🎯</div><div><div class="sig-lbl">Capai target omset (≥ ${fmtRp(finTarget.omset)})</div><div class="sig-val" style="color:${okO ? 'var(--green)' : 'var(--red)'}">${hitO}/${base.length} bln</div><div class="sig-sub">${rateO}% bulan memenuhi target</div></div></div>`;
+        }
+        if (finTarget.laba > 0) {
+          const hitL = base.filter(m => m.laba >= finTarget.laba).length;
+          const rateL = pct(hitL, base.length);
+          const okL = rateL >= 50;
+          tgtCards += `<div class="sig-card"><div class="sig-ico ${okL ? 'green' : 'red'}">💰</div><div><div class="sig-lbl">Capai target laba (≥ ${fmtRp(finTarget.laba)})</div><div class="sig-val" style="color:${okL ? 'var(--green)' : 'var(--red)'}">${hitL}/${base.length} bln</div><div class="sig-sub">${rateL}% bulan memenuhi target</div></div></div>`;
+        }
+      }
       document.getElementById('finSigGrid').innerHTML = `
+    ${tgtCards}
     <div class="sig-card"><div class="sig-ico green">🏆</div><div><div class="sig-lbl">Bulan OMSET tertinggi (pemasukan)</div><div class="sig-val">${esc(bestOmsetMonth.label)}</div><div class="sig-sub">${fmtRp(bestOmsetMonth.masuk)} masuk</div></div></div>
     <div class="sig-card"><div class="sig-ico green">💎</div><div><div class="sig-lbl">Bulan LABA tertinggi (untung bersih)</div><div class="sig-val">${esc(bestLabaMonth.label)}</div><div class="sig-sub">${fmtRp(bestLabaMonth.laba)} laba</div></div></div>
     <div class="sig-card"><div class="sig-ico blue">📆</div><div><div class="sig-lbl">Hari omset tertinggi</div><div class="sig-val">${fmtRp(bestOmsetDay.masuk)}</div><div class="sig-sub">${fmtTgl(bestOmsetDay.iso)}</div></div></div>
@@ -2549,22 +3087,37 @@
       const labels = monthly.map(m => m.label);
       document.getElementById('lgFinMonth').innerHTML = '';
       dc('cFinMonth');
+      const tgtO = finTarget.omset, tgtL = finTarget.laba;
+      const omsetPtCol = monthly.map(m => tgtO > 0 ? (m.masuk >= tgtO ? FIN_UP : '#f59e0b') : FIN_UP);
+      const datasets = [
+        { label: 'Dana Masuk', data: monthly.map(m => m.masuk), borderColor: FIN_UP, backgroundColor: 'rgba(21,128,61,.08)', borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: omsetPtCol, pointBorderColor: '#fff', pointBorderWidth: 1.5, tension: .3, fill: true, _showLabel: true, _labelPos: 'top' },
+        { label: 'Dana Keluar', data: monthly.map(m => m.keluar), borderColor: FIN_DOWN, backgroundColor: 'rgba(185,28,28,.07)', borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: FIN_DOWN, pointBorderColor: '#fff', pointBorderWidth: 1.5, tension: .3, fill: true, _showLabel: true, _labelPos: 'bottom' },
+        { label: 'Laba Usaha', data: monthly.map(m => m.laba), borderColor: FIN_NEU, backgroundColor: 'transparent', borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: FIN_NEU, pointBorderColor: '#fff', pointBorderWidth: 1.5, tension: .3, fill: false, _showLabel: true, _labelPos: 'top' }
+      ];
+      if (tgtO > 0) datasets.push({ label: '🎯 Target Omset', data: labels.map(() => tgtO), borderColor: FIN_UP, borderDash: [7, 5], borderWidth: 1.4, pointRadius: 0, pointHoverRadius: 0, fill: false, tension: 0 });
+      if (tgtL > 0) datasets.push({ label: '🎯 Target Laba', data: labels.map(() => tgtL), borderColor: FIN_NEU, borderDash: [4, 4], borderWidth: 1.2, pointRadius: 0, pointHoverRadius: 0, fill: false, tension: 0 });
       chartInst['cFinMonth'] = new Chart(document.getElementById('cFinMonth'), {
         type: 'line',
-        data: {
-          labels, datasets: [
-            { label: 'Dana Masuk', data: monthly.map(m => m.masuk), borderColor: FIN_UP, backgroundColor: 'rgba(21,128,61,.08)', borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: FIN_UP, pointBorderColor: '#fff', pointBorderWidth: 1.5, tension: .3, fill: true, _showLabel: true, _labelPos: 'top' },
-            { label: 'Dana Keluar', data: monthly.map(m => m.keluar), borderColor: FIN_DOWN, backgroundColor: 'rgba(185,28,28,.07)', borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: FIN_DOWN, pointBorderColor: '#fff', pointBorderWidth: 1.5, tension: .3, fill: true, _showLabel: true, _labelPos: 'bottom' },
-            { label: 'Laba Usaha', data: monthly.map(m => m.laba), borderColor: FIN_NEU, backgroundColor: 'transparent', borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: FIN_NEU, pointBorderColor: '#fff', pointBorderWidth: 1.5, tension: .3, fill: false, _showLabel: true, _labelPos: 'top' }]
-        },
+        data: { labels, datasets },
         options: {
           ...baseOpts, layout: { padding: { top: 24, bottom: 6 } },
           plugins: {
             legend: { display: true, position: 'top', labels: { font: { size: 12 }, usePointStyle: true, boxWidth: 8, padding: 16 } },
-            tooltip: { mode: 'index', intersect: false, callbacks: { label: c => ` ${c.dataset.label}: ${fmtRp(c.parsed.y)}` } }
+            tooltip: {
+              mode: 'index', intersect: false, callbacks: {
+                label: c => ` ${c.dataset.label}: ${fmtRp(c.parsed.y)}`,
+                afterBody: items => {
+                  const i = items[0].dataIndex, m = monthly[i]; if (!m) return '';
+                  const out = [];
+                  if (tgtO > 0) out.push(m.masuk >= tgtO ? `✓ Omset capai target (+${fmtRp(m.masuk - tgtO)})` : `✗ Omset kurang ${fmtRp(tgtO - m.masuk)}`);
+                  if (tgtL > 0) out.push(m.laba >= tgtL ? `✓ Laba capai target` : `✗ Laba kurang ${fmtRp(tgtL - m.laba)}`);
+                  return out.length ? '\n' + out.join('\n') : '';
+                }
+              }
+            }
           },
           interaction: { mode: 'index', intersect: false },
-          scales: { x: { ticks: { font: { size: 11 } }, grid: { display: false } }, y: { beginAtZero: true, ticks: { font: { size: 10 }, callback: v => fmtJt(v) } } }
+          scales: { x: { ticks: { font: { size: 11 } }, grid: { display: false } }, y: { beginAtZero: true, ticks: { font: { size: 10 }, callback: v => fmtJt(v) }, grid: { color: ctx => ctx.tick.value === 0 ? '#475569' : '#eef2f7' } } }
         },
         plugins: [lineLabelPlugin]
       });
@@ -2603,8 +3156,8 @@
         options: { ...baseOpts, plugins: { legend: { display: false }, tooltip: { callbacks: { title: items => 'Minggu mulai ' + items[0].label, label: c => ` ${c.dataset.label}: ${fmtRp(c.parsed.y)}` } } }, scales: { x: { ticks: { font: { size: 10 }, maxRotation: 45, minRotation: 0, autoSkip: true, maxTicksLimit: 16 } }, y: { beginAtZero: true, ticks: { font: { size: 10 }, callback: v => fmtJt(v) } } } }
       });
     }
-    function renderFinDay() {
-      const rows = finRowsDateRange(finFilters.day.from, finFilters.day.to);
+    function renderFinDay(rows) {
+      rows = rows || finRowsDateRange(adminRange.from, adminRange.to);
       if (!rows.length) { dc('cFinDay'); return; }
       const labels = rows.map(d => new Date(d.iso + 'T00:00:00').toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }));
       const dense = rows.length > 60;
@@ -2649,12 +3202,17 @@
         const margin = m.masuk > 0 ? pct(m.laba, m.masuk) : 0;
         const g = i === 0 ? null : (monthly[i - 1].masuk > 0 ? Math.round((m.masuk - monthly[i - 1].masuk) / monthly[i - 1].masuk * 100) : null);
         const gTxt = g == null ? '<span class="kpi-sub">—</span>' : `<span class="delta ${g >= 0 ? 'up' : 'down'}">${g >= 0 ? '▲ +' : '▼ '}${Math.abs(g)}%</span>`;
-        return `<tr><td><strong>${esc(m.label)}</strong></td><td>${m.days}</td><td>${fmtRp(m.masuk)}</td><td style="color:var(--red)">${fmtRp(m.keluar)}</td><td style="color:${m.laba >= 0 ? 'var(--green)' : 'var(--red)'};font-weight:600">${fmtRp(m.laba)}</td><td>${margin}%</td><td>${gTxt}</td></tr>`;
+        let tTxt = '<span class="kpi-sub">—</span>';
+        if (finTarget.omset > 0) {
+          const ok = m.masuk >= finTarget.omset;
+          tTxt = `<span class="delta ${ok ? 'up' : 'down'}">${ok ? '✓ ' : '✗ '}${ok ? '+' : '−'}${fmtRp(Math.abs(m.masuk - finTarget.omset))}</span>`;
+        }
+        return `<tr><td><strong>${esc(m.label)}</strong></td><td>${m.days}</td><td>${fmtRp(m.masuk)}</td><td style="color:var(--red)">${fmtRp(m.keluar)}</td><td style="color:${m.laba >= 0 ? 'var(--green)' : 'var(--red)'};font-weight:600">${fmtRp(m.laba)}</td><td>${margin}%</td><td>${gTxt}</td><td>${tTxt}</td></tr>`;
       }).join('');
     }
 
     // NAV
-    const PAGE_TITLES = { overview: 'Overview', perorangan: 'Per Orang', divisi: 'Per Divisi', cs: 'Data CS', finance: 'Finance' };
+    const PAGE_TITLES = { overview: 'Overview', perorangan: 'Per Orang', divisi: 'Per Divisi', desain: 'Desain', cs: 'Data CS', finance: 'Finance' };
     function showPage(id) {
       curPage = id;
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -2662,6 +3220,12 @@
       document.getElementById(`page-${id}`)?.classList.add('active');
       document.querySelector(`.sb-item[data-page="${id}"]`)?.classList.add('active');
       document.getElementById('pgTitle').textContent = PAGE_TITLES[id] || id;
+      // Filter tanggal & divisi hanya relevan di halaman admin (overview/perorangan/divisi)
+      // Filter tanggal global: tampil di semua tab data kecuali CS (CS berbasis bulan)
+      const showDate = id !== 'cs';
+      const showDiv = ['overview', 'perorangan', 'divisi'].includes(id);
+      const drpA = document.getElementById('drp_admin'); if (drpA) drpA.style.display = showDate ? 'block' : 'none';
+      const fdv = document.getElementById('fDivisi'); if (fdv) fdv.style.display = showDiv ? '' : 'none';
       renderAll();
     }
     document.querySelectorAll('.sb-item[data-page]').forEach(el => el.addEventListener('click', () => showPage(el.dataset.page)));
