@@ -1386,8 +1386,7 @@
       <div class="sb-section">Divisi Admin</div>
       <div class="sb-item active" data-page="overview"><span class="ico">📊</span>Overview Admin</div>
       <div class="sb-item" data-page="perorangan"><span class="ico">👤</span>Per Orang</div>
-      <div class="sb-item" data-page="divisi"><span class="ico">🏢</span>Per Divisi Admin</div>
-            <div class="sb-section">Divisi Desain</div>
+      <div class="sb-item" data-page="divisi"><span class="ico">🏢</span>Per Divisi</div>
       <div class="sb-item" data-page="desain"><span class="ico">🎨</span>Desain</div>
       <div class="sb-section" style="margin-top:8px">Divisi CS</div>
       <div class="sb-item" data-page="cs"><span class="ico">📞</span>Data CS</div>
@@ -1473,7 +1472,7 @@
         <div class="cg1">
           <div class="chart-card">
             <div class="cc-title">Beban kerja per orang berdasarkan status</div>
-            <div class="cc-sub">Tinggi batang = total beban · warna = status (selesai / dikerjakan / menunggu)</div>
+            <div class="cc-sub">Tinggi batang = total beban · warna = status (LIST / DOING / FINISH)</div>
             <div id="lgWork" class="legend"></div>
             <div style="position:relative;height:300px"><canvas id="cWorkload" role="img"
                 aria-label="Stacked bar beban kerja"></canvas></div>
@@ -1568,7 +1567,7 @@
                   <th>Nama</th>
                   <th>Divisi</th>
                   <th>Total</th>
-                  <th>Selesai</th>
+                  <th>FINISH</th>
                   <th>Completion</th>
                   <th>vs Bln Lalu</th>
                 </tr>
@@ -1586,7 +1585,7 @@
           <div class="cg2">
             <div class="chart-card">
               <div class="cc-title">Status pekerjaan</div>
-              <div class="cc-sub">Selesai vs dikerjakan vs menunggu</div>
+              <div class="cc-sub">FINISH / DOING / LIST</div>
               <div id="lgPStatus" class="legend"></div>
               <div style="position:relative;height:210px"><canvas id="cPStatus" role="img"
                   aria-label="Status orang"></canvas></div>
@@ -1635,8 +1634,9 @@
 
       <!-- PER DIVISI (unified) -->
       <div class="page" id="page-divisi">
-        <div class="cc-sub" style="margin-bottom:14px">Menggabungkan <b>eksekusi harian</b> (rekap) dengan <b>kondisi
-            papan Trello</b> (pipeline) untuk tiap divisi.</div>
+        <div class="cc-sub" style="margin-bottom:14px">Ringkasan tiap divisi admin: jumlah tugas, orang, tugas macet, dan
+          tingkat penyelesaian.</div>
+        <div class="div-grid" id="divGrid"></div>
 
         <div class="sec-divider">Skala Pekerjaan — Kategori × Divisi</div>
         <div class="chart-card" style="margin-bottom:18px">
@@ -1656,42 +1656,18 @@
           </div>
         </div>
 
-        <div class="sec-divider">Kategori &amp; Produktivitas per Divisi</div>
+        <div class="sec-divider">Status Pekerjaan per Divisi</div>
         <div class="chart-card" style="margin-bottom:18px">
           <div
             style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px">
             <div>
-              <div class="cc-title">Sebaran kategori &amp; tingkat penyelesaian</div>
-              <div class="cc-sub" style="margin:0">Batang = jumlah · garis = % selesai. Pilih divisi untuk
-                membandingkan.</div>
+              <div class="cc-title">Komposisi status tiap divisi (LIST / DOING / FINISH)</div>
+              <div class="cc-sub" style="margin:0">Tinggi batang = total tugas · warna = status. Terlihat langsung berapa
+                yang FINISH, DOING, dan LIST di tiap divisi.</div>
             </div>
           </div>
-          <div id="divKatChips" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px"></div>
-          <div style="position:relative;height:340px">
-            <canvas id="cDivKat" role="img" aria-label="Kategori produktivitas per divisi"></canvas>
-          </div>
-        </div>
-
-        <div class="div-grid" id="divGrid"></div>
-        <div class="tbl-card">
-          <div class="tbl-hdr">
-            <span class="tbl-title">Data Trello — rincian per board</span>
-            <div style="display:flex;align-items:center;gap:8px">
-              <input class="tbl-search" id="trelloSearch" placeholder="Cari…" oninput="filterTrelloTable()">
-              <span class="tbl-cnt" id="trelloCnt"></span>
-            </div>
-          </div>
-          <div class="tbl-scroll">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Board Divisi</th>
-                  <th>Jenis / Status</th>
-                  <th>Jumlah</th>
-                </tr>
-              </thead>
-              <tbody id="trelloTblBody"></tbody>
-            </table>
+          <div style="position:relative;height:320px">
+            <canvas id="cDivKat" role="img" aria-label="Status per divisi"></canvas>
           </div>
         </div>
       </div>
@@ -1699,7 +1675,7 @@
       <!-- DESAIN -->
       <div class="page" id="page-desain">
         <div class="cc-sub" style="margin-bottom:14px">Rekap pekerjaan tim <b>Desain</b> — sumber: sheet <b>Desain</b>
-          (kolom: NO, Tanggal, NAMA PERUSAHAAN, ORDER, STATUS, PIC, KETERANGAN).</div>
+          (kolom: NO, Tanggal, KONTEN/FLYER, NAMA PERUSAHAAN, ORDER, STATUS, KETERANGAN, LINK).</div>
         <div id="desEmpty" style="display:none"></div>
         <div id="desMain">
           <div class="kpi-grid" id="desKpiGrid"></div>
@@ -1708,7 +1684,7 @@
           <div class="cg2">
             <div class="chart-card">
               <div class="cc-title">Status pekerjaan</div>
-              <div class="cc-sub">Selesai vs dikerjakan vs menunggu</div>
+              <div class="cc-sub">FINISH / DOING / LIST</div>
               <div id="lgDesStatus" class="legend"></div>
               <div style="position:relative;height:230px"><canvas id="cDesStatus" role="img"
                   aria-label="Status desain"></canvas></div>
@@ -1722,14 +1698,14 @@
             </div>
           </div>
 
-          <div class="sec-divider">Beban per PIC</div>
+          <div class="sec-divider">Status per Jenis Order</div>
           <div class="cg1">
             <div class="chart-card">
-              <div class="cc-title">Beban kerja per PIC berdasarkan status</div>
-              <div class="cc-sub">Tinggi batang = total tugas · warna = status</div>
+              <div class="cc-title">Komposisi status tiap jenis order</div>
+              <div class="cc-sub">Tinggi batang = jumlah order · warna = status (LIST / DOING / FINISH)</div>
               <div id="lgDesPic" class="legend"></div>
               <div style="position:relative;height:290px"><canvas id="cDesPic" role="img"
-                  aria-label="Beban PIC desain"></canvas></div>
+                  aria-label="Status per jenis order desain"></canvas></div>
             </div>
           </div>
 
@@ -1747,10 +1723,10 @@
                   <tr>
                     <th>No</th>
                     <th>Tanggal</th>
-                    <th>Nama Perusahaan</th>
+                    <th>Konten / Flyer</th>
                     <th>Order</th>
-                    <th>PIC</th>
                     <th>Keterangan</th>
+                    <th>Link</th>
                     <th>Status</th>
                   </tr>
                 </thead>
@@ -1986,7 +1962,7 @@
     // Sheet Desain (struktur kolom sama dengan sheet admin)
     const DESAIN_SHEET = 'Desain';
     // ====== PIN TAB FINANCE — ubah 6 digit di sini ======
-    const FINANCE_PIN = '112233';
+    const FINANCE_PIN = '102525';
     // ====================================================
     const FINANCE_ID = '18iTRMXITMd_-VQlRLdZQULMrwqPPuj3sChTud8O_jf4';
     // Sheet bulanan khusus (angka bulanan yang dipelihara manual) — jadi sumber grafik/tabel bulanan
@@ -2101,6 +2077,18 @@
       dStr = String(dStr).trim();
       if (!dStr) return '';
       if (/^\d{4}-\d{2}-\d{2}/.test(dStr)) return dStr.slice(0, 10);
+      // format teks Indonesia, mis. "1 Juli 2026"
+      if (/[a-zA-Z]/.test(dStr)) {
+        const parts = dStr.replace(/,/g, ' ').split(/\s+/).filter(Boolean);
+        let day, mon, yr;
+        parts.forEach(p => {
+          if (/^\d{4}$/.test(p)) yr = p;
+          else if (/^\d{1,2}$/.test(p)) { if (!day) day = p; }
+          else { const idx = ID_MONTHS.findIndex(mn => mn.slice(0, 3).toLowerCase() === p.slice(0, 3).toLowerCase()); if (idx >= 0) mon = idx + 1; }
+        });
+        if (day && mon && yr) return `${yr}-${String(mon).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        return dStr;
+      }
       const slash = dStr.includes('/');                 // slash → format admin (M/D/Y)
       const p = dStr.split(/[\/.\-]/);
       if (p.length === 3) {
@@ -2201,6 +2189,44 @@
       const txt = await fetchRaw(csvUrl(id, sheetName));
       if (/<!doctype|<html|accounts\.google|signin|sign in/i.test(txt.slice(0, 500))) return [];
       return parseAdminSheet(txt, sheetName);
+    }
+
+    // === Sheet Desain (LIST KERJAAN) — susunan kolom BERBEDA, tanpa PIC ===
+    // 0=NO,1=Tanggal,2=KONTEN/FLYER,3=NAMA PERUSAHAAN,4=ORDER,5=STATUS,6=KETERANGAN,7=LINK GAMBAR
+    function parseDesainSheet(txt) {
+      const rows = parseCSV(txt);
+      const out = [];
+      rows.forEach(r => {
+        const no = String(r[0] || '').trim();
+        const tgl = String(r[1] || '').trim();
+        const konten = String(r[2] || '').trim();
+        const perusahaan = String(r[3] || '').trim();
+        const order = String(r[4] || '').trim();
+        const statusRaw = String(r[5] || '').trim();
+        const ket = String(r[6] || '').trim();
+        const link = String(r[7] || '').trim();
+        const title = konten || perusahaan;
+        if (!title) return;                                              // baris kosong
+        if (/^no$/i.test(no) && /tanggal/i.test(tgl)) return;            // baris header
+        if (/^konten\s*\/?\s*fl[a]?yer/i.test(konten)) return;           // header kolom C
+        out.push({
+          'No': no,
+          'Tanggal': normalizeDate(tgl) || tgl,
+          'Nama Kerjaan': title,
+          'Perusahaan': perusahaan,
+          'Kategori': order || '(tanpa order)',
+          'Status': normalizeAdminStatus(statusRaw),
+          '_statusRaw': statusRaw,
+          'Detail': ket,
+          'Link': link
+        });
+      });
+      return out;
+    }
+    async function fetchDesainSheet(id, sheetName) {
+      const txt = await fetchRaw(csvUrl(id, sheetName));
+      if (/<!doctype|<html|accounts\.google|signin|sign in/i.test(txt.slice(0, 500))) return [];
+      return parseDesainSheet(txt);
     }
 
     function finNum(v) {
@@ -2408,11 +2434,7 @@
           ADMIN_SHEETS.map(s => fetchAdminSheet(SHEET_ID, s).catch(() => []))
         );
         dataRekap = adminResults.flat();
-        const [tr, des] = await Promise.all([
-          fetchSheet(SHEET_ID, SHEET_TRELLO).catch(() => []),
-          fetchAdminSheet(SHEET_ID, DESAIN_SHEET).catch(() => [])
-        ]);
-        dataTrello = tr; dataDesain = des;
+        dataDesain = await fetchDesainSheet(SHEET_ID, DESAIN_SHEET).catch(() => []);
         await Promise.allSettled([loadCSData(), loadFinanceData()]);
         populateMonthFilter();
         if (firstLoad || !DRP.admin) {
@@ -2464,7 +2486,7 @@
     function catColor(k, i = 0) { return CAT_COLORS[k] || PALETTE[i % PALETTE.length]; }
     function divColor(k, i = 0) { return DIV_COLORS[k] || PALETTE[i % PALETTE.length]; }
     const STATUS_BG = { 'Done': '#15803d', 'On Progress': '#f59e0b', 'Pending': '#cbd5e1' };
-    const STATUS_LABEL = { 'Done': 'Selesai', 'On Progress': 'Dikerjakan', 'Pending': 'Menunggu', 'Belum diisi': 'Belum diisi' };
+    const STATUS_LABEL = { 'Done': 'FINISH', 'On Progress': 'DOING', 'Pending': 'LIST', 'Belum diisi': 'Belum diisi' };
     const BADGE = { 'Done': 'b-done', 'On Progress': 'b-prog', 'Pending': 'b-pend' };
     function stLbl(v) { return STATUS_LABEL[v] || v; }
     function bdg(v) { return `<span class="badge ${BADGE[v] || 'b-pend'}">${esc(STATUS_LABEL[v] || v || '-')}</span>`; }
@@ -2502,8 +2524,8 @@
       document.getElementById('kpiGrid').innerHTML = `
     <div class="kpi-card"><div class="kpi-lbl">📝 Total Pekerjaan</div><div class="kpi-val">${all.total}</div><div class="kpi-foot">${delta(cM.total, pM.total, true)}</div></div>
     <div class="kpi-card ok"><div class="kpi-lbl">✅ Tingkat Penyelesaian</div><div class="kpi-val">${allRate}%</div><div class="kpi-foot">${delta(cRate, pRate, true)}</div></div>
-    <div class="kpi-card warn"><div class="kpi-lbl">⚙️ Sedang Dikerjakan</div><div class="kpi-val">${all.prog}</div><div class="kpi-foot">${delta(cM.prog, pM.prog, false)}</div></div>
-    <div class="kpi-card bad"><div class="kpi-lbl">⏳ Menunggu</div><div class="kpi-val">${all.pend}</div><div class="kpi-foot">${delta(cM.pend, pM.pend, false)}</div></div>`;
+    <div class="kpi-card warn"><div class="kpi-lbl">⚙️ DOING (dikerjakan)</div><div class="kpi-val">${all.prog}</div><div class="kpi-foot">${delta(cM.prog, pM.prog, false)}</div></div>
+    <div class="kpi-card bad"><div class="kpi-lbl">⏳ LIST (antri)</div><div class="kpi-val">${all.pend}</div><div class="kpi-foot">${delta(cM.pend, pM.pend, false)}</div></div>`;
 
       const byDiv = {}, byDivDone = {}, byOrang = {}, byOrangDone = {};
       rk.forEach(d => {
@@ -2608,9 +2630,9 @@
       const belum = rows.length - done - onprog - pending;
       document.getElementById('personStats').innerHTML = `
     <div class="stat-box"><div class="stat-box-label">Total Pekerjaan</div><div class="stat-box-value">${rows.length}</div></div>
-    <div class="stat-box"><div class="stat-box-label">Selesai</div><div class="stat-box-value" style="color:var(--green)">${done}</div></div>
-    <div class="stat-box"><div class="stat-box-label">Dikerjakan</div><div class="stat-box-value" style="color:var(--amber)">${onprog}</div></div>
-    <div class="stat-box"><div class="stat-box-label">Menunggu</div><div class="stat-box-value" style="color:var(--muted)">${pending}</div></div>
+    <div class="stat-box"><div class="stat-box-label">FINISH</div><div class="stat-box-value" style="color:var(--green)">${done}</div></div>
+    <div class="stat-box"><div class="stat-box-label">DOING</div><div class="stat-box-value" style="color:var(--amber)">${onprog}</div></div>
+    <div class="stat-box"><div class="stat-box-label">LIST</div><div class="stat-box-value" style="color:var(--muted)">${pending}</div></div>
     <div class="stat-box"><div class="stat-box-label">Completion</div><div class="stat-box-value" style="color:var(--accent)">${pct(done, rows.length)}%</div></div>`;
       const byStatus = { 'Done': done, 'On Progress': onprog, 'Pending': pending, 'Belum diisi': belum };
       const STAT_BG2 = { ...STATUS_BG, 'Belum diisi': '#e2e8f0' };
@@ -2724,62 +2746,48 @@
     }
 
     let divKatSel = '__all__';
-    function rekapMonthOnly() { const mo = document.getElementById('fMonth').value; return dataRekap.filter(d => !mo || (d['Tanggal'] || '').startsWith(mo)); }
     function setDivKat(d) { divKatSel = d; renderDivKat(); }
     function renderDivKat() {
-      const base = rekapMonthOnly();
-      const divs = [...new Set(base.map(d => d['Divisi']).filter(Boolean))].sort();
-      if (divKatSel !== '__all__' && !divs.includes(divKatSel)) divKatSel = '__all__';
-      const chips = [{ k: '__all__', label: 'Semua divisi' }, ...divs.map(d => ({ k: d, label: d }))];
-      document.getElementById('divKatChips').innerHTML = chips.map(c => `<button class="dk-chip${divKatSel === c.k ? ' active' : ''}" onclick="setDivKat('${esc(c.k).replace(/'/g, "\\'")}')">${esc(c.label)}</button>`).join('');
-      const rows = divKatSel === '__all__' ? base : base.filter(d => d['Divisi'] === divKatSel);
-      const byCat = {}; rows.forEach(d => { const k = d['Kategori']; if (k) byCat[k] = (byCat[k] || 0) + 1; });
-      const cKeys = Object.keys(byCat).sort((a, b) => byCat[b] - byCat[a]);
-      const catDone = cKeys.map(k => rows.filter(d => d['Kategori'] === k && d['Status'] === 'Done').length);
+      const rk = fRekap();
+      const divs = [...new Set(rk.map(d => d['Divisi']).filter(Boolean))].sort();
       dc('cDivKat');
-      if (!cKeys.length) return;
-      const dynHeight = Math.max(340, cKeys.length * 26 + 60);
-      const wrap = document.getElementById('cDivKat'); if (wrap && wrap.parentElement) wrap.parentElement.style.height = dynHeight + 'px';
+      if (!divs.length) return;
+      const cnt = st => divs.map(dv => rk.filter(d => d['Divisi'] === dv && d['Status'] === st).length);
       chartInst['cDivKat'] = new Chart(document.getElementById('cDivKat'), {
-        data: { labels: cKeys, datasets: [
-          { type: 'bar', label: 'Jumlah', data: cKeys.map(k => byCat[k]), backgroundColor: cKeys.map((k, i) => catColor(k, i)), borderRadius: 6, borderSkipped: false, xAxisID: 'x', order: 2 },
-          { type: 'line', label: '% selesai', data: cKeys.map((k, i) => pct(catDone[i], byCat[k])), borderColor: '#3b5bdb', backgroundColor: '#fff', borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#3b5bdb', pointBorderColor: '#fff', pointBorderWidth: 2, tension: .3, xAxisID: 'x1', order: 1 }] },
-        options: { ...baseOpts, indexAxis: 'y', plugins: { legend: { display: true, position: 'top', labels: { font: { size: 11 }, usePointStyle: true, boxWidth: 8 } }, tooltip: { callbacks: { label: c => c.dataset.xAxisID === 'x1' ? ` ${c.dataset.label}: ${c.parsed.x}%` : ` ${c.dataset.label}: ${c.parsed.x} tugas` } } },
-          scales: { x: { position: 'top', beginAtZero: true, title: { display: true, text: 'Jumlah tugas', font: { size: 10 } }, ticks: { font: { size: 10 }, precision: 0 } }, x1: { position: 'bottom', beginAtZero: true, max: 100, grid: { drawOnChartArea: false }, ticks: { font: { size: 10 }, callback: v => v + '%' } }, y: { ticks: { font: { size: 10 } } } } }
+        type: 'bar',
+        data: {
+          labels: divs, datasets: [
+            { label: 'FINISH', data: cnt('Done'), backgroundColor: '#15803d', stack: 's', borderRadius: 4, borderSkipped: false },
+            { label: 'DOING', data: cnt('On Progress'), backgroundColor: '#f59e0b', stack: 's', borderRadius: 4, borderSkipped: false },
+            { label: 'LIST', data: cnt('Pending'), backgroundColor: '#cbd5e1', stack: 's', borderRadius: 4, borderSkipped: false }
+          ]
+        },
+        options: {
+          ...baseOpts,
+          plugins: { legend: { display: true, position: 'top', labels: { font: { size: 12 }, usePointStyle: true, boxWidth: 8, padding: 14 } }, tooltip: { callbacks: { label: c => ` ${c.dataset.label}: ${c.parsed.y} tugas` } } },
+          scales: { x: { stacked: true, ticks: { font: { size: 12 } } }, y: { stacked: true, beginAtZero: true, ticks: { font: { size: 10 }, precision: 0 } } }
+        }
       });
     }
 
     function renderDivisi() {
-      const rk = fRekap(), tr = fTrello();
+      const rk = fRekap();
       renderHeatmap(rk);
       renderDivKat();
-      const divs = [...new Set([...rk.map(d => d['Divisi']), ...tr.map(d => d['Board Divisi'])].filter(Boolean))].sort();
+      const divs = [...new Set(rk.map(d => d['Divisi']).filter(Boolean))].sort();
       const cards = divs.map((dv, i) => {
         const rows = rk.filter(d => d['Divisi'] === dv);
         const done = rows.filter(d => d['Status'] === 'Done').length;
+        const doi = rows.filter(d => d['Status'] === 'On Progress').length;
+        const lst = rows.filter(d => d['Status'] === 'Pending').length;
         const rate = pct(done, rows.length);
         const ppl = [...new Set(rows.map(d => d['Nama']).filter(Boolean))].length;
-        const stuck = rows.filter(d => d['Status'] !== 'Done').length;
-        const pipe = tr.filter(d => d['Board Divisi'] === dv);
-        const pipeMax = Math.max(1, ...pipe.map(p => +p['Jumlah'] || 0));
         const rateCol = rate >= 80 ? 'var(--green)' : rate >= 60 ? 'var(--amber)' : 'var(--red)';
         const rateBg = rate >= 80 ? 'var(--green-l)' : rate >= 60 ? 'var(--amber-l)' : 'var(--red-l)';
-        const pipeHtml = pipe.length ? pipe.map(p => {
-          const v = +p['Jumlah'] || 0; const w = Math.round(v / pipeMax * 100);
-          const jn = p['jenis'] || p['Status'] || p['Jenis'] || '';
-          const col = jn.toLowerCase().includes('done') || jn.toLowerCase().includes('selesai') ? 'var(--green)' : jn.toLowerCase().includes('progress') || jn.toLowerCase().includes('proses') ? 'var(--amber)' : 'var(--accent)';
-          return `<div class="dc-pipe-row"><span class="dc-pipe-name">${esc(jn)}</span><span class="dc-pipe-bar"><span class="dc-pipe-fill" style="width:${w}%;background:${col}"></span></span><span class="dc-pipe-val">${v}</span></div>`;
-        }).join('') : '<div class="cc-sub">Belum ada data Trello untuk divisi ini.</div>';
-        return `<div class="div-card"><div class="dc-head"><div class="dc-name">${esc(dv)}</div><span class="dc-rate" style="color:${rateCol};background:${rateBg}">${rate}% selesai</span></div><div class="dc-row">📋 <b>${rows.length}</b> tugas (rekap) · 👤 <b>${ppl}</b> orang · 🐢 <b>${stuck}</b> macet</div><div class="dc-bar"><div class="dc-bar-fill" style="width:${rate}%;background:${rateCol}"></div></div><div class="dc-sub-title">Pipeline Trello</div><div class="dc-pipe">${pipeHtml}</div></div>`;
+        return `<div class="div-card"><div class="dc-head"><div class="dc-name">${esc(dv)}</div><span class="dc-rate" style="color:${rateCol};background:${rateBg}">${rate}% finish</span></div><div class="dc-row">📋 <b>${rows.length}</b> tugas · 👤 <b>${ppl}</b> orang</div><div class="dc-bar"><div class="dc-bar-fill" style="width:${rate}%;background:${rateCol}"></div></div><div style="display:flex;gap:14px;font-size:12px;margin-top:2px"><span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#15803d;margin-right:5px"></span>FINISH <b>${done}</b></span><span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#f59e0b;margin-right:5px"></span>DOING <b>${doi}</b></span><span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#cbd5e1;margin-right:5px"></span>LIST <b>${lst}</b></span></div></div>`;
       });
       document.getElementById('divGrid').innerHTML = cards.length ? cards.join('') : '<div class="empty">Tidak ada data divisi.</div>';
-      trelloTableRows = tr; renderTrelloTable(tr);
     }
-    function renderTrelloTable(rows) {
-      document.getElementById('trelloCnt').textContent = `${rows.length} baris`;
-      document.getElementById('trelloTblBody').innerHTML = rows.length ? rows.map(r => `<tr><td><strong>${esc(r['Board Divisi'])}</strong></td><td>${esc(r['jenis'] || r['Status'] || r['Jenis'])}</td><td style="text-align:center;font-weight:700">${esc(r['Jumlah'] || '0')}</td></tr>`).join('') : '<tr><td colspan="3" class="empty">Tidak ada data Trello.</td></tr>';
-    }
-    function filterTrelloTable() { const q = document.getElementById('trelloSearch').value.toLowerCase(); renderTrelloTable(trelloTableRows.filter(r => Object.values(r).some(v => String(v).toLowerCase().includes(q)))); }
 
     // ===== DESAIN =====
     function renderDesain() {
@@ -2800,33 +2808,36 @@
       const done = rows.filter(d => d['Status'] === 'Done').length;
       const prog = rows.filter(d => d['Status'] === 'On Progress').length;
       const pend = rows.filter(d => d['Status'] === 'Pending').length;
-      const pics = [...new Set(rows.map(d => d['Nama']).filter(Boolean))].length;
+      const orders = [...new Set(rows.map(d => d['Kategori']).filter(Boolean))].length;
       document.getElementById('desKpiGrid').innerHTML = `
-    <div class="kpi-card"><div class="kpi-lbl">🎨 Total Order Desain</div><div class="kpi-val">${total}</div><div class="kpi-foot"><span class="kpi-sub">${pics} PIC</span></div></div>
-    <div class="kpi-card ok"><div class="kpi-lbl">✅ Selesai</div><div class="kpi-val">${done}</div><div class="kpi-foot"><span class="kpi-sub">${pct(done, total)}% dari total</span></div></div>
-    <div class="kpi-card warn"><div class="kpi-lbl">⚙️ Dikerjakan</div><div class="kpi-val">${prog}</div><div class="kpi-foot"><span class="kpi-sub">on progress</span></div></div>
-    <div class="kpi-card bad"><div class="kpi-lbl">⏳ Menunggu</div><div class="kpi-val">${pend}</div><div class="kpi-foot"><span class="kpi-sub">pending</span></div></div>`;
+    <div class="kpi-card"><div class="kpi-lbl">🎨 Total Order Desain</div><div class="kpi-val">${total}</div><div class="kpi-foot"><span class="kpi-sub">${orders} jenis order</span></div></div>
+    <div class="kpi-card ok"><div class="kpi-lbl">✅ FINISH</div><div class="kpi-val">${done}</div><div class="kpi-foot"><span class="kpi-sub">${pct(done, total)}% dari total</span></div></div>
+    <div class="kpi-card warn"><div class="kpi-lbl">⚙️ DOING</div><div class="kpi-val">${prog}</div><div class="kpi-foot"><span class="kpi-sub">sedang dikerjakan</span></div></div>
+    <div class="kpi-card bad"><div class="kpi-lbl">⏳ LIST</div><div class="kpi-val">${pend}</div><div class="kpi-foot"><span class="kpi-sub">antri</span></div></div>`;
       const byStat = { 'Done': done, 'On Progress': prog, 'Pending': pend };
       const sKeys = Object.keys(byStat).filter(k => byStat[k] > 0);
       document.getElementById('lgDesStatus').innerHTML = sKeys.map(k => `<span class="li"><span class="ld" style="background:${STATUS_BG[k]}"></span>${stLbl(k)} ${byStat[k]}</span>`).join('');
       dc('cDesStatus');
-      if (sKeys.length) chartInst['cDesStatus'] = new Chart(document.getElementById('cDesStatus'), { type: 'doughnut', data: { labels: sKeys, datasets: [{ data: sKeys.map(k => byStat[k]), backgroundColor: sKeys.map(k => STATUS_BG[k]), borderWidth: 0 }] }, options: { ...baseOpts, cutout: '60%' } });
+      if (sKeys.length) chartInst['cDesStatus'] = new Chart(document.getElementById('cDesStatus'), { type: 'doughnut', data: { labels: sKeys.map(stLbl), datasets: [{ data: sKeys.map(k => byStat[k]), backgroundColor: sKeys.map(k => STATUS_BG[k]), borderWidth: 0 }] }, options: { ...baseOpts, cutout: '60%' } });
       const byOrder = {}; rows.forEach(d => { const k = d['Kategori']; if (k) byOrder[k] = (byOrder[k] || 0) + 1; });
       const oKeys = Object.keys(byOrder).sort((a, b) => byOrder[b] - byOrder[a]);
       document.getElementById('lgDesOrder').innerHTML = '';
       dc('cDesOrder');
       if (oKeys.length) chartInst['cDesOrder'] = new Chart(document.getElementById('cDesOrder'), { type: 'bar', data: { labels: oKeys, datasets: [{ label: 'Jumlah', data: oKeys.map(k => byOrder[k]), backgroundColor: oKeys.map((k, i) => catColor(k, i)), borderRadius: 6, borderSkipped: false }] }, options: { ...baseOpts, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, ticks: { font: { size: 10 }, precision: 0 } }, y: { ticks: { font: { size: 10 } } } } } });
+      // Status per jenis ORDER (menggantikan beban per PIC — sheet Desain tak punya PIC)
       const STAT_KEYS = ['Done', 'On Progress', 'Pending'];
-      const byPic = {}; rows.forEach(d => { const n = d['Nama']; if (!n) return; byPic[n] = byPic[n] || { 'Done': 0, 'On Progress': 0, 'Pending': 0 }; if (byPic[n][d['Status']] != null) byPic[n][d['Status']]++; });
-      const pKeys = Object.keys(byPic).sort((a, b) => { const tb = byPic[b].Done + byPic[b]['On Progress'] + byPic[b].Pending, ta = byPic[a].Done + byPic[a]['On Progress'] + byPic[a].Pending; return tb - ta; });
+      const stByOrder = st => oKeys.map(k => rows.filter(d => d['Kategori'] === k && d['Status'] === st).length);
       document.getElementById('lgDesPic').innerHTML = STAT_KEYS.map(s => `<span class="li"><span class="ld" style="background:${STATUS_BG[s]}"></span>${stLbl(s)}</span>`).join('');
       dc('cDesPic');
-      if (pKeys.length) chartInst['cDesPic'] = new Chart(document.getElementById('cDesPic'), { type: 'bar', data: { labels: pKeys, datasets: STAT_KEYS.map((s, idx) => ({ label: s, data: pKeys.map(k => byPic[k][s]), backgroundColor: STATUS_BG[s], borderRadius: idx === STAT_KEYS.length - 1 ? 6 : 0, borderSkipped: false })) }, options: { ...baseOpts, scales: { x: { stacked: true, ticks: { font: { size: 10 } } }, y: { stacked: true, beginAtZero: true, ticks: { font: { size: 10 } } } } } });
+      if (oKeys.length) chartInst['cDesPic'] = new Chart(document.getElementById('cDesPic'), { type: 'bar', data: { labels: oKeys, datasets: STAT_KEYS.map(s => ({ label: stLbl(s), data: stByOrder(s), backgroundColor: STATUS_BG[s], stack: 's', borderRadius: 4, borderSkipped: false })) }, options: { ...baseOpts, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ` ${c.dataset.label}: ${c.parsed.y}` } } }, scales: { x: { stacked: true, ticks: { font: { size: 10 } } }, y: { stacked: true, beginAtZero: true, ticks: { font: { size: 10 }, precision: 0 } } } } });
       desainTableRows = rows; renderDesainTable(rows);
     }
     function renderDesainTable(rows) {
       document.getElementById('desTblCnt').textContent = `${rows.length} order`;
-      document.getElementById('desTblBody').innerHTML = rows.length ? rows.map(r => `<tr><td>${esc(r['No'])}</td><td>${esc(r['Tanggal'])}</td><td>${esc(r['Nama Kerjaan'])}</td><td><span class="chip">${esc(r['Kategori'])}</span></td><td><strong>${esc(r['Nama'])}</strong></td><td style="max-width:280px;word-break:break-word">${esc(r['Detail'])}</td><td>${bdg(r['Status'])}</td></tr>`).join('') : '<tr><td colspan="7" class="empty">Tidak ada data.</td></tr>';
+      document.getElementById('desTblBody').innerHTML = rows.length ? rows.map(r => {
+        const link = r['Link'] ? `<a href="${esc(r['Link'])}" target="_blank" style="color:var(--accent)">buka ↗</a>` : '';
+        return `<tr><td>${esc(r['No'])}</td><td>${esc(r['Tanggal'])}</td><td><strong>${esc(r['Nama Kerjaan'])}</strong></td><td><span class="chip">${esc(r['Kategori'])}</span></td><td style="max-width:260px;word-break:break-word">${esc(r['Detail'])}</td><td>${link}</td><td>${bdg(r['Status'])}</td></tr>`;
+      }).join('') : '<tr><td colspan="7" class="empty">Tidak ada data.</td></tr>';
     }
     function filterDesainTable() { const q = document.getElementById('desSearch').value.toLowerCase(); renderDesainTable(desainTableRows.filter(r => Object.values(r).some(v => String(v).toLowerCase().includes(q)))); }
 
