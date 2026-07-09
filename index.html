@@ -709,6 +709,84 @@
       color: var(--muted)
     }
 
+    /* ===== SKOR & ARAH (khusus tab CS) ===== */
+    .skor-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 9px;
+      border-radius: 6px;
+      white-space: nowrap
+    }
+
+    .arah-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 9px;
+      border-radius: 99px;
+      white-space: nowrap;
+      color: #fff
+    }
+
+    .funnel-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 9px;
+      font-size: 12px
+    }
+
+    .funnel-name {
+      min-width: 104px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .funnel-bar {
+      flex: 1;
+      height: 24px;
+      background: #f1f5f9;
+      border-radius: 6px;
+      overflow: hidden
+    }
+
+    .funnel-fill {
+      height: 100%;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 7px;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      min-width: 26px
+    }
+
+    .funnel-val {
+      min-width: 78px;
+      text-align: right;
+      color: var(--muted);
+      font-size: 11px
+    }
+
+    .conv-cell {
+      font-size: 11px
+    }
+
+    .conv-cell b {
+      font-size: 13px
+    }
+
+    .conv-cell small {
+      color: var(--faint);
+      display: block;
+      font-size: 10px
+    }
+
     /* PERSON CARDS */
     .person-grid {
       display: grid;
@@ -856,55 +934,6 @@
       height: 100%;
       border-radius: 99px;
       transition: width .4s
-    }
-
-    .dc-sub-title {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: .05em;
-      color: var(--faint);
-      font-weight: 600;
-      margin: 12px 0 8px;
-      border-top: 1px solid var(--border);
-      padding-top: 12px
-    }
-
-    .dc-pipe {
-      display: flex;
-      flex-direction: column;
-      gap: 6px
-    }
-
-    .dc-pipe-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11.5px
-    }
-
-    .dc-pipe-bar {
-      flex: 1;
-      height: 16px;
-      background: #f1f5f9;
-      border-radius: 5px;
-      overflow: hidden;
-      position: relative
-    }
-
-    .dc-pipe-fill {
-      height: 100%;
-      border-radius: 5px
-    }
-
-    .dc-pipe-val {
-      font-weight: 600;
-      min-width: 26px;
-      text-align: right
-    }
-
-    .dc-pipe-name {
-      min-width: 74px;
-      color: var(--muted)
     }
 
     /* HEATMAP */
@@ -1632,7 +1661,7 @@
         </div>
       </div>
 
-      <!-- PER DIVISI (unified) -->
+      <!-- PER DIVISI -->
       <div class="page" id="page-divisi">
         <div class="cc-sub" style="margin-bottom:14px">Ringkasan tiap divisi admin: jumlah tugas, orang, tugas macet, dan
           tingkat penyelesaian.</div>
@@ -1644,7 +1673,7 @@
             style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px">
             <div>
               <div class="cc-title">Sebaran pekerjaan tiap kategori per divisi</div>
-              <div class="cc-sub" style="margin:0">Semakin pekat = semakin banyak. Sumber: rekap_harian.</div>
+              <div class="cc-sub" style="margin:0">Semakin pekat = semakin banyak.</div>
             </div>
             <div style="display:flex;gap:4px;background:#f1f5f9;padding:3px;border-radius:8px">
               <button class="hm-tab active" id="hmVol" onclick="setHeatMode('vol')">Volume</button>
@@ -1658,13 +1687,9 @@
 
         <div class="sec-divider">Status Pekerjaan per Divisi</div>
         <div class="chart-card" style="margin-bottom:18px">
-          <div
-            style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px">
-            <div>
-              <div class="cc-title">Komposisi status tiap divisi (LIST / DOING / FINISH)</div>
-              <div class="cc-sub" style="margin:0">Tinggi batang = total tugas · warna = status. Terlihat langsung berapa
-                yang FINISH, DOING, dan LIST di tiap divisi.</div>
-            </div>
+          <div style="margin-bottom:12px">
+            <div class="cc-title">Komposisi status tiap divisi (LIST / DOING / FINISH)</div>
+            <div class="cc-sub" style="margin:0">Tinggi batang = total tugas · warna = status.</div>
           </div>
           <div style="position:relative;height:320px">
             <canvas id="cDivKat" role="img" aria-label="Status per divisi"></canvas>
@@ -1674,8 +1699,8 @@
 
       <!-- DESAIN -->
       <div class="page" id="page-desain">
-        <div class="cc-sub" style="margin-bottom:14px">Rekap pekerjaan tim <b>Desain</b> — sumber: sheet <b>Desain</b>
-          (kolom: NO, Tanggal, KONTEN/FLYER, NAMA PERUSAHAAN, ORDER, STATUS, KETERANGAN, LINK).</div>
+        <div class="cc-sub" style="margin-bottom:14px">Rekap pekerjaan tim <b>Desain</b> — sumber: sheet <b>Desain</b>.
+        </div>
         <div id="desEmpty" style="display:none"></div>
         <div id="desMain">
           <div class="kpi-grid" id="desKpiGrid"></div>
@@ -1702,7 +1727,7 @@
           <div class="cg1">
             <div class="chart-card">
               <div class="cc-title">Komposisi status tiap jenis order</div>
-              <div class="cc-sub">Tinggi batang = jumlah order · warna = status (LIST / DOING / FINISH)</div>
+              <div class="cc-sub">Tinggi batang = jumlah order · warna = status</div>
               <div id="lgDesPic" class="legend"></div>
               <div style="position:relative;height:290px"><canvas id="cDesPic" role="img"
                   aria-label="Status per jenis order desain"></canvas></div>
@@ -1737,62 +1762,106 @@
         </div>
       </div>
 
-      <!-- CS -->
+      <!-- ================= CS (DIROMBAK) ================= -->
       <div class="page" id="page-cs">
         <div id="csNote" style="display:none"></div>
         <div id="csMain">
           <div id="csWarn"></div>
-          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px">
-            <span
-              style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em">Filter
-              Periode</span>
-            <select class="fsel" id="csMonthSel" onchange="setCsMonth(this.value)" style="min-width:150px"></select>
+
+          <div class="fin-filter" style="background:#eff6ff;border-color:#bfdbfe">
+            <span class="fin-flbl" style="text-transform:uppercase;letter-spacing:.05em">🎨 Legenda Skor</span>
+            <span id="csLegend" style="display:flex;flex-wrap:wrap;gap:8px"></span>
           </div>
 
-          <div class="sec-divider">Perbandingan Performa Antar-CS</div>
           <div class="kpi-grid" id="csKpiGrid"></div>
-          <div class="cg2">
-            <div class="chart-card">
-              <div class="cc-title">Total interaksi (skor) per CS</div>
-              <div class="cc-sub">Jumlah pelanggan yang dinilai</div>
-              <div style="position:relative;height:240px"><canvas id="cCsCust" role="img"
-                  aria-label="Interaksi per CS"></canvas></div>
-            </div>
-            <div class="chart-card">
-              <div class="cc-title">Status bayar per CS</div>
-              <div class="cc-sub">DP vs Lunas (jumlah deal)</div>
-              <div id="lgCsPay" class="legend"></div>
-              <div style="position:relative;height:240px"><canvas id="cCsPay" role="img"
-                  aria-label="Status bayar per CS"></canvas></div>
-            </div>
-          </div>
+
+          <div class="sec-divider">Komposisi Prospek per Hari</div>
           <div class="cg1">
             <div class="chart-card">
-              <div class="cc-title">Harga vs Nominal per CS</div>
-              <div class="cc-sub">Batang = nilai (Rp) · garis = % tertagih (nominal ÷ harga)</div>
-              <div style="position:relative;height:290px"><canvas id="cCsRev" role="img"
-                  aria-label="Harga vs nominal per CS"></canvas></div>
+              <div class="cc-title">Berapa lead berada di tiap skor, hari demi hari</div>
+              <div class="cc-sub">Tinggi batang = jumlah lead · warna = skor. Kalau kerja CS berjalan, batang
+                <b>oranye (Hot)</b> menyusut dan <b>ungu (Deal)</b> tumbuh. Finish &amp; Dorman disembunyikan —
+                klik legenda untuk menampilkan.</div>
+              <div style="position:relative;height:330px"><canvas id="cCsKomposisi" role="img"
+                  aria-label="Komposisi skor harian"></canvas></div>
             </div>
           </div>
+
+          <div class="sec-divider">Pergerakan Skor</div>
+          <div class="cg2">
+            <div class="chart-card">
+              <div class="cc-title">Pergerakan per hari</div>
+              <div class="cc-sub">Tiap batang = jumlah lead yang berpindah skor hari itu · warna = arah</div>
+              <div id="lgCsGerak" class="legend"></div>
+              <div style="position:relative;height:290px"><canvas id="cCsGerak" role="img"
+                  aria-label="Pergerakan skor harian"></canvas></div>
+            </div>
+            <div class="chart-card">
+              <div class="cc-title">Pergerakan per CS</div>
+              <div class="cc-sub">Warna tetap mengikuti arah, bukan nama CS — supaya terbaca siapa yang menaikkan
+                dan siapa yang kehilangan lead</div>
+              <div id="lgCsArah" class="legend"></div>
+              <div style="position:relative;height:290px"><canvas id="cCsArahCS" role="img"
+                  aria-label="Arah pergerakan per CS"></canvas></div>
+            </div>
+          </div>
+
+          <div class="sec-divider">Corong Konversi</div>
+          <div class="cg2">
+            <div class="chart-card">
+              <div class="cc-title">Posisi lead saat ini</div>
+              <div class="cc-sub">Kondisi terakhir tiap lead. Dorman berada di luar corong — bukan puncak.</div>
+              <div id="csFunnel" style="margin-top:8px"></div>
+            </div>
+            <div class="chart-card">
+              <div class="cc-title">Kualitas follow-up per CS</div>
+              <div class="cc-sub">Dari lead yang masuk ke suatu skor, berapa persen naik ke skor berikutnya
+                dalam <b id="csWindowLbl">7</b> hari. Lead yang belum genap 7 hari tidak dihitung.</div>
+              <div class="tbl-scroll" style="margin-top:6px">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>CS</th>
+                      <th>1→2</th>
+                      <th>2→3</th>
+                      <th>3→4</th>
+                      <th>4→5</th>
+                      <th>5→6</th>
+                    </tr>
+                  </thead>
+                  <tbody id="csConvBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="sec-divider">🐢 Lead Mandek — daftar sentuhan hari ini</div>
           <div class="tbl-card">
-            <div class="tbl-hdr"><span class="tbl-title">Ringkasan per CS</span><span class="tbl-cnt"
-                id="csTblCnt"></span></div>
+            <div class="tbl-hdr">
+              <div>
+                <div class="tbl-title">Lead yang terlalu lama diam di skor yang sama</div>
+                <div class="cc-sub" style="margin:3px 0 0">Ambang SOP: Hot ≥3 hari · Proses ≥2 hari · Deal ≥4 hari ·
+                  Cool/Warm ≥8 hari. Lead bertanda <span class="chip">≈ TGL FU</span> belum pernah berubah sejak
+                  baseline, jadi tanggalnya diambil dari kolom TGL FU di sheet.</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px">
+                <input class="tbl-search" id="csStuckSearch" placeholder="Cari lead…" oninput="filterCsStuck()">
+                <span class="tbl-cnt" id="csStuckCnt"></span>
+              </div>
+            </div>
             <div class="tbl-scroll">
               <table class="data-table">
                 <thead>
                   <tr>
+                    <th>Diam</th>
                     <th>CS</th>
-                    <th>Interaksi</th>
-                    <th>DP</th>
-                    <th>Lunas</th>
-                    <th>% Lunas</th>
-                    <th>Harga</th>
-                    <th>Nominal</th>
-                    <th>% Tertagih</th>
-                    <th>Skor Rata²</th>
+                    <th>Nama Perusahaan</th>
+                    <th>Skor</th>
+                    <th>Terakhir Disentuh</th>
+                    <th>Aktivitas Terakhir</th>
                   </tr>
                 </thead>
-                <tbody id="csTblBody"></tbody>
+                <tbody id="csStuckBody"></tbody>
               </table>
             </div>
           </div>
@@ -1806,24 +1875,85 @@
             <div class="cg2">
               <div class="chart-card">
                 <div class="cc-title" id="csScoreTitle">Distribusi skor</div>
-                <div class="cc-sub">Jumlah pelanggan per nilai skor (1–7)</div>
-                <div style="position:relative;height:230px"><canvas id="cCsScore" role="img"
+                <div class="cc-sub">Posisi lead saat ini · warna mengikuti skor</div>
+                <div style="position:relative;height:240px"><canvas id="cCsSkor" role="img"
                     aria-label="Distribusi skor CS"></canvas></div>
               </div>
               <div class="chart-card">
-                <div class="cc-title">Status bayar</div>
-                <div class="cc-sub">DP vs Lunas</div>
-                <div id="lgCsStatus" class="legend"></div>
-                <div style="position:relative;height:230px"><canvas id="cCsStatus" role="img"
-                    aria-label="Status bayar CS"></canvas></div>
+                <div class="cc-title">Kecepatan naik level</div>
+                <div class="cc-sub">Median hari yang dibutuhkan untuk naik satu skor. Makin pendek makin baik.</div>
+                <div style="position:relative;height:240px"><canvas id="cCsSpeed" role="img"
+                    aria-label="Kecepatan naik level"></canvas></div>
               </div>
             </div>
-            <div class="cg1">
+            <div class="tbl-card">
+              <div class="tbl-hdr">
+                <span class="tbl-title" id="csHistTitle">Riwayat perubahan skor</span>
+                <div style="display:flex;align-items:center;gap:8px">
+                  <input class="tbl-search" id="csHistSearch" placeholder="Cari…" oninput="filterCsHist()">
+                  <span class="tbl-cnt" id="csHistCnt"></span>
+                </div>
+              </div>
+              <div class="tbl-scroll">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Tanggal</th>
+                      <th>Nama Perusahaan</th>
+                      <th>Dari</th>
+                      <th>Ke</th>
+                      <th>Arah</th>
+                      <th>Aktivitas</th>
+                    </tr>
+                  </thead>
+                  <tbody id="csHistBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="sec-divider">💵 Keuangan CS — sumber: export_kpi</div>
+          <div id="csMoneyNote" style="display:none"></div>
+          <div id="csMoneyMain">
+            <div class="fin-filter">
+              <span class="fin-flbl" style="text-transform:uppercase;letter-spacing:.05em">Periode</span>
+              <select class="fsel fin-sel" id="csMonthSel" onchange="setCsMonth(this.value)"></select>
+              <span class="fin-flbl" style="font-weight:400;color:var(--faint)">Bagian ini memakai rekap bulanan
+                manual, terpisah dari LOG_SKOR.</span>
+            </div>
+            <div class="cg2">
               <div class="chart-card">
-                <div class="cc-title">Harga vs Nominal</div>
-                <div class="cc-sub">Nilai transaksi vs nominal yang masuk</div>
-                <div style="position:relative;height:240px"><canvas id="cCsNom" role="img"
-                    aria-label="Harga vs nominal CS"></canvas></div>
+                <div class="cc-title">Status bayar per CS</div>
+                <div class="cc-sub">Warna mengikuti status: DP amber, Lunas hijau</div>
+                <div id="lgCsPay" class="legend"></div>
+                <div style="position:relative;height:250px"><canvas id="cCsPay" role="img"
+                    aria-label="Status bayar per CS"></canvas></div>
+              </div>
+              <div class="chart-card">
+                <div class="cc-title">Harga vs Nominal per CS</div>
+                <div class="cc-sub">Batang = nilai (Rp) · garis = % tertagih</div>
+                <div style="position:relative;height:250px"><canvas id="cCsRev" role="img"
+                    aria-label="Harga vs nominal per CS"></canvas></div>
+              </div>
+            </div>
+            <div class="tbl-card">
+              <div class="tbl-hdr"><span class="tbl-title">Ringkasan keuangan per CS</span><span class="tbl-cnt"
+                  id="csTblCnt"></span></div>
+              <div class="tbl-scroll">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>CS</th>
+                      <th>DP</th>
+                      <th>Lunas</th>
+                      <th>% Lunas</th>
+                      <th>Harga</th>
+                      <th>Nominal</th>
+                      <th>% Tertagih</th>
+                    </tr>
+                  </thead>
+                  <tbody id="csTblBody"></tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -1837,7 +1967,8 @@
         <div id="finMain">
           <div class="fin-filter" style="margin-bottom:16px;background:#eff6ff;border-color:#bfdbfe">
             <span class="fin-flbl" style="text-transform:uppercase;letter-spacing:.05em">🔎 Rentang tanggal</span>
-            <span class="fin-flbl" style="font-weight:400">diatur dari tombol 📅 di kanan atas — berlaku untuk semua grafik.</span>
+            <span class="fin-flbl" style="font-weight:400">diatur dari tombol 📅 di kanan atas — berlaku untuk semua
+              grafik.</span>
           </div>
           <div class="fin-filter" style="margin-bottom:16px;background:#fffbeb;border:1px dashed #f59e0b">
             <span class="fin-flbl" style="text-transform:uppercase;letter-spacing:.05em">🎯 Target Bulanan</span>
@@ -1860,8 +1991,7 @@
           <div class="cg1">
             <div class="chart-card">
               <div class="cc-title">Omset, pengeluaran &amp; laba per bulan</div>
-              <div class="cc-sub">Tiga garis: Dana Masuk (hijau), Dana Keluar (merah), Laba Usaha (biru) · label nilai
-                di tiap titik</div>
+              <div class="cc-sub">Dana Masuk (hijau), Dana Keluar (merah), Laba Usaha (biru)</div>
               <div id="lgFinMonth" class="legend"></div>
               <div style="position:relative;height:330px"><canvas id="cFinMonth" role="img"
                   aria-label="Tren bulanan finance"></canvas></div>
@@ -1888,27 +2018,18 @@
           <div class="cg1">
             <div class="chart-card">
               <div class="cc-title">Omset &amp; laba mingguan</div>
-              <div class="cc-sub">Batang omset hijau/merah mengikuti naik-turun vs minggu sebelumnya · garis = laba
-              </div>
+              <div class="cc-sub">Batang omset hijau/merah mengikuti naik-turun vs minggu sebelumnya · garis = laba</div>
               <div id="lgFinWeek" class="legend"></div>
               <div style="position:relative;height:300px"><canvas id="cFinWeek" role="img"
                   aria-label="Tren mingguan finance"></canvas></div>
             </div>
           </div>
 
-          <div class="sec-divider">📊 Tren per Hari — Pergerakan Harian</div>
+          <div class="sec-divider">📊 Tren per Hari</div>
           <div class="cg1">
             <div class="chart-card">
-              <div
-                style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:6px">
-                <div>
-                  <div class="cc-title">Pergerakan harian: Uang Masuk, Uang Keluar &amp; Laba</div>
-                  <div class="cc-sub" style="margin:0"><b>Tiap titik = 1 hari.</b> <span
-                      style="color:var(--green);font-weight:600">Hijau</span> = uang masuk,
-                    <span style="color:var(--red);font-weight:600">merah</span> = uang keluar,
-                    <span style="color:#2563eb;font-weight:600">biru</span> = laba (area). Rentang tanggal diatur dari tombol 📅 di kanan atas.</div>
-                </div>
-              </div>
+              <div class="cc-title">Pergerakan harian: Uang Masuk, Uang Keluar &amp; Laba</div>
+              <div class="cc-sub"><b>Tiap titik = 1 hari.</b> Rentang tanggal diatur dari tombol 📅 di kanan atas.</div>
               <div style="position:relative;height:300px"><canvas id="cFinDay" role="img"
                   aria-label="Tren harian finance"></canvas></div>
             </div>
@@ -1917,7 +2038,7 @@
           <div class="cg1">
             <div class="chart-card">
               <div class="cc-title">Akumulasi laba (kumulatif)</div>
-              <div class="cc-sub">Total laba yang menumpuk dari hari ke hari — makin menanjak makin sehat</div>
+              <div class="cc-sub">Total laba yang menumpuk dari hari ke hari</div>
               <div style="position:relative;height:260px"><canvas id="cFinCum" role="img"
                   aria-label="Akumulasi laba"></canvas></div>
             </div>
@@ -1953,52 +2074,87 @@
   </main>
 
   <script>
-    // CONFIG
+    // ══════════════════ KONFIGURASI ══════════════════
     const SHEET_ID = '1AeE4MOMGiX8vpPc4_W39C5BVq7m3fJ9BbHHbaQfd26E';
-    const SHEET_REKAP = 'rekap_harian';
-    const SHEET_TRELLO = 'trello_board';
-    // Sumber baru: 3 sheet admin (Divisi = nama sheet). Kolom: NO, Tanggal, NAMA PERUSAHAAN, ORDER, STATUS, PIC, KETERANGAN
     const ADMIN_SHEETS = ['Admin Draft', 'Admin Perizinan', 'Admin Pajak'];
-    // Sheet Desain (struktur kolom sama dengan sheet admin)
     const DESAIN_SHEET = 'Desain';
-    // ====== PIN TAB FINANCE — ubah 6 digit di sini ======
+
     const FINANCE_PIN = '102525';
-    // ====================================================
     const FINANCE_ID = '18iTRMXITMd_-VQlRLdZQULMrwqPPuj3sChTud8O_jf4';
-    // Sheet bulanan khusus (angka bulanan yang dipelihara manual) — jadi sumber grafik/tabel bulanan
     const FINANCE_MONTHLY_SHEET = 'TREND PER BULAN';
-    const CS_SHEET_TAB = 'export_kpi';
+
+    const CS_KPI_TAB = 'export_kpi';   // rekap bulanan manual (nominal, status bayar)
+    const CS_LOG_TAB = 'LOG_SKOR';     // riwayat perubahan skor (sumber utama prospek)
     const CS_SHEETS = [
-      { name: 'Julia', id: '1gZq8PDQvxtNzMb3bRJ0dVyDpj1HWVwl9-RWrQ8rEBlY', gid: '516681424' },
-      { name: 'Devi', id: '1MlF7F_E6QkrI-IXXk1p77s7bEepTw3hvBWkvuIlqReM', gid: '2028414982' },
-      { name: 'Dewi', id: '1QeDEK9KIWBY4AdXsn6qy0Q6v8mON0MewZWcC4kXT_yA', gid: '994930126' },
-      { name: 'Dedes', id: '1zftlA_FTA60EvEEr3snWWH1Uzf9S_UjtOCTyNe6i5ag', gid: '1942550243' },
+      { name: 'Julia', id: '1gZq8PDQvxtNzMb3bRJ0dVyDpj1HWVwl9-RWrQ8rEBlY' },
+      { name: 'Devi', id: '1MlF7F_E6QkrI-IXXk1p77s7bEepTw3hvBWkvuIlqReM' },
+      { name: 'Dewi', id: '1QeDEK9KIWBY4AdXsn6qy0Q6v8mON0MewZWcC4kXT_yA' },
+      { name: 'Dedes', id: '1zftlA_FTA60EvEEr3snWWH1Uzf9S_UjtOCTyNe6i5ag' },
     ];
+
     const ID_MONTHS = ['JANUARI', 'FEBRUARI', 'MARET', 'APRIL', 'MEI', 'JUNI', 'JULI', 'AGUSTUS', 'SEPTEMBER', 'OKTOBER', 'NOVEMBER', 'DESEMBER'];
-    const CS_COLORS = { 'Julia': '#3b5bdb', 'Devi': '#15803d', 'Dewi': '#b45309', 'Dedes': '#5b21b6' };
+
+    /* ── SISTEM WARNA SEMANTIK ──────────────────────────────────
+       Warna mengikuti ARTI, bukan identitas CS.
+       Merah murni dipesan khusus untuk MATI (lead pindah ke Dorman),
+       karena itu Hot memakai oranye — agar "panas" dan "mati"
+       tidak pernah tertukar di mata pembaca.                      */
+    const SKOR_META = {
+      1: { nama: 'Cool', warna: '#3b82f6', bg: '#dbeafe', teks: '#1e40af' },
+      2: { nama: 'Warm', warna: '#f59e0b', bg: '#fef3c7', teks: '#92400e' },
+      3: { nama: 'Hot', warna: '#ea580c', bg: '#ffedd5', teks: '#9a3412' },
+      4: { nama: 'Deal', warna: '#8b5cf6', bg: '#ede9fe', teks: '#5b21b6' },
+      5: { nama: 'Proses', warna: '#0891b2', bg: '#cffafe', teks: '#155e75' },
+      6: { nama: 'Finish', warna: '#15803d', bg: '#dcfce7', teks: '#14532d' },
+      7: { nama: 'Dorman', warna: '#94a3b8', bg: '#f1f5f9', teks: '#475569' }
+    };
+    const ARAH_META = {
+      'NAIK': { warna: '#15803d', label: 'Naik' },
+      'FINISH': { warna: '#065f46', label: 'Finish' },
+      'AKTIF KEMBALI': { warna: '#0891b2', label: 'Aktif kembali' },
+      'LEAD BARU': { warna: '#3b82f6', label: 'Lead baru' },
+      'TURUN': { warna: '#f59e0b', label: 'Turun' },
+      'MATI': { warna: '#b91c1c', label: 'Mati' }
+    };
+    const ARAH_POSITIF = ['NAIK', 'FINISH', 'AKTIF KEMBALI'];
+
+    // Ambang "mandek" (hari kalender sejak skor terakhir berubah).
+    // Skor 3 paling ketat karena SOP menyebutnya prioritas utama.
+    const MANDEK_AMBANG = { 1: 8, 2: 8, 3: 3, 4: 4, 5: 2 };
+    const KONVERSI_JENDELA = 7;   // hari
+
     const FIN_UP = '#15803d', FIN_DOWN = '#b91c1c', FIN_NEU = '#3b5bdb', FIN_GREY = '#cbd5e1';
 
-    let dataRekap = [], dataTrello = [], dataDesain = [];
+    // ══════════════════ STATE ══════════════════
+    let dataRekap = [], dataDesain = [];
     let financeUnlocked = false;
     let adminRange = { from: '', to: '' };
-    let dataCS = {}, csMonth = null, csSel = null, csDiag = [];
-    let dataFinance = [], dataFinanceMonthly = [], finDiag = { ok: false, msg: '' }, finDayMetric = 'masuk';
-    let finFilters = { summary: { from: '', to: '' }, month: { from: '', to: '' }, growth: { from: '', to: '' }, mk: { from: '', to: '' }, week: { from: '', to: '' }, day: { from: '', to: '' }, cum: { from: '', to: '' } };
-    let finPopulated = false;
+    let dataLog = [], dataCS = {}, csMonth = null, csSel = null, csDiag = [];
+    let csStuckRows = [], csHistRows = [];
+    let dataFinance = [], dataFinanceMonthly = [], finDiag = { ok: false, msg: '' };
     const FIN_TARGET_DEFAULT = { omset: 500000000, laba: 150000000 };
     let finTarget = (function () { try { const s = JSON.parse(localStorage.getItem('akses_fin_target') || 'null'); if (s && typeof s.omset === 'number' && typeof s.laba === 'number') return s; } catch (e) { } return { ...FIN_TARGET_DEFAULT }; })();
-    let personTableRows = [], trelloTableRows = [], overviewTableRows = [], desainTableRows = [];
+    let personTableRows = [], overviewTableRows = [], desainTableRows = [];
     let chartInst = {};
     let selectedPerson = null, curPage = 'overview', firstLoad = true;
 
+    // ══════════════════ UTIL ══════════════════
     function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
     function pct(n, d) { return d > 0 ? Math.round(n / d * 100) : 0; }
     function daysAgo(dateStr) { const t = Date.parse(dateStr); if (isNaN(t)) return null; return Math.floor((Date.now() - t) / 864e5); }
+    function isoOf(d) { return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; }
+    function hariIniISO() { return isoOf(new Date()); }
+    function selisihHari(a, b) { if (!a || !b) return null; return Math.round((Date.parse(b + 'T00:00:00') - Date.parse(a + 'T00:00:00')) / 864e5); }
+    function tambahHari(iso, n) { const d = new Date(iso + 'T00:00:00'); d.setDate(d.getDate() + n); return isoOf(d); }
+    function median(arr) { if (!arr.length) return null; const s = arr.slice().sort((a, b) => a - b); const m = Math.floor(s.length / 2); return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; }
+    function skorMeta(s) { return SKOR_META[s] || { nama: 'Skor ' + s, warna: '#64748b', bg: '#f1f5f9', teks: '#334155' }; }
+    function arahMeta(a) { return ARAH_META[a] || { warna: '#64748b', label: a || '—' }; }
+    function skorBadge(s) { const m = skorMeta(s); return `<span class="skor-badge" style="background:${m.bg};color:${m.teks}">${s} · ${m.nama}</span>`; }
+    function arahBadge(a) { const m = arahMeta(a); return `<span class="arah-badge" style="background:${m.warna}">${esc(m.label)}</span>`; }
 
-    // ===== DATE RANGE PICKER (dipakai di Admin & Finance) =====
+    // ══════════════════ DATE RANGE PICKER ══════════════════
     const DRP = {};
     const DRP_PRESETS = [['today', 'Hari ini'], ['yesterday', 'Kemarin'], ['week', 'Minggu ini'], ['month', 'Bulan ini'], ['quarter', 'Kuartal ini'], ['year', 'Tahun ini'], ['l7', '7 hari terakhir'], ['l14', '14 hari terakhir'], ['l30', '30 hari terakhir'], ['l90', '90 hari terakhir'], ['all', 'Semua tanggal']];
-    function isoOf(d) { return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; }
     function drpFmt(iso) { return iso ? new Date(iso + 'T00:00:00').toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) : ''; }
     function drpLabel(id) { const s = DRP[id]; if (!s || (!s.from && !s.to)) return 'Semua tanggal'; if (s.from && s.to && s.from === s.to) return drpFmt(s.from); return `${drpFmt(s.from) || '…'} – ${drpFmt(s.to) || '…'}`; }
     function drpPresetRange(key) {
@@ -2022,7 +2178,6 @@
       const host = document.getElementById('drp_' + id); if (!host) return;
       host.innerHTML = `<button type="button" class="drp-btn" onclick="drpToggle('${id}')">📅 <span id="drpLbl_${id}">${esc(drpLabel(id))}</span> <span style="color:var(--faint)">▾</span></button><div class="drp-pop" id="drpPop_${id}" style="display:none"></div>`;
     }
-    function syncDRP(id, from, to) { const s = DRP[id]; if (!s) return; s.from = from || ''; s.to = to || ''; const l = document.getElementById('drpLbl_' + id); if (l) l.textContent = drpLabel(id); }
     function drpToggle(id) {
       const s = DRP[id]; if (!s) return; s.open = !s.open;
       const pop = document.getElementById('drpPop_' + id);
@@ -2072,12 +2227,12 @@
       });
     });
 
+    // ══════════════════ PARSING UMUM ══════════════════
     function normalizeDate(dStr) {
       if (!dStr) return '';
       dStr = String(dStr).trim();
       if (!dStr) return '';
       if (/^\d{4}-\d{2}-\d{2}/.test(dStr)) return dStr.slice(0, 10);
-      // format teks Indonesia, mis. "1 Juli 2026"
       if (/[a-zA-Z]/.test(dStr)) {
         const parts = dStr.replace(/,/g, ' ').split(/\s+/).filter(Boolean);
         let day, mon, yr;
@@ -2089,35 +2244,21 @@
         if (day && mon && yr) return `${yr}-${String(mon).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
         return dStr;
       }
-      const slash = dStr.includes('/');                 // slash → format admin (M/D/Y)
+      const slash = dStr.includes('/');
       const p = dStr.split(/[\/.\-]/);
       if (p.length === 3) {
         if (p[0].length === 4) return `${p[0]}-${p[1].padStart(2, '0')}-${p[2].padStart(2, '0')}`;
         let a = +p[0], b = +p[1], y = p[2];
         let mo, da;
-        if (a > 12) { da = a; mo = b; }            // jelas D/M/Y
-        else if (b > 12) { mo = a; da = b; }       // jelas M/D/Y (mis. 6/29/2026)
-        else if (slash) { mo = a; da = b; }        // ambigu + slash → M/D/Y (gviz/admin)
-        else { da = a; mo = b; }                   // ambigu + strip/titik → D/M/Y (finance dd-mm-yyyy)
+        if (a > 12) { da = a; mo = b; }
+        else if (b > 12) { mo = a; da = b; }
+        else if (slash) { mo = a; da = b; }
+        else { da = a; mo = b; }
         if (String(y).length === 2) y = '20' + y;
         if (!mo || !da || mo > 12 || da > 31) return dStr;
         return `${y}-${String(mo).padStart(2, '0')}-${String(da).padStart(2, '0')}`;
       }
       return dStr;
-    }
-
-    function normalizeStatus(row) {
-      const rawS = String(row['Status'] || '').trim().toLowerCase();
-      const rawD = String(row['Detail'] || '').trim().toLowerCase();
-      const rawK = String(row['Kategori'] || '').trim().toLowerCase();
-      if (rawS) {
-        if (/done|selesai|completed|terbit|lunas|finish|sukses|ok|berhasil/.test(rawS)) return 'Done';
-        if (/progress|proses|doing|dikerjakan|revisi|upload|cek|konsul|draft|tambah|peta/.test(rawS)) return 'On Progress';
-        if (/pending|menunggu|hold|list|berkas|antri/.test(rawS)) return 'Pending';
-      }
-      if (/terbit|selesai|lunas|penyerahan|ttd|berhasil|sukses/.test(rawD) || /terbit|lunas|penyerahan/.test(rawK)) return 'Done';
-      if (/menunggu|pending|hold|antri|antrian/.test(rawD)) return 'Pending';
-      return 'On Progress';
     }
 
     function parseCSV(txt) {
@@ -2134,20 +2275,13 @@
       if (f || row.length) { row.push(f.trim()); if (row.some(x => x)) rows.push(row); }
       return rows;
     }
-    function csvToObj(txt) {
-      const rows = parseCSV(txt); if (rows.length < 2) return [];
-      const hdr = rows[0];
-      return rows.slice(1).filter(r => r.some(c => c)).map(r => { const o = {}; hdr.forEach((h, i) => o[h.trim()] = (r[i] || '').trim()); return o; });
-    }
 
     function csvUrl(id, sheet) { return `https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheet)}`; }
     function csvUrlDefault(id) { return `https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:csv`; }
-    async function fetchSheet(id, sheet) { const r = await fetch(csvUrl(id, sheet)); if (!r.ok) throw new Error(`HTTP ${r.status} — sheet "${sheet}"`); return csvToObj(await r.text()); }
     async function fetchRaw(url) { const r = await fetch(url); if (!r.ok) throw new Error('HTTP ' + r.status); return await r.text(); }
+    function butuhLogin(txt) { return /<html|<!doctype|accounts\.google|signin/i.test(txt.slice(0, 400)); }
 
-    // === Sheet Admin (Admin Draft / Admin Perizinan / Admin Pajak) ===
-    // Petakan STATUS mentah -> 3 keadaan seragam. Urutan cek penting.
-    // FINISH/PIRT DONE/SELESAI -> Done · DOING/PROSES/VERIF/AMDAL -> On Progress · LIST/EROR/TO BE CONFIRM/MENUNGGU/MINUS -> Pending
+    // ══════════════════ SHEET ADMIN & DESAIN ══════════════════
     function normalizeAdminStatus(raw) {
       const s = String(raw || '').toUpperCase().trim();
       if (!s) return 'Pending';
@@ -2156,79 +2290,265 @@
       if (/DOING|PROSES|VERIF|PKKPR|AMDAL|WAIT|REVIEW|CEK|PROGRESS|DRAFT|PENGAJUAN|CONFIRM|BUTUH|ON GOING/.test(s)) return 'On Progress';
       return 'On Progress';
     }
-    // Baca posisi kolom: 0=NO,1=Tanggal,2=NAMA PERUSAHAAN,3=ORDER,4=STATUS,5=PIC,6=KETERANGAN
     function parseAdminSheet(txt, divisi) {
-      const rows = parseCSV(txt);
-      const out = [];
+      const rows = parseCSV(txt); const out = [];
       rows.forEach(r => {
         const no = String(r[0] || '').trim();
         const tgl = String(r[1] || '').trim();
         const perusahaan = String(r[2] || '').trim();
-        if (!perusahaan) return;                                   // baris kosong
-        if (/nama perusahaan/i.test(perusahaan)) return;           // baris header
-        if (/^no$/i.test(no) && /tanggal/i.test(tgl)) return;      // header lain
-        const order = String(r[3] || '').trim();
-        const statusRaw = String(r[4] || '').trim();
-        const pic = String(r[5] || '').trim();
-        const ket = String(r[6] || '').trim();
+        if (!perusahaan) return;
+        if (/nama perusahaan/i.test(perusahaan)) return;
+        if (/^no$/i.test(no) && /tanggal/i.test(tgl)) return;
         out.push({
           'Tanggal': normalizeDate(tgl) || tgl,
-          'Nama': pic || '(tanpa PIC)',
+          'Nama': String(r[5] || '').trim() || '(tanpa PIC)',
           'Divisi': divisi,
           'No': no,
           'Nama Kerjaan': perusahaan,
-          'Kategori': order || '(tanpa order)',
-          'Detail': ket,
-          'Status': normalizeAdminStatus(statusRaw),
-          '_statusRaw': statusRaw
+          'Kategori': String(r[3] || '').trim() || '(tanpa order)',
+          'Detail': String(r[6] || '').trim(),
+          'Status': normalizeAdminStatus(String(r[4] || '').trim())
         });
       });
       return out;
     }
     async function fetchAdminSheet(id, sheetName) {
       const txt = await fetchRaw(csvUrl(id, sheetName));
-      if (/<!doctype|<html|accounts\.google|signin|sign in/i.test(txt.slice(0, 500))) return [];
+      if (butuhLogin(txt)) return [];
       return parseAdminSheet(txt, sheetName);
     }
-
-    // === Sheet Desain (LIST KERJAAN) — susunan kolom BERBEDA, tanpa PIC ===
-    // 0=NO,1=Tanggal,2=KONTEN/FLYER,3=NAMA PERUSAHAAN,4=ORDER,5=STATUS,6=KETERANGAN,7=LINK GAMBAR
     function parseDesainSheet(txt) {
-      const rows = parseCSV(txt);
-      const out = [];
+      const rows = parseCSV(txt); const out = [];
       rows.forEach(r => {
         const no = String(r[0] || '').trim();
         const tgl = String(r[1] || '').trim();
         const konten = String(r[2] || '').trim();
         const perusahaan = String(r[3] || '').trim();
-        const order = String(r[4] || '').trim();
-        const statusRaw = String(r[5] || '').trim();
-        const ket = String(r[6] || '').trim();
-        const link = String(r[7] || '').trim();
         const title = konten || perusahaan;
-        if (!title) return;                                              // baris kosong
-        if (/^no$/i.test(no) && /tanggal/i.test(tgl)) return;            // baris header
-        if (/^konten\s*\/?\s*fl[a]?yer/i.test(konten)) return;           // header kolom C
+        if (!title) return;
+        if (/^no$/i.test(no) && /tanggal/i.test(tgl)) return;
+        if (/^konten\s*\/?\s*fl[a]?yer/i.test(konten)) return;
         out.push({
-          'No': no,
-          'Tanggal': normalizeDate(tgl) || tgl,
-          'Nama Kerjaan': title,
-          'Perusahaan': perusahaan,
-          'Kategori': order || '(tanpa order)',
-          'Status': normalizeAdminStatus(statusRaw),
-          '_statusRaw': statusRaw,
-          'Detail': ket,
-          'Link': link
+          'No': no, 'Tanggal': normalizeDate(tgl) || tgl, 'Nama Kerjaan': title,
+          'Perusahaan': perusahaan, 'Kategori': String(r[4] || '').trim() || '(tanpa order)',
+          'Status': normalizeAdminStatus(String(r[5] || '').trim()),
+          'Detail': String(r[6] || '').trim(), 'Link': String(r[7] || '').trim()
         });
       });
       return out;
     }
     async function fetchDesainSheet(id, sheetName) {
       const txt = await fetchRaw(csvUrl(id, sheetName));
-      if (/<!doctype|<html|accounts\.google|signin|sign in/i.test(txt.slice(0, 500))) return [];
+      if (butuhLogin(txt)) return [];
       return parseDesainSheet(txt);
     }
 
+    // ══════════════════ CS — LOG_SKOR ══════════════════
+    function csNum(s) { const d = String(s == null ? '' : s).replace(/[^\d-]/g, ''); return d ? parseInt(d, 10) : 0; }
+    function fmtRp(n) { return 'Rp' + Math.round(n || 0).toLocaleString('id-ID'); }
+    function fmtJt(n) { return (n / 1e6).toLocaleString('id-ID', { maximumFractionDigits: 1 }) + ' jt'; }
+
+    /**
+     * Membaca tab LOG_SKOR. Kolom dicari lewat nama header,
+     * bukan posisi, agar tahan terhadap penambahan kolom di kemudian hari.
+     */
+    function parseLogSkor(text, csName) {
+      const rows = parseCSV(text);
+      if (rows.length < 2) return [];
+      const hdr = rows[0].map(h => String(h || '').trim().toUpperCase());
+      const at = n => hdr.indexOf(n);
+      const iTgl = at('TANGGAL'), iCS = at('CS'), iHp = at('NO HP'), iNama = at('NAMA PERUSAHAAN'),
+        iMasuk = at('TGL MASUK'), iLama = at('SKOR LAMA'), iBaru = at('SKOR BARU'),
+        iArah = at('ARAH'), iAkt = at('AKTIVITAS'), iTab = at('TAB'), iBaris = at('BARIS'),
+        iFu = at('TGL FU');
+      if (iTgl < 0 || iBaru < 0 || iArah < 0) return [];
+
+      const out = [];
+      rows.slice(1).forEach((r, n) => {
+        const tgl = normalizeDate(r[iTgl] || '');
+        const baru = parseInt(r[iBaru], 10);
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(tgl)) return;
+        if (!(baru >= 1 && baru <= 7)) return;
+        const cs = (iCS >= 0 ? String(r[iCS] || '').trim() : '') || csName;
+        const hp = iHp >= 0 ? String(r[iHp] || '').trim() : '';
+        const nama = iNama >= 0 ? String(r[iNama] || '').trim() : '';
+        const ident = hp || nama || ((iTab >= 0 ? r[iTab] : '') + '#' + (iBaris >= 0 ? r[iBaris] : n));
+        const lamaRaw = iLama >= 0 ? String(r[iLama] || '').trim() : '';
+        out.push({
+          cs, tgl, seq: n,
+          key: cs + '|' + ident,
+          hp, nama: nama || hp || '(tanpa nama)',
+          tglMasuk: iMasuk >= 0 ? normalizeDate(r[iMasuk] || '') : '',
+          tglFu: iFu >= 0 ? normalizeDate(r[iFu] || '') : '',
+          lama: lamaRaw === '' ? null : parseInt(lamaRaw, 10),
+          baru,
+          arah: (String(r[iArah] || '').trim().toUpperCase()) || 'TETAP',
+          aktivitas: iAkt >= 0 ? String(r[iAkt] || '').trim() : ''
+        });
+      });
+      return out;
+    }
+
+    function logTerurut(ev) {
+      return ev.slice().sort((a, b) => a.tgl < b.tgl ? -1 : a.tgl > b.tgl ? 1 : a.seq - b.seq);
+    }
+
+    /** Kondisi terakhir tiap lead, hasil pemutaran ulang seluruh riwayat. */
+    function csKondisiSekarang(ev) {
+      const state = {};
+      logTerurut(ev).forEach(e => {
+        state[e.key] = {
+          key: e.key, cs: e.cs, nama: e.nama, hp: e.hp,
+          skor: e.baru, tglUbah: e.tgl, arah: e.arah,
+          aktivitas: e.aktivitas || (state[e.key] ? state[e.key].aktivitas : ''),
+          tglMasuk: e.tglMasuk || (state[e.key] ? state[e.key].tglMasuk : ''),
+          tglFu: e.tglFu || (state[e.key] ? state[e.key].tglFu : '')
+        };
+      });
+      return Object.values(state);
+    }
+
+    /**
+     * Sejak kapan lead ini benar-benar diam.
+     *
+     * Baris BASELINE selalu bertanggal hari perekaman — itu memang artinya:
+     * "sejauh yang kita tahu per hari ini, lead ada di skor ini". Kalau tanggal
+     * itu dipakai apa adanya, tidak akan pernah ada lead yang terhitung mandek,
+     * dan dashboard akan berbohong pada hari pertama.
+     *
+     * Untuk lead yang belum pernah berubah sejak baseline, TGL FU di sheet
+     * (tanggal terakhir di-follow-up) adalah perkiraan terbaik yang kita punya.
+     */
+    function tglAcuanDiam(k) {
+      if (k.arah === 'BASELINE' && /^\d{4}-\d{2}-\d{2}$/.test(k.tglFu || '') && k.tglFu <= hariIniISO()) {
+        return k.tglFu;
+      }
+      return k.tglUbah;
+    }
+    function lamaDiam(k) { return selisihHari(tglAcuanDiam(k), hariIniISO()); }
+
+    /** Komposisi skor untuk tiap tanggal, dari awal riwayat sampai hari ini. */
+    function csKomposisiHarian(ev) {
+      const sorted = logTerurut(ev);
+      if (!sorted.length) return [];
+      const mulai = sorted[0].tgl;
+      const akhir = [sorted[sorted.length - 1].tgl, hariIniISO()].sort().pop();
+      const state = {}; const hasil = [];
+      let i = 0, d = mulai, guard = 0;
+      while (d <= akhir && guard++ < 800) {
+        while (i < sorted.length && sorted[i].tgl <= d) { state[sorted[i].key] = sorted[i].baru; i++; }
+        const cnt = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 };
+        Object.values(state).forEach(s => { if (cnt[s] != null) cnt[s]++; });
+        hasil.push({ tgl: d, cnt });
+        d = tambahHari(d, 1);
+      }
+      return hasil;
+    }
+
+    /**
+     * Konversi skor `dari` → skor berikutnya dalam N hari.
+     * Lead yang baru masuk skor itu kurang dari N hari lalu TIDAK dihitung —
+     * mereka belum punya kesempatan penuh, memasukkannya akan menekan angka
+     * CS secara tidak adil.
+     */
+    function csKonversi(ev, dari, jendela) {
+      const byKey = {};
+      logTerurut(ev).forEach(e => { (byKey[e.key] = byKey[e.key] || []).push(e); });
+      const hariIni = hariIniISO();
+      let denom = 0, num = 0;
+      Object.values(byKey).forEach(list => {
+        const i = list.findIndex(e => e.baru === dari);
+        if (i === -1) return;
+        const t0 = list[i].tgl;
+        const umur = selisihHari(t0, hariIni);
+        if (umur == null || umur < jendela) return;      // masih dalam masa tunggu
+        denom++;
+        const batas = tambahHari(t0, jendela);
+        const naik = list.slice(i + 1).some(e => e.tgl <= batas && e.baru > dari && e.baru !== 7);
+        if (naik) num++;
+      });
+      return { denom, num, rate: pct(num, denom) };
+    }
+
+    /** Median hari untuk naik dari skor X ke skor mana pun di atasnya. */
+    function csKecepatan(ev) {
+      const byKey = {};
+      logTerurut(ev).forEach(e => { (byKey[e.key] = byKey[e.key] || []).push(e); });
+      const bucket = { 1: [], 2: [], 3: [], 4: [], 5: [] };
+      Object.values(byKey).forEach(list => {
+        for (let i = 1; i < list.length; i++) {
+          const prev = list[i - 1], cur = list[i];
+          if (!ARAH_POSITIF.includes(cur.arah)) continue;
+          if (cur.arah === 'AKTIF KEMBALI') continue;
+          const dari = prev.baru;
+          if (bucket[dari] == null) continue;
+          const hari = selisihHari(prev.tgl, cur.tgl);
+          if (hari != null && hari >= 0) bucket[dari].push(hari);
+        }
+      });
+      return bucket;
+    }
+
+    function csDalamRange(ev) {
+      return ev.filter(e => {
+        if (adminRange.from && e.tgl < adminRange.from) return false;
+        if (adminRange.to && e.tgl > adminRange.to) return false;
+        return true;
+      });
+    }
+
+    // ══════════════════ CS — export_kpi ══════════════════
+    function parseExportKpi(text) {
+      const rows = parseCSV(text); const months = {};
+      rows.forEach(r => {
+        const bln = String(r[1] || '').trim().toUpperCase();
+        if (!ID_MONTHS.includes(bln)) return;
+        const scores = {};
+        for (let k = 0; k < 7; k++) { const v = r[2 + k]; if (v !== undefined && String(v).trim() !== '') scores[k + 1] = csNum(v); }
+        const dp = csNum(r[9]), lunas = csNum(r[10]), nominal = csNum(r[11]), harga = csNum(r[12]);
+        const tot = Object.values(scores).reduce((a, c) => a + c, 0);
+        if (tot === 0 && dp === 0 && lunas === 0 && nominal === 0 && harga === 0) return;
+        months[bln] = { scores, dp, lunas, nominal, harga };
+      });
+      return months;
+    }
+
+    /**
+     * LOG_SKOR adalah sumber utama; export_kpi hanya pelengkap.
+     * Kegagalan salah satu tidak boleh menjatuhkan yang lain —
+     * pelajaran dari tab export_kpi yang sempat terhapus.
+     */
+    async function loadCSData() {
+      const log = []; const kpi = {}; csDiag = [];
+      await Promise.allSettled(CS_SHEETS.map(async cs => {
+        const info = { name: cs.name, logOk: false, logMsg: '', kpiOk: false, kpiMsg: '' };
+
+        try {
+          const txt = await fetchRaw(csvUrl(cs.id, CS_LOG_TAB));
+          if (butuhLogin(txt)) info.logMsg = 'butuh login / belum publik';
+          else {
+            const ev = parseLogSkor(txt, cs.name);
+            if (ev.length) { log.push(...ev); info.logOk = true; info.logMsg = ev.length + ' baris riwayat'; }
+            else info.logMsg = 'tab terbaca, tapi belum ada baris valid';
+          }
+        } catch (e) { info.logMsg = 'tab LOG_SKOR tidak ditemukan'; }
+
+        try {
+          const txt = await fetchRaw(csvUrl(cs.id, CS_KPI_TAB));
+          if (butuhLogin(txt)) info.kpiMsg = 'butuh login / belum publik';
+          else {
+            const months = parseExportKpi(txt);
+            if (Object.keys(months).length) { kpi[cs.name] = { months }; info.kpiOk = true; info.kpiMsg = Object.keys(months).length + ' bulan'; }
+            else info.kpiMsg = 'terbaca, bulan tak dikenali';
+          }
+        } catch (e) { info.kpiMsg = 'tab export_kpi tidak ditemukan'; }
+
+        csDiag.push(info);
+      }));
+      dataLog = log; dataCS = kpi;
+    }
+
+    // ══════════════════ FINANCE ══════════════════
     function finNum(v) {
       if (v == null) return 0;
       let s = String(v).trim(); if (!s) return 0;
@@ -2251,8 +2571,11 @@
       out.sort((a, b) => a.iso < b.iso ? -1 : a.iso > b.iso ? 1 : 0);
       return out;
     }
-    function finMonthKey(iso) { return iso.slice(0, 7); }
-    // Parser sheet "TREND PER BULAN": A=Tanggal (bln/thn, mis. /05/25), B=Dana Masuk, C=Dana Keluar, D=Laba Usaha
+    function finMonthLabel(iso) {
+      const [y, m] = iso.split('-');
+      const nm = ID_MONTHS[(+m) - 1] || '';
+      return `${nm.charAt(0).toUpperCase() + nm.slice(1).toLowerCase()} ${y}`;
+    }
     function parseFinanceMonthly(text) {
       const rows = parseCSV(text); const out = [];
       rows.forEach(r => {
@@ -2272,35 +2595,28 @@
         const masuk = finNum(r[1]), keluar = finNum(r[2]);
         let laba = (r[3] !== undefined && String(r[3]).trim() !== '') ? finNum(r[3]) : (masuk - keluar);
         const key = `${y}-${m}`;
-        out.push({ key, iso: `${key}-01`, label: finMonthLabel(`${key}-01`, ''), masuk, keluar, laba, days: 0 });
+        out.push({ key, iso: `${key}-01`, label: finMonthLabel(`${key}-01`), masuk, keluar, laba, days: 0 });
       });
       out.sort((a, b) => a.key < b.key ? -1 : 1);
       return out;
     }
-    // Sumber bulanan: pakai sheet TREND PER BULAN bila ada, jika tidak fallback jumlah harian
-    function finMonthlyInRange(fromK, toK) {
-      const src = (dataFinanceMonthly && dataFinanceMonthly.length) ? dataFinanceMonthly : finGroupMonthly(dataFinance);
-      return src.filter(m => (!fromK || m.key >= fromK) && (!toK || m.key <= toK));
-    }
-    function finMonthLabel(iso, bulan) {
-      const [y, m] = iso.split('-');
-      const nm = ID_MONTHS[(+m) - 1] || '';
-      return `${nm.charAt(0).toUpperCase() + nm.slice(1).toLowerCase()} ${y}`;
-    }
     function finGroupMonthly(rows) {
       const map = {};
       rows.forEach(d => {
-        const k = finMonthKey(d.iso);
-        if (!map[k]) map[k] = { key: k, label: finMonthLabel(d.iso, d.bulan), masuk: 0, keluar: 0, laba: 0, days: 0 };
+        const k = d.iso.slice(0, 7);
+        if (!map[k]) map[k] = { key: k, label: finMonthLabel(d.iso), masuk: 0, keluar: 0, laba: 0, days: 0 };
         map[k].masuk += d.masuk; map[k].keluar += d.keluar; map[k].laba += d.laba; map[k].days++;
       });
       return Object.values(map).sort((a, b) => a.key < b.key ? -1 : 1);
     }
+    function finMonthlyInRange(fromK, toK) {
+      const src = (dataFinanceMonthly && dataFinanceMonthly.length) ? dataFinanceMonthly : finGroupMonthly(dataFinance);
+      return src.filter(m => (!fromK || m.key >= fromK) && (!toK || m.key <= toK));
+    }
     function finWeekStart(iso) {
       const dt = new Date(iso + 'T00:00:00');
-      const day = (dt.getDay() + 6) % 7;
-      dt.setDate(dt.getDate() - day);
-      return dt.toISOString().slice(0, 10);
+      dt.setDate(dt.getDate() - ((dt.getDay() + 6) % 7));
+      return isoOf(dt);
     }
     function finGroupWeekly(rows) {
       const map = {};
@@ -2310,25 +2626,13 @@
         map[k].masuk += d.masuk; map[k].keluar += d.keluar; map[k].laba += d.laba; map[k].days++;
       });
       return Object.values(map).sort((a, b) => a.key < b.key ? -1 : 1).map(w => {
-        const dt = new Date(w.key + 'T00:00:00');
-        w.label = dt.toLocaleDateString('id-ID', { day: '2-digit', month: 'short' });
+        w.label = new Date(w.key + 'T00:00:00').toLocaleDateString('id-ID', { day: '2-digit', month: 'short' });
         return w;
       });
     }
-    function upDownColors(arr, neutralFirst) {
-      return arr.map((v, i) => i === 0 ? (neutralFirst ? FIN_NEU : FIN_UP) : (v >= arr[i - 1] ? FIN_UP : FIN_DOWN));
-    }
-    function finMonthsList() {
-      const map = {};
-      dataFinance.forEach(d => { const k = d.iso.slice(0, 7); if (!map[k]) map[k] = finMonthLabel(d.iso, d.bulan); });
-      return Object.keys(map).sort().map(k => ({ key: k, label: map[k] }));
-    }
-    function finRowsFor(key) { return key ? dataFinance.filter(d => d.iso.slice(0, 7) === key) : dataFinance.slice(); }
-    function finRowsMonthRange(fromK, toK) { return dataFinance.filter(d => { const k = d.iso.slice(0, 7); return (!fromK || k >= fromK) && (!toK || k <= toK); }); }
+    function upDownColors(arr) { return arr.map((v, i) => i === 0 ? FIN_UP : (v >= arr[i - 1] ? FIN_UP : FIN_DOWN)); }
     function finRowsDateRange(fromD, toD) { return dataFinance.filter(d => (!fromD || d.iso >= fromD) && (!toD || d.iso <= toD)); }
-    function finDateBounds() { return dataFinance.length ? { min: dataFinance[0].iso, max: dataFinance[dataFinance.length - 1].iso } : { min: '', max: '' }; }
-    function finRecentStart(b, days) { if (!b.max) return b.min; const d = new Date(b.max + 'T00:00:00'); d.setDate(d.getDate() - (days || 44)); const iso = d.toISOString().slice(0, 10); return iso > b.min ? iso : b.min; }
-    // plugin label nilai di tiap titik garis (opt-in via ds._showLabel)
+
     const lineLabelPlugin = {
       id: 'lineLabels',
       afterDatasetsDraw(chart) {
@@ -2351,76 +2655,26 @@
       }
     };
 
-    async function loadCSData() {
-      const out = {}; csDiag = [];
-      await Promise.allSettled(CS_SHEETS.map(async cs => {
-        const info = { name: cs.name, ok: false, msg: '', sample: '' };
-        let exTxt = '';
-        try { exTxt = await fetchRaw(csvUrl(cs.id, CS_SHEET_TAB)); } catch (e) { info.msg = 'export_kpi tak diakses: ' + (e.message || e); }
-        if (exTxt && exTxt.trim()) {
-          if (/<html|<!doctype|accounts\.google|signin/i.test(exTxt.slice(0, 400))) {
-            info.msg = 'export_kpi: butuh login / belum publik'; info.sample = exTxt.slice(0, 140); csDiag.push(info); return;
-          }
-          const months = parseExportKpi(exTxt);
-          if (Object.keys(months).length) {
-            out[cs.name] = { months }; info.ok = true;
-            info.msg = 'bulan: ' + Object.keys(months).map(m => m.charAt(0) + m.slice(1).toLowerCase()).join(', ');
-            csDiag.push(info); return;
-          }
-          info.msg = 'export_kpi terbaca, tapi bulan tak dikenali. Cuplikan:';
-          info.sample = exTxt.slice(0, 240);
-        }
-        try {
-          const txt = await fetchRaw(csvUrl(cs.id, 'count'));
-          const months = parseCountSheet(txt);
-          if (Object.keys(months).length) { out[cs.name] = { months }; info.ok = true; info.msg = '(fallback count) ' + Object.keys(months).join(', '); }
-        } catch (e) { }
-        csDiag.push(info);
-      }));
-      dataCS = out;
-    }
-
     async function loadFinanceData() {
       finDiag = { ok: false, msg: '' };
       try {
         const txt = await fetchRaw(csvUrlDefault(FINANCE_ID));
-        if (/<html|<!doctype|accounts\.google|signin/i.test(txt.slice(0, 400))) {
-          finDiag.msg = 'Sheet FINANCE butuh login / belum dibagikan publik.'; dataFinance = []; return;
-        }
-        const parsed = parseFinance(txt);
-        dataFinance = parsed;
-        finDiag.ok = parsed.length > 0;
-        finDiag.msg = parsed.length ? `${parsed.length} baris harian terbaca` : 'Sheet terbaca tapi tak ada baris tanggal valid.';
+        if (butuhLogin(txt)) { finDiag.msg = 'Sheet FINANCE butuh login / belum publik.'; dataFinance = []; return; }
+        dataFinance = parseFinance(txt);
+        finDiag.ok = dataFinance.length > 0;
+        finDiag.msg = dataFinance.length ? `${dataFinance.length} baris harian terbaca` : 'Sheet terbaca tapi tak ada baris tanggal valid.';
       } catch (e) { finDiag.msg = 'Gagal memuat FINANCE: ' + (e.message || e); dataFinance = []; }
-      // Sumber bulanan khusus: sheet TREND PER BULAN
       try {
         const mtxt = await fetchRaw(csvUrl(FINANCE_ID, FINANCE_MONTHLY_SHEET));
-        if (!/<html|<!doctype|accounts\.google|signin/i.test(mtxt.slice(0, 400))) {
-          dataFinanceMonthly = parseFinanceMonthly(mtxt);
-        } else dataFinanceMonthly = [];
+        dataFinanceMonthly = butuhLogin(mtxt) ? [] : parseFinanceMonthly(mtxt);
       } catch (e) { dataFinanceMonthly = []; }
-      // isi jumlah hari tercatat per bulan dari data harian (untuk kolom tabel)
       if (dataFinanceMonthly.length && dataFinance.length) {
         const cnt = {}; dataFinance.forEach(d => { const k = d.iso.slice(0, 7); cnt[k] = (cnt[k] || 0) + 1; });
         dataFinanceMonthly.forEach(m => { if (cnt[m.key]) m.days = cnt[m.key]; });
       }
     }
 
-    function parseExportKpi(text) {
-      const rows = parseCSV(text); const months = {};
-      rows.forEach(r => {
-        const bln = String(r[1] || '').trim().toUpperCase();
-        if (!ID_MONTHS.includes(bln)) return;
-        const scores = {};
-        for (let k = 0; k < 7; k++) { const v = r[2 + k]; if (v !== undefined && String(v).trim() !== '') scores[k + 1] = csNum(v); }
-        const dp = csNum(r[9]), lunas = csNum(r[10]), nominal = csNum(r[11]), harga = csNum(r[12]);
-        const tot = Object.values(scores).reduce((a, c) => a + c, 0);
-        if (tot === 0 && dp === 0 && lunas === 0 && nominal === 0 && harga === 0) return;
-        months[bln] = { scores, dp, lunas, nominal, harga };
-      });
-      return months;
-    }
-
+    // ══════════════════ LOAD ══════════════════
     async function loadAllData(silent) {
       const dot = document.getElementById('updDot');
       if (!silent && firstLoad) {
@@ -2429,10 +2683,7 @@
       }
       dot.classList.add('busy');
       try {
-        // Sumber utama sekarang: gabungan 3 sheet admin (Divisi = nama sheet)
-        const adminResults = await Promise.all(
-          ADMIN_SHEETS.map(s => fetchAdminSheet(SHEET_ID, s).catch(() => []))
-        );
+        const adminResults = await Promise.all(ADMIN_SHEETS.map(s => fetchAdminSheet(SHEET_ID, s).catch(() => [])));
         dataRekap = adminResults.flat();
         dataDesain = await fetchDesainSheet(SHEET_ID, DESAIN_SHEET).catch(() => []);
         await Promise.allSettled([loadCSData(), loadFinanceData()]);
@@ -2468,20 +2719,18 @@
         return true;
       });
     }
-    function fTrello() { const dv = document.getElementById('fDivisi').value; return dataTrello.filter(d => !dv || d['Board Divisi'] === dv); }
     function prevMonthStr(m) { const [y, mo] = m.split('-').map(Number); const d = new Date(y, mo - 2, 1); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0'); }
     function rekapForMonth(m) { const dv = document.getElementById('fDivisi').value; return dataRekap.filter(d => (d['Tanggal'] || '').startsWith(m) && (!dv || d['Divisi'] === dv)); }
     function deltaMonths() {
       const mo = document.getElementById('fMonth').value;
       const months = [...new Set(dataRekap.map(d => (d['Tanggal'] || '').slice(0, 7)).filter(Boolean))].sort();
-      let cur, prev;
-      if (mo) { cur = mo; prev = prevMonthStr(mo); } else { cur = months[months.length - 1]; prev = months[months.length - 2]; }
-      return { cur, prev };
+      if (mo) return { cur: mo, prev: prevMonthStr(mo) };
+      return { cur: months[months.length - 1], prev: months[months.length - 2] };
     }
 
     function dc(id) { if (chartInst[id]) { chartInst[id].destroy(); delete chartInst[id]; } }
     const CAT_COLORS = { 'Merek': '#5b21b6', 'Akta': '#065f46', 'NIB/OSS': '#1e40af', 'Draf': '#b45309', 'Revisi': '#991b1b', 'Revisi Draft': '#c2410c', 'NPWP': '#047857', 'SPT': '#9d174d', 'Pajak Lainnya': '#7c3aed', 'Perizinan Lainnya': '#475569', 'Konsultasi': '#0369a1', 'Lainnya': '#64748b' };
-    const DIV_COLORS = { 'Admin Draft': '#3b5bdb', 'Admin Perizinan': '#15803d', 'Admin Pajak': '#b45309', 'HKI': '#5b21b6', 'Perizinan': '#1e40af', 'Admin': '#0369a1', 'Pajak': '#047857', 'Lainnya': '#64748b' };
+    const DIV_COLORS = { 'Admin Draft': '#3b5bdb', 'Admin Perizinan': '#15803d', 'Admin Pajak': '#b45309' };
     const PALETTE = ['#3b5bdb', '#15803d', '#a32d2d', '#b45309', '#5b21b6', '#0369a1', '#9d174d', '#047857'];
     function catColor(k, i = 0) { return CAT_COLORS[k] || PALETTE[i % PALETTE.length]; }
     function divColor(k, i = 0) { return DIV_COLORS[k] || PALETTE[i % PALETTE.length]; }
@@ -2502,7 +2751,7 @@
       if (curPage === 'finance') renderFinance();
     }
 
-    // ===== OVERVIEW =====
+    // ══════════════════ OVERVIEW ══════════════════
     function renderOverview() {
       const rk = fRekap();
       renderTarget(rk);
@@ -2537,9 +2786,8 @@
       const workRank = Object.keys(byOrang).map(nm => ({ k: nm, total: byOrang[nm], done: byOrangDone[nm] || 0 })).sort((a, b) => b.total - a.total);
       const stuckByDiv = {}; rk.forEach(d => { if (d['Status'] !== 'Done' && d['Divisi']) stuckByDiv[d['Divisi']] = (stuckByDiv[d['Divisi']] || 0) + 1; });
       const stuckRank = Object.keys(stuckByDiv).map(k => ({ k, n: stuckByDiv[k] })).sort((a, b) => b.n - a.n);
-      const best = divRank[0], worst = divRank[divRank.length - 1], top = workRank[0], bottle = stuckRank[0];
       const NA = { k: '—', rate: 0, total: 0, done: 0, n: 0 };
-      const b = best || NA, w = worst || NA, t = top || NA, bo = bottle || NA;
+      const b = divRank[0] || NA, w = divRank[divRank.length - 1] || NA, t = workRank[0] || NA, bo = stuckRank[0] || NA;
       document.getElementById('sigGrid').innerHTML = `
     <div class="sig-card"><div class="sig-ico green">🏆</div><div><div class="sig-lbl">Divisi performa terbaik</div><div class="sig-val">${esc(b.k)}</div><div class="sig-sub">${b.rate}% selesai (${b.done}/${b.total})</div></div></div>
     <div class="sig-card"><div class="sig-ico red">⚠️</div><div><div class="sig-lbl">Divisi perlu perhatian</div><div class="sig-val">${esc(w.k)}</div><div class="sig-sub">${w.rate}% selesai (${w.done}/${w.total})</div></div></div>
@@ -2550,25 +2798,27 @@
       dc('cDivisi');
       if (divs.length) {
         chartInst['cDivisi'] = new Chart(document.getElementById('cDivisi'), {
-          data: { labels: divs, datasets: [
-            { type: 'bar', label: 'Jumlah tugas', data: divs.map(dv => byDiv[dv]), backgroundColor: divs.map((dv, i) => divColor(dv, i)), borderRadius: 6, borderSkipped: false, yAxisID: 'y', order: 2 },
-            { type: 'line', label: '% selesai', data: divs.map(dv => pct(byDivDone[dv] || 0, byDiv[dv])), borderColor: '#3b5bdb', backgroundColor: '#fff', borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#3b5bdb', pointBorderColor: '#fff', pointBorderWidth: 2, tension: .3, yAxisID: 'y1', order: 1 }] },
-          options: { ...baseOpts, plugins: { legend: { display: true, position: 'top', labels: { font: { size: 11 }, usePointStyle: true, boxWidth: 8 } }, tooltip: { callbacks: { label: c => c.dataset.yAxisID === 'y1' ? ` ${c.dataset.label}: ${c.parsed.y}%` : ` ${c.dataset.label}: ${c.parsed.y}` } } },
-            scales: { y: { position: 'left', beginAtZero: true, title: { display: true, text: 'Jumlah tugas', font: { size: 10 } }, ticks: { font: { size: 10 } } }, y1: { position: 'right', beginAtZero: true, max: 100, grid: { drawOnChartArea: false }, title: { display: true, text: '% selesai', font: { size: 10 } }, ticks: { font: { size: 10 }, callback: v => v + '%' } }, x: { ticks: { font: { size: 9 }, maxRotation: 45, minRotation: 30, autoSkip: false } } } }
+          data: {
+            labels: divs, datasets: [
+              { type: 'bar', label: 'Jumlah tugas', data: divs.map(dv => byDiv[dv]), backgroundColor: divs.map((dv, i) => divColor(dv, i)), borderRadius: 6, borderSkipped: false, yAxisID: 'y', order: 2 },
+              { type: 'line', label: '% selesai', data: divs.map(dv => pct(byDivDone[dv] || 0, byDiv[dv])), borderColor: '#3b5bdb', backgroundColor: '#fff', borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#3b5bdb', pointBorderColor: '#fff', pointBorderWidth: 2, tension: .3, yAxisID: 'y1', order: 1 }]
+          },
+          options: {
+            ...baseOpts, plugins: { legend: { display: true, position: 'top', labels: { font: { size: 11 }, usePointStyle: true, boxWidth: 8 } }, tooltip: { callbacks: { label: c => c.dataset.yAxisID === 'y1' ? ` ${c.dataset.label}: ${c.parsed.y}%` : ` ${c.dataset.label}: ${c.parsed.y}` } } },
+            scales: { y: { position: 'left', beginAtZero: true, ticks: { font: { size: 10 } } }, y1: { position: 'right', beginAtZero: true, max: 100, grid: { drawOnChartArea: false }, ticks: { font: { size: 10 }, callback: v => v + '%' } }, x: { ticks: { font: { size: 9 }, maxRotation: 45, minRotation: 30, autoSkip: false } } }
+          }
         });
       }
 
       const oKeys = workRank.map(o => o.k);
-      const STAT_KEYS = ['Done', 'On Progress', 'Pending', 'Belum diisi'];
-      const STAT_BG2 = { ...STATUS_BG, 'Belum diisi': '#e2e8f0' };
-      const byO = {}; rk.forEach(d => { const n = d['Nama']; if (!n) return; byO[n] = byO[n] || { Done: 0, 'On Progress': 0, Pending: 0, 'Belum diisi': 0 }; const s = STAT_KEYS.includes(d['Status']) ? d['Status'] : 'Belum diisi'; byO[n][s]++; });
-      const usedStat = STAT_KEYS.filter(s => oKeys.some(k => byO[k][s] > 0));
-      document.getElementById('lgWork').innerHTML = usedStat.map(s => `<span class="li"><span class="ld" style="background:${STAT_BG2[s]}"></span>${stLbl(s)}</span>`).join('');
+      const STAT_KEYS = ['Done', 'On Progress', 'Pending'];
+      const byO = {}; rk.forEach(d => { const n = d['Nama']; if (!n) return; byO[n] = byO[n] || { Done: 0, 'On Progress': 0, Pending: 0 }; if (byO[n][d['Status']] != null) byO[n][d['Status']]++; });
+      document.getElementById('lgWork').innerHTML = STAT_KEYS.map(s => `<span class="li"><span class="ld" style="background:${STATUS_BG[s]}"></span>${stLbl(s)}</span>`).join('');
       dc('cWorkload');
       if (oKeys.length) {
         chartInst['cWorkload'] = new Chart(document.getElementById('cWorkload'), {
-          type: 'bar', data: { labels: oKeys, datasets: usedStat.map((s, idx) => ({ label: s, data: oKeys.map(k => byO[k]?.[s] || 0), backgroundColor: STAT_BG2[s], borderRadius: idx === usedStat.length - 1 ? 6 : 0, borderSkipped: false })) },
-          options: { ...baseOpts, plugins: { legend: { display: false } }, scales: { x: { stacked: true, ticks: { font: { size: 10 } } }, y: { stacked: true, beginAtZero: true, ticks: { font: { size: 10 } } } } }
+          type: 'bar', data: { labels: oKeys, datasets: STAT_KEYS.map((s, idx) => ({ label: stLbl(s), data: oKeys.map(k => byO[k]?.[s] || 0), backgroundColor: STATUS_BG[s], borderRadius: idx === STAT_KEYS.length - 1 ? 6 : 0, borderSkipped: false })) },
+          options: { ...baseOpts, scales: { x: { stacked: true, ticks: { font: { size: 10 } } }, y: { stacked: true, beginAtZero: true, ticks: { font: { size: 10 } } } } }
         });
       }
 
@@ -2605,7 +2855,7 @@
     }
     function filterOverviewTable() { const q = document.getElementById('ovSearch').value.toLowerCase(); renderOverviewTable(overviewTableRows.filter(r => Object.values(r).some(v => String(v).toLowerCase().includes(q)))); }
 
-    // ===== PER ORANG =====
+    // ══════════════════ PER ORANG ══════════════════
     function renderPerOrang() {
       const rk = fRekap();
       const orang = [...new Set(rk.map(d => d['Nama']).filter(Boolean))];
@@ -2615,8 +2865,7 @@
         const div = rows[0]?.['Divisi'] || '–';
         const done = rows.filter(d => d['Status'] === 'Done').length;
         const rate = pct(done, rows.length);
-        const col = PALETTE[i % PALETTE.length];
-        return `<div class="person-card${selectedPerson === nm ? ' sel' : ''}" onclick="selectPerson('${esc(nm).replace(/'/g, "\\'")}')"><div class="pc-top"><div class="pav" style="background:${col}">${esc(nm.slice(0, 2).toUpperCase())}</div><div><div class="pname">${esc(nm)}</div><div class="pdiv">${esc(div)}</div></div></div><div class="pbar"><div class="pbar-fill" style="width:${rate}%"></div></div><div class="pstats"><span><b>${rows.length}</b> total</span><span><b>${done}</b> selesai</span><span><b>${rate}%</b></span></div></div>`;
+        return `<div class="person-card${selectedPerson === nm ? ' sel' : ''}" onclick="selectPerson('${esc(nm).replace(/'/g, "\\'")}')"><div class="pc-top"><div class="pav" style="background:${PALETTE[i % PALETTE.length]}">${esc(nm.slice(0, 2).toUpperCase())}</div><div><div class="pname">${esc(nm)}</div><div class="pdiv">${esc(div)}</div></div></div><div class="pbar"><div class="pbar-fill" style="width:${rate}%"></div></div><div class="pstats"><span><b>${rows.length}</b> total</span><span><b>${done}</b> selesai</span><span><b>${rate}%</b></span></div></div>`;
       }).join('') : '<div class="empty">Tidak ada data untuk filter ini.</div>';
       if (selectedPerson && orang.includes(selectedPerson)) renderPersonDetail(rk.filter(d => d['Nama'] === selectedPerson));
       else document.getElementById('personDetail').style.display = 'none';
@@ -2627,30 +2876,29 @@
       document.getElementById('personDetailTitle').textContent = `Detail — ${selectedPerson}`;
       document.getElementById('pTblTitle').textContent = `Kerjaan — ${selectedPerson}`;
       const done = rows.filter(d => d['Status'] === 'Done').length, onprog = rows.filter(d => d['Status'] === 'On Progress').length, pending = rows.filter(d => d['Status'] === 'Pending').length;
-      const belum = rows.length - done - onprog - pending;
       document.getElementById('personStats').innerHTML = `
     <div class="stat-box"><div class="stat-box-label">Total Pekerjaan</div><div class="stat-box-value">${rows.length}</div></div>
     <div class="stat-box"><div class="stat-box-label">FINISH</div><div class="stat-box-value" style="color:var(--green)">${done}</div></div>
     <div class="stat-box"><div class="stat-box-label">DOING</div><div class="stat-box-value" style="color:var(--amber)">${onprog}</div></div>
     <div class="stat-box"><div class="stat-box-label">LIST</div><div class="stat-box-value" style="color:var(--muted)">${pending}</div></div>
     <div class="stat-box"><div class="stat-box-label">Completion</div><div class="stat-box-value" style="color:var(--accent)">${pct(done, rows.length)}%</div></div>`;
-      const byStatus = { 'Done': done, 'On Progress': onprog, 'Pending': pending, 'Belum diisi': belum };
-      const STAT_BG2 = { ...STATUS_BG, 'Belum diisi': '#e2e8f0' };
+      const byStatus = { 'Done': done, 'On Progress': onprog, 'Pending': pending };
       const sKeys = Object.keys(byStatus).filter(k => byStatus[k] > 0);
-      document.getElementById('lgPStatus').innerHTML = sKeys.map(k => `<span class="li"><span class="ld" style="background:${STAT_BG2[k]}"></span>${stLbl(k)} ${byStatus[k]}</span>`).join('');
+      document.getElementById('lgPStatus').innerHTML = sKeys.map(k => `<span class="li"><span class="ld" style="background:${STATUS_BG[k]}"></span>${stLbl(k)} ${byStatus[k]}</span>`).join('');
       dc('cPStatus');
-      if (sKeys.length) chartInst['cPStatus'] = new Chart(document.getElementById('cPStatus'), { type: 'doughnut', data: { labels: sKeys, datasets: [{ data: sKeys.map(k => byStatus[k]), backgroundColor: sKeys.map(k => STAT_BG2[k]), borderWidth: 0 }] }, options: { ...baseOpts, cutout: '60%' } });
+      if (sKeys.length) chartInst['cPStatus'] = new Chart(document.getElementById('cPStatus'), { type: 'doughnut', data: { labels: sKeys.map(stLbl), datasets: [{ data: sKeys.map(k => byStatus[k]), backgroundColor: sKeys.map(k => STATUS_BG[k]), borderWidth: 0 }] }, options: { ...baseOpts, cutout: '60%' } });
 
       const byCat = {}; rows.forEach(d => { const k = d['Kategori']; if (k) byCat[k] = (byCat[k] || 0) + 1; });
       const cKeys = Object.keys(byCat).sort((a, b) => byCat[b] - byCat[a]);
       const catDone = cKeys.map(k => rows.filter(d => d['Kategori'] === k && d['Status'] === 'Done').length);
       dc('cPKat');
       if (cKeys.length) chartInst['cPKat'] = new Chart(document.getElementById('cPKat'), {
-        data: { labels: cKeys, datasets: [
-          { type: 'bar', label: 'Jumlah', data: cKeys.map(k => byCat[k]), backgroundColor: cKeys.map((k, i) => catColor(k, i)), borderRadius: 6, borderSkipped: false, yAxisID: 'y', order: 2 },
-          { type: 'line', label: '% selesai', data: cKeys.map((k, i) => pct(catDone[i], byCat[k])), borderColor: '#3b5bdb', pointRadius: 3, pointBackgroundColor: '#3b5bdb', borderWidth: 2, tension: .3, yAxisID: 'y1', order: 1 }] },
-        options: { ...baseOpts, plugins: { legend: { display: true, position: 'top', labels: { font: { size: 10 }, usePointStyle: true, boxWidth: 8 } }, tooltip: { callbacks: { label: c => c.dataset.yAxisID === 'y1' ? ` ${c.dataset.label}: ${c.parsed.y}%` : ` ${c.dataset.label}: ${c.parsed.y}` } } },
-          scales: { y: { position: 'left', beginAtZero: true, ticks: { font: { size: 10 } } }, y1: { position: 'right', beginAtZero: true, max: 100, grid: { drawOnChartArea: false }, ticks: { font: { size: 10 }, callback: v => v + '%' } }, x: { ticks: { font: { size: 9 } } } } }
+        data: {
+          labels: cKeys, datasets: [
+            { type: 'bar', label: 'Jumlah', data: cKeys.map(k => byCat[k]), backgroundColor: cKeys.map((k, i) => catColor(k, i)), borderRadius: 6, borderSkipped: false, yAxisID: 'y', order: 2 },
+            { type: 'line', label: '% selesai', data: cKeys.map((k, i) => pct(catDone[i], byCat[k])), borderColor: '#3b5bdb', pointRadius: 3, pointBackgroundColor: '#3b5bdb', borderWidth: 2, tension: .3, yAxisID: 'y1', order: 1 }]
+        },
+        options: { ...baseOpts, plugins: { legend: { display: true, position: 'top', labels: { font: { size: 10 }, usePointStyle: true, boxWidth: 8 } } }, scales: { y: { position: 'left', beginAtZero: true, ticks: { font: { size: 10 } } }, y1: { position: 'right', beginAtZero: true, max: 100, grid: { drawOnChartArea: false }, ticks: { font: { size: 10 }, callback: v => v + '%' } }, x: { ticks: { font: { size: 9 } } } } }
       });
 
       const byDate = {}; rows.forEach(d => { const t = d['Tanggal']; if (t) byDate[t] = (byDate[t] || 0) + 1; });
@@ -2682,7 +2930,7 @@
       document.getElementById('gaugeText').innerHTML = `<div style="font-size:34px;font-weight:700;color:${col};line-height:1">${rate}%</div><div style="font-size:11px;color:var(--muted);margin-top:2px">selesai dari ${rk.length} tugas</div><div style="font-size:11px;margin-top:7px"><span class="delta ${gap >= 0 ? 'up' : 'down'}">${gap >= 0 ? '✓ +' : '✗ '}${gap}%</span> <span style="color:var(--faint)">vs target ${targetPct}%</span></div>`;
       const divs = [...new Set(rk.map(d => d['Divisi']).filter(Boolean))].sort();
       const list = divs.map(dv => { const rows = rk.filter(d => d['Divisi'] === dv); const r = pct(rows.filter(d => d['Status'] === 'Done').length, rows.length); return { dv, r, ok: r >= targetPct }; }).sort((a, b) => b.r - a.r);
-      document.getElementById('divTargetList').innerHTML = list.length ? list.map(x => `<div style="margin-bottom:13px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px"><span style="font-weight:600">${esc(x.dv)}</span><span style="font-weight:700;color:${x.ok ? 'var(--green)' : 'var(--red)'}">${x.ok ? '✓' : '✗'} ${x.r}%</span></div><div style="position:relative;height:9px;background:#eef0f5;border-radius:99px"><div style="position:absolute;left:0;top:0;height:100%;width:${x.r}%;background:${x.ok ? 'var(--green)' : 'var(--amber)'};border-radius:99px"></div><div style="position:absolute;left:${targetPct}%;top:-3px;height:15px;width:2px;background:#0f172a" title="Target ${targetPct}%"></div></div></div>`).join('') : '<div class="empty">Tidak ada data.</div>';
+      document.getElementById('divTargetList').innerHTML = list.length ? list.map(x => `<div style="margin-bottom:13px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px"><span style="font-weight:600">${esc(x.dv)}</span><span style="font-weight:700;color:${x.ok ? 'var(--green)' : 'var(--red)'}">${x.ok ? '✓' : '✗'} ${x.r}%</span></div><div style="position:relative;height:9px;background:#eef0f5;border-radius:99px"><div style="position:absolute;left:0;top:0;height:100%;width:${x.r}%;background:${x.ok ? 'var(--green)' : 'var(--amber)'};border-radius:99px"></div><div style="position:absolute;left:${targetPct}%;top:-3px;height:15px;width:2px;background:#0f172a"></div></div></div>`).join('') : '<div class="empty">Tidak ada data.</div>';
     }
 
     let lbMode = 'done';
@@ -2702,7 +2950,7 @@
       }).join('') : '<tr><td colspan="7" class="empty">Tidak ada data.</td></tr>';
     }
 
-    // ===== PER DIVISI =====
+    // ══════════════════ PER DIVISI ══════════════════
     let heatMode = 'vol';
     function setHeatMode(m) { heatMode = m; document.getElementById('hmVol').classList.toggle('active', m === 'vol'); document.getElementById('hmRate').classList.toggle('active', m === 'rate'); renderHeatmap(fRekap()); }
     function renderHeatmap(rk) {
@@ -2714,14 +2962,13 @@
       divs.forEach(dv => { cnt[dv] = {}; don[dv] = {}; cats.forEach(c => { cnt[dv][c] = 0; don[dv][c] = 0; }); });
       rk.forEach(d => { const dv = d['Divisi'], c = d['Kategori']; if (dv && c && cnt[dv] && cnt[dv][c] != null) { cnt[dv][c]++; if (d['Status'] === 'Done') don[dv][c]++; } });
       const val = (dv, c) => heatMode === 'vol' ? cnt[dv][c] : (cnt[dv][c] > 0 ? pct(don[dv][c], cnt[dv][c]) : null);
-      let maxV = 0; divs.forEach(dv => cats.forEach(c => { const v = heatMode === 'vol' ? cnt[dv][c] : val(dv, c); if (v != null && v > maxV) maxV = v; }));
+      let maxV = 0; divs.forEach(dv => cats.forEach(c => { const v = val(dv, c); if (v != null && v > maxV) maxV = v; }));
       if (heatMode === 'rate') maxV = 100;
       const shade = v => {
         if (v == null) return { bg: '#f8fafc', fg: '#cbd5e1', t: '–' };
         if (v === 0) return { bg: '#f8fafc', fg: '#cbd5e1', t: '0' };
         const a = Math.max(.12, v / (maxV || 1));
-        const fg = a > .55 ? '#fff' : '#1e3a8a';
-        return { bg: `rgba(59,91,219,${a})`, fg, t: heatMode === 'vol' ? v : v + '%' };
+        return { bg: `rgba(59,91,219,${a})`, fg: a > .55 ? '#fff' : '#1e3a8a', t: heatMode === 'vol' ? v : v + '%' };
       };
       const catTot = {}; cats.forEach(c => catTot[c] = divs.reduce((s, dv) => s + cnt[dv][c], 0));
       const catsSorted = cats.slice().sort((a, b) => catTot[b] - catTot[a]);
@@ -2744,9 +2991,6 @@
       html += `<td><div class="heat-cell heat-total">${grand}</div></td></tr></tbody></table>`;
       el.innerHTML = html;
     }
-
-    let divKatSel = '__all__';
-    function setDivKat(d) { divKatSel = d; renderDivKat(); }
     function renderDivKat() {
       const rk = fRekap();
       const divs = [...new Set(rk.map(d => d['Divisi']).filter(Boolean))].sort();
@@ -2762,20 +3006,14 @@
             { label: 'LIST', data: cnt('Pending'), backgroundColor: '#cbd5e1', stack: 's', borderRadius: 4, borderSkipped: false }
           ]
         },
-        options: {
-          ...baseOpts,
-          plugins: { legend: { display: true, position: 'top', labels: { font: { size: 12 }, usePointStyle: true, boxWidth: 8, padding: 14 } }, tooltip: { callbacks: { label: c => ` ${c.dataset.label}: ${c.parsed.y} tugas` } } },
-          scales: { x: { stacked: true, ticks: { font: { size: 12 } } }, y: { stacked: true, beginAtZero: true, ticks: { font: { size: 10 }, precision: 0 } } }
-        }
+        options: { ...baseOpts, plugins: { legend: { display: true, position: 'top', labels: { font: { size: 12 }, usePointStyle: true, boxWidth: 8, padding: 14 } } }, scales: { x: { stacked: true, ticks: { font: { size: 12 } } }, y: { stacked: true, beginAtZero: true, ticks: { font: { size: 10 }, precision: 0 } } } }
       });
     }
-
     function renderDivisi() {
       const rk = fRekap();
-      renderHeatmap(rk);
-      renderDivKat();
+      renderHeatmap(rk); renderDivKat();
       const divs = [...new Set(rk.map(d => d['Divisi']).filter(Boolean))].sort();
-      const cards = divs.map((dv, i) => {
+      const cards = divs.map(dv => {
         const rows = rk.filter(d => d['Divisi'] === dv);
         const done = rows.filter(d => d['Status'] === 'Done').length;
         const doi = rows.filter(d => d['Status'] === 'On Progress').length;
@@ -2784,12 +3022,12 @@
         const ppl = [...new Set(rows.map(d => d['Nama']).filter(Boolean))].length;
         const rateCol = rate >= 80 ? 'var(--green)' : rate >= 60 ? 'var(--amber)' : 'var(--red)';
         const rateBg = rate >= 80 ? 'var(--green-l)' : rate >= 60 ? 'var(--amber-l)' : 'var(--red-l)';
-        return `<div class="div-card"><div class="dc-head"><div class="dc-name">${esc(dv)}</div><span class="dc-rate" style="color:${rateCol};background:${rateBg}">${rate}% finish</span></div><div class="dc-row">📋 <b>${rows.length}</b> tugas · 👤 <b>${ppl}</b> orang</div><div class="dc-bar"><div class="dc-bar-fill" style="width:${rate}%;background:${rateCol}"></div></div><div style="display:flex;gap:14px;font-size:12px;margin-top:2px"><span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#15803d;margin-right:5px"></span>FINISH <b>${done}</b></span><span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#f59e0b;margin-right:5px"></span>DOING <b>${doi}</b></span><span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#cbd5e1;margin-right:5px"></span>LIST <b>${lst}</b></span></div></div>`;
+        return `<div class="div-card"><div class="dc-head"><div class="dc-name">${esc(dv)}</div><span class="dc-rate" style="color:${rateCol};background:${rateBg}">${rate}% finish</span></div><div class="dc-row">📋 <b>${rows.length}</b> tugas · 👤 <b>${ppl}</b> orang</div><div class="dc-bar"><div class="dc-bar-fill" style="width:${rate}%;background:${rateCol}"></div></div><div style="display:flex;gap:14px;font-size:12px"><span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#15803d;margin-right:5px"></span>FINISH <b>${done}</b></span><span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#f59e0b;margin-right:5px"></span>DOING <b>${doi}</b></span><span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#cbd5e1;margin-right:5px"></span>LIST <b>${lst}</b></span></div></div>`;
       });
       document.getElementById('divGrid').innerHTML = cards.length ? cards.join('') : '<div class="empty">Tidak ada data divisi.</div>';
     }
 
-    // ===== DESAIN =====
+    // ══════════════════ DESAIN ══════════════════
     function renderDesain() {
       const rows = dataDesain.filter(d => {
         const t = d['Tanggal'] || '';
@@ -2800,7 +3038,7 @@
       const empty = document.getElementById('desEmpty'), main = document.getElementById('desMain');
       if (!rows.length) {
         main.style.display = 'none'; empty.style.display = 'block';
-        empty.innerHTML = `<div class="tbl-card" style="max-width:640px;margin:10px auto"><div class="tbl-hdr"><span class="tbl-title">🎨 Belum ada data Desain</span></div><div style="padding:16px 18px;font-size:13px;color:var(--muted);line-height:1.6">Sheet <b>Desain</b> masih kosong atau belum bisa diakses. Pastikan sheet dibagikan <b>"Siapa saja yang memiliki link → Pelihat"</b> dan sudah berisi baris data, lalu klik <b>Perbarui sekarang</b>.</div></div>`;
+        empty.innerHTML = `<div class="tbl-card" style="max-width:640px;margin:10px auto"><div class="tbl-hdr"><span class="tbl-title">🎨 Belum ada data Desain</span></div><div style="padding:16px 18px;font-size:13px;color:var(--muted);line-height:1.6">Sheet <b>Desain</b> kosong atau belum bisa diakses pada rentang tanggal ini.</div></div>`;
         return;
       }
       empty.style.display = 'none'; main.style.display = 'block';
@@ -2823,13 +3061,12 @@
       const oKeys = Object.keys(byOrder).sort((a, b) => byOrder[b] - byOrder[a]);
       document.getElementById('lgDesOrder').innerHTML = '';
       dc('cDesOrder');
-      if (oKeys.length) chartInst['cDesOrder'] = new Chart(document.getElementById('cDesOrder'), { type: 'bar', data: { labels: oKeys, datasets: [{ label: 'Jumlah', data: oKeys.map(k => byOrder[k]), backgroundColor: oKeys.map((k, i) => catColor(k, i)), borderRadius: 6, borderSkipped: false }] }, options: { ...baseOpts, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, ticks: { font: { size: 10 }, precision: 0 } }, y: { ticks: { font: { size: 10 } } } } } });
-      // Status per jenis ORDER (menggantikan beban per PIC — sheet Desain tak punya PIC)
+      if (oKeys.length) chartInst['cDesOrder'] = new Chart(document.getElementById('cDesOrder'), { type: 'bar', data: { labels: oKeys, datasets: [{ label: 'Jumlah', data: oKeys.map(k => byOrder[k]), backgroundColor: oKeys.map((k, i) => catColor(k, i)), borderRadius: 6, borderSkipped: false }] }, options: { ...baseOpts, indexAxis: 'y', scales: { x: { beginAtZero: true, ticks: { font: { size: 10 }, precision: 0 } }, y: { ticks: { font: { size: 10 } } } } } });
       const STAT_KEYS = ['Done', 'On Progress', 'Pending'];
       const stByOrder = st => oKeys.map(k => rows.filter(d => d['Kategori'] === k && d['Status'] === st).length);
       document.getElementById('lgDesPic').innerHTML = STAT_KEYS.map(s => `<span class="li"><span class="ld" style="background:${STATUS_BG[s]}"></span>${stLbl(s)}</span>`).join('');
       dc('cDesPic');
-      if (oKeys.length) chartInst['cDesPic'] = new Chart(document.getElementById('cDesPic'), { type: 'bar', data: { labels: oKeys, datasets: STAT_KEYS.map(s => ({ label: stLbl(s), data: stByOrder(s), backgroundColor: STATUS_BG[s], stack: 's', borderRadius: 4, borderSkipped: false })) }, options: { ...baseOpts, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ` ${c.dataset.label}: ${c.parsed.y}` } } }, scales: { x: { stacked: true, ticks: { font: { size: 10 } } }, y: { stacked: true, beginAtZero: true, ticks: { font: { size: 10 }, precision: 0 } } } } });
+      if (oKeys.length) chartInst['cDesPic'] = new Chart(document.getElementById('cDesPic'), { type: 'bar', data: { labels: oKeys, datasets: STAT_KEYS.map(s => ({ label: stLbl(s), data: stByOrder(s), backgroundColor: STATUS_BG[s], stack: 's', borderRadius: 4, borderSkipped: false })) }, options: { ...baseOpts, scales: { x: { stacked: true, ticks: { font: { size: 10 } } }, y: { stacked: true, beginAtZero: true, ticks: { font: { size: 10 }, precision: 0 } } } } });
       desainTableRows = rows; renderDesainTable(rows);
     }
     function renderDesainTable(rows) {
@@ -2841,108 +3078,335 @@
     }
     function filterDesainTable() { const q = document.getElementById('desSearch').value.toLowerCase(); renderDesainTable(desainTableRows.filter(r => Object.values(r).some(v => String(v).toLowerCase().includes(q)))); }
 
-    // ===== CS =====
-    function csNum(s) { const d = String(s == null ? '' : s).replace(/[^\d-]/g, ''); return d ? parseInt(d, 10) : 0; }
-    function fmtRp(n) { return 'Rp' + Math.round(n || 0).toLocaleString('id-ID'); }
-    function fmtJt(n) { return (n / 1e6).toLocaleString('id-ID', { maximumFractionDigits: 1 }) + ' jt'; }
-    function parseCountSheet(text) {
-      const rows = parseCSV(text); const anchors = [];
-      rows.forEach((r, ri) => { const c0 = (r[0] || '').trim().toUpperCase(); if (ID_MONTHS.includes(c0)) anchors.push({ m: c0, ri }); });
-      const months = {};
-      anchors.forEach((a, idx) => { const end = idx + 1 < anchors.length ? anchors[idx + 1].ri : rows.length; months[a.m] = parseCountBlock(rows.slice(a.ri, end)); });
-      return months;
-    }
-    function parseCountBlock(block) {
-      const out = { scores: {}, dp: 0, lunas: 0, nominal: 0, harga: 0 };
-      let skorCol = -1, skorRow = -1, sbCol = -1, jenisCol = -1;
-      block.forEach((r, ri) => (r || []).forEach((cell, ci) => {
-        const c = (cell || '').trim().toUpperCase();
-        if (c === 'SKOR') { skorCol = ci; skorRow = ri; } else if (c === 'STATUS BAYAR') { sbCol = ci; } else if (c === 'JENIS') { jenisCol = ci; }
-      }));
-      if (skorCol >= 0) for (let ri = skorRow + 1; ri < block.length; ri++) { const lbl = ((block[ri] || [])[skorCol] || '').trim(); if (/^[1-9]$/.test(lbl)) out.scores[lbl] = csNum((block[ri] || [])[skorCol + 1]); }
-      if (sbCol >= 0) block.forEach(r => { const l = ((r || [])[sbCol] || '').trim().toUpperCase(); if (l === 'DP') out.dp = csNum(r[sbCol + 1]); else if (l === 'LUNAS') out.lunas = csNum(r[sbCol + 1]); });
-      if (jenisCol >= 0) block.forEach(r => { const l = ((r || [])[jenisCol] || '').trim().toUpperCase(); if (l === 'NOMINAL') out.nominal = csNum(r[jenisCol + 1]); else if (l === 'HARGA') out.harga = csNum(r[jenisCol + 1]); });
-      return out;
-    }
-    function csMonthsAvailable() { const set = new Set(); Object.values(dataCS).forEach(c => Object.keys(c.months).forEach(m => set.add(m))); return ID_MONTHS.filter(m => set.has(m)); }
-    function csAgg(name, month) {
-      const cm = dataCS[name]?.months; if (!cm) return null;
-      let blocks;
-      if (!month) blocks = Object.values(cm); else { const b = cm[month]; if (!b) return null; blocks = [b]; }
-      if (!blocks.length) return null;
-      const scores = {}; let dp = 0, lunas = 0, nominal = 0, harga = 0;
-      blocks.forEach(b => { Object.entries(b.scores).forEach(([s, c]) => scores[s] = (scores[s] || 0) + c); dp += b.dp; lunas += b.lunas; nominal += b.nominal; harga += b.harga; });
-      const interaksi = Object.values(scores).reduce((a, c) => a + c, 0);
-      const deal = dp + lunas;
-      const sumScore = Object.entries(scores).reduce((a, [s, c]) => a + (+s) * c, 0);
-      return { name, scores, dp, lunas, nominal, harga, interaksi, deal, lunasRate: deal > 0 ? pct(lunas, deal) : 0, collect: harga > 0 ? pct(nominal, harga) : 0, avgScore: interaksi > 0 ? (sumScore / interaksi) : 0 };
-    }
-    function setCsMonth(m) { csMonth = m; renderCS(); }
+    // ══════════════════ CS — RENDER ══════════════════
+    function setCsMonth(m) { csMonth = m; renderCsMoney(); }
     function setCsSel(n) { csSel = n; renderCS(); }
+
     function renderCS() {
       const note = document.getElementById('csNote'), main = document.getElementById('csMain');
-      const names = Object.keys(dataCS);
-      if (!names.length) {
+
+      // Legenda skor — dibaca lebih dulu supaya warna grafik punya arti
+      document.getElementById('csLegend').innerHTML = [1, 2, 3, 4, 5, 6, 7]
+        .map(s => `<span class="skor-badge" style="background:${skorMeta(s).bg};color:${skorMeta(s).teks}">${s} · ${skorMeta(s).nama}</span>`).join('');
+
+      if (!dataLog.length) {
         main.style.display = 'none'; note.style.display = 'block';
-        const rows = (csDiag.length ? csDiag : CS_SHEETS.map(c => ({ name: c.name, ok: false, msg: 'belum dicoba' }))).map(d => `<tr><td><strong>${esc(d.name)}</strong></td><td>${d.ok ? '<span class="badge b-done">OK</span>' : '<span class="badge b-pend">Gagal</span>'}</td><td style="color:var(--muted)">${esc(d.msg)}${d.sample ? `<div style="margin-top:4px;font-family:monospace;font-size:10px;color:var(--faint);white-space:pre-wrap;word-break:break-all">${esc(d.sample)}…</div>` : ''}</td></tr>`).join('');
-        note.innerHTML = `<div class="tbl-card" style="max-width:760px;margin:10px auto"><div class="tbl-hdr"><span class="tbl-title">🔒 Data CS belum dapat dimuat</span></div><div style="padding:16px 18px;font-size:13px;color:var(--muted);line-height:1.6">Dashboard membaca tab rapi bernama <b>export_kpi</b> di tiap spreadsheet CS. Pastikan tiap file diset <b>Bagikan → "Siapa saja yang memiliki link" → Pelihat</b>, lalu klik <b>Perbarui sekarang</b>.<div style="margin-top:4px">${CS_SHEETS.map(c => `<a href="${csvUrl(c.id, CS_SHEET_TAB)}" target="_blank" style="color:var(--accent);font-size:12px;display:block">Tes ${esc(c.name)} (tab export_kpi) ↗</a>`).join('')}</div></div><div class="tbl-scroll"><table class="data-table"><thead><tr><th>CS</th><th>Status</th><th>Keterangan</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
+        const baris = (csDiag.length ? csDiag : CS_SHEETS.map(c => ({ name: c.name, logOk: false, logMsg: 'belum dicoba' })))
+          .map(d => `<tr><td><strong>${esc(d.name)}</strong></td><td>${d.logOk ? '<span class="badge b-done">OK</span>' : '<span class="badge b-pend">Gagal</span>'}</td><td style="color:var(--muted)">${esc(d.logMsg)}</td></tr>`).join('');
+        note.innerHTML = `<div class="tbl-card" style="max-width:760px;margin:10px auto"><div class="tbl-hdr"><span class="tbl-title">📭 Riwayat skor belum tersedia</span></div>
+        <div style="padding:16px 18px;font-size:13px;color:var(--muted);line-height:1.6">Tab <b>LOG_SKOR</b> belum terbaca di satu pun spreadsheet CS. Pasang skrip <b>log_skor_cs.gs</b>, jalankan <b>Rekam Baseline</b>, lalu klik <b>Perbarui sekarang</b>.
+        <div style="margin-top:8px">${CS_SHEETS.map(c => `<a href="${csvUrl(c.id, CS_LOG_TAB)}" target="_blank" style="color:var(--accent);font-size:12px;display:block">Tes ${esc(c.name)} (tab LOG_SKOR) ↗</a>`).join('')}</div></div>
+        <div class="tbl-scroll"><table class="data-table"><thead><tr><th>CS</th><th>Status</th><th>Keterangan</th></tr></thead><tbody>${baris}</tbody></table></div></div>`;
         return;
       }
       note.style.display = 'none'; main.style.display = 'block';
-      const failed = csDiag.filter(d => !d.ok);
-      document.getElementById('csWarn').innerHTML = failed.length ? `<div class="kpi-card bad" style="margin-bottom:14px"><div style="font-size:12px;color:var(--muted)">⚠️ ${failed.length} CS belum termuat: <b>${failed.map(d => esc(d.name)).join(', ')}</b>. Pastikan aksesnya publik lalu klik Perbarui.</div></div>` : '';
+
+      const gagalLog = csDiag.filter(d => !d.logOk);
+      const gagalKpi = csDiag.filter(d => !d.kpiOk);
+      let warn = '';
+      if (gagalLog.length) warn += `<div style="font-size:12px;color:var(--muted);margin-bottom:5px">⚠️ Riwayat skor belum termuat untuk: <b>${gagalLog.map(d => esc(d.name)).join(', ')}</b> — grafik prospek belum mencakup CS tersebut.</div>`;
+      if (gagalKpi.length) warn += `<div style="font-size:12px;color:var(--muted)">ℹ️ Tab <b>export_kpi</b> belum termuat untuk: <b>${gagalKpi.map(d => esc(d.name)).join(', ')}</b> — hanya bagian keuangan yang terpengaruh.</div>`;
+      document.getElementById('csWarn').innerHTML = warn ? `<div class="kpi-card ${gagalLog.length ? 'bad' : 'warn'}" style="margin-bottom:14px">${warn}</div>` : '';
+
+      const evRange = csDalamRange(dataLog);
+      const kondisi = csKondisiSekarang(dataLog);   // kondisi selalu memakai seluruh riwayat
+
+      renderCsKpi(evRange, kondisi);
+      renderCsKomposisi();
+      renderCsGerak(evRange);
+      renderCsArahPerCS(evRange);
+      renderCsFunnel(kondisi);
+      renderCsKonversi();
+      renderCsMandek(kondisi);
+
+      const names = [...new Set(dataLog.map(e => e.cs))].sort();
+      if (!csSel || !names.includes(csSel)) csSel = names[0];
+      document.getElementById('csChips').innerHTML = names.map(n => `<button class="dk-chip${csSel === n ? ' active' : ''}" onclick="setCsSel('${esc(n).replace(/'/g, "\\'")}')">${esc(n)}</button>`).join('');
+      renderCsDetail(csSel, kondisi);
+
+      renderCsMoney();
+    }
+
+    function renderCsKpi(evRange, kondisi) {
+      const aktif = kondisi.filter(k => k.skor >= 1 && k.skor <= 5).length;
+      const naik = evRange.filter(e => ARAH_POSITIF.includes(e.arah)).length;
+      const mati = evRange.filter(e => e.arah === 'MATI').length;
+      const finish = evRange.filter(e => e.arah === 'FINISH').length;
+      const mandek = kondisi.filter(k => {
+        const amb = MANDEK_AMBANG[k.skor]; if (!amb) return false;
+        const d = lamaDiam(k);
+        return d != null && d >= amb;
+      }).length;
+      const baseline = dataLog.some(e => e.arah === 'BASELINE');
+      const catatan = baseline ? '' : '<span class="kpi-sub">baseline belum direkam</span>';
+      document.getElementById('csKpiGrid').innerHTML = `
+    <div class="kpi-card"><div class="kpi-lbl">🎯 Lead Aktif (skor 1–5)</div><div class="kpi-val">${aktif}</div><div class="kpi-foot"><span class="kpi-sub">di luar Finish &amp; Dorman</span></div></div>
+    <div class="kpi-card ok"><div class="kpi-lbl">⬆️ Kenaikan Skor</div><div class="kpi-val">${naik}</div><div class="kpi-foot"><span class="kpi-sub">${finish} di antaranya Finish</span></div></div>
+    <div class="kpi-card warn"><div class="kpi-lbl">🐢 Lead Mandek</div><div class="kpi-val">${mandek}</div><div class="kpi-foot"><span class="kpi-sub">melewati ambang SOP</span> ${catatan}</div></div>
+    <div class="kpi-card bad"><div class="kpi-lbl">💀 Lead Mati (→ Dorman)</div><div class="kpi-val">${mati}</div><div class="kpi-foot"><span class="kpi-sub">pada rentang terpilih</span></div></div>`;
+    }
+
+    function renderCsKomposisi() {
+      const komp = csKomposisiHarian(dataLog).filter(h => {
+        if (adminRange.from && h.tgl < adminRange.from) return false;
+        if (adminRange.to && h.tgl > adminRange.to) return false;
+        return true;
+      });
+      dc('cCsKomposisi');
+      if (!komp.length) return;
+      const labels = komp.map(h => new Date(h.tgl + 'T00:00:00').toLocaleDateString('id-ID', { day: '2-digit', month: 'short' }));
+      const datasets = [1, 2, 3, 4, 5, 6, 7].map(s => ({
+        label: `${s} · ${skorMeta(s).nama}`,
+        data: komp.map(h => h.cnt[s]),
+        backgroundColor: skorMeta(s).warna,
+        stack: 'k', borderRadius: 3, borderSkipped: false,
+        hidden: (s === 6 || s === 7)   // akumulatif — menutupi cerita prospek
+      }));
+      chartInst['cCsKomposisi'] = new Chart(document.getElementById('cCsKomposisi'), {
+        type: 'bar', data: { labels, datasets },
+        options: {
+          ...baseOpts,
+          plugins: { legend: { display: true, position: 'top', labels: { font: { size: 11 }, usePointStyle: true, boxWidth: 8, padding: 12 } }, tooltip: { mode: 'index', intersect: false } },
+          scales: { x: { stacked: true, ticks: { font: { size: 9 }, maxRotation: 60, minRotation: 45, autoSkip: true, maxTicksLimit: 20 } }, y: { stacked: true, beginAtZero: true, ticks: { font: { size: 10 }, precision: 0 } } }
+        }
+      });
+    }
+
+    function renderCsGerak(ev) {
+      const arahList = ['NAIK', 'FINISH', 'AKTIF KEMBALI', 'LEAD BARU', 'TURUN', 'MATI'];
+      const gerak = ev.filter(e => arahList.includes(e.arah));
+      document.getElementById('lgCsGerak').innerHTML = arahList.map(a => `<span class="li"><span class="ld" style="background:${arahMeta(a).warna}"></span>${arahMeta(a).label}</span>`).join('');
+      dc('cCsGerak');
+      if (!gerak.length) { return; }
+      const tgls = [...new Set(gerak.map(e => e.tgl))].sort();
+      chartInst['cCsGerak'] = new Chart(document.getElementById('cCsGerak'), {
+        type: 'bar',
+        data: {
+          labels: tgls.map(t => new Date(t + 'T00:00:00').toLocaleDateString('id-ID', { day: '2-digit', month: 'short' })),
+          datasets: arahList.map(a => ({
+            label: arahMeta(a).label,
+            data: tgls.map(t => gerak.filter(e => e.tgl === t && e.arah === a).length),
+            backgroundColor: arahMeta(a).warna, stack: 'g', borderRadius: 3, borderSkipped: false
+          }))
+        },
+        options: { ...baseOpts, plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } }, scales: { x: { stacked: true, ticks: { font: { size: 9 }, maxRotation: 60, minRotation: 45, autoSkip: true, maxTicksLimit: 16 } }, y: { stacked: true, beginAtZero: true, ticks: { font: { size: 10 }, precision: 0 } } } }
+      });
+    }
+
+    function renderCsArahPerCS(ev) {
+      const names = [...new Set(dataLog.map(e => e.cs))].sort();
+      const arahList = ['NAIK', 'FINISH', 'AKTIF KEMBALI', 'MATI'];
+      document.getElementById('lgCsArah').innerHTML = arahList.map(a => `<span class="li"><span class="ld" style="background:${arahMeta(a).warna}"></span>${arahMeta(a).label}</span>`).join('');
+      dc('cCsArahCS');
+      if (!names.length) return;
+      chartInst['cCsArahCS'] = new Chart(document.getElementById('cCsArahCS'), {
+        type: 'bar',
+        data: {
+          labels: names,
+          datasets: arahList.map(a => ({
+            label: arahMeta(a).label,
+            data: names.map(n => ev.filter(e => e.cs === n && e.arah === a).length),
+            backgroundColor: arahMeta(a).warna, borderRadius: 5, borderSkipped: false
+          }))
+        },
+        options: { ...baseOpts, plugins: { legend: { display: false } }, scales: { x: { ticks: { font: { size: 11 } } }, y: { beginAtZero: true, ticks: { font: { size: 10 }, precision: 0 } } } }
+      });
+    }
+
+    function renderCsFunnel(kondisi) {
+      const cnt = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 };
+      kondisi.forEach(k => { if (cnt[k.skor] != null) cnt[k.skor]++; });
+      const maks = Math.max(1, ...[1, 2, 3, 4, 5, 6].map(s => cnt[s]));
+      const total = [1, 2, 3, 4, 5, 6].reduce((a, s) => a + cnt[s], 0);
+      let html = [1, 2, 3, 4, 5, 6].map(s => {
+        const m = skorMeta(s);
+        const w = Math.max(3, Math.round(cnt[s] / maks * 100));
+        return `<div class="funnel-row">
+          <span class="funnel-name"><span class="ld" style="background:${m.warna};width:9px;height:9px;border-radius:2px"></span>${s} · ${m.nama}</span>
+          <span class="funnel-bar"><span class="funnel-fill" style="width:${w}%;background:${m.warna}">${cnt[s] || ''}</span></span>
+          <span class="funnel-val">${pct(cnt[s], total)}% dari ${total}</span>
+        </div>`;
+      }).join('');
+      const md = skorMeta(7);
+      html += `<div style="border-top:1px dashed var(--border);margin-top:12px;padding-top:12px">
+        <div class="funnel-row" style="margin:0">
+          <span class="funnel-name"><span class="ld" style="background:${md.warna};width:9px;height:9px;border-radius:2px"></span>7 · Dorman</span>
+          <span class="funnel-bar" style="background:transparent"><span style="font-size:11px;color:var(--muted)">di luar corong — lead berhenti merespon</span></span>
+          <span class="funnel-val" style="font-weight:700;color:var(--txt)">${cnt[7]} lead</span>
+        </div></div>`;
+      document.getElementById('csFunnel').innerHTML = html;
+    }
+
+    function renderCsKonversi() {
+      document.getElementById('csWindowLbl').textContent = KONVERSI_JENDELA;
+      const names = [...new Set(dataLog.map(e => e.cs))].sort();
+      const tahap = [1, 2, 3, 4, 5];
+      const baris = names.map(n => {
+        const ev = dataLog.filter(e => e.cs === n);
+        const sel = tahap.map(t => {
+          const r = csKonversi(ev, t, KONVERSI_JENDELA);
+          if (!r.denom) return `<td class="conv-cell"><span style="color:var(--faint)">—</span><small>belum cukup data</small></td>`;
+          const warna = r.rate >= 60 ? 'var(--green)' : r.rate >= 30 ? 'var(--amber)' : 'var(--red)';
+          return `<td class="conv-cell"><b style="color:${warna}">${r.rate}%</b><small>${r.num} dari ${r.denom}</small></td>`;
+        }).join('');
+        return `<tr><td><strong>${esc(n)}</strong></td>${sel}</tr>`;
+      }).join('');
+      document.getElementById('csConvBody').innerHTML = baris || '<tr><td colspan="6" class="empty">Belum ada data.</td></tr>';
+    }
+
+    function renderCsMandek(kondisi) {
+      const rows = kondisi.map(k => {
+        const amb = MANDEK_AMBANG[k.skor];
+        if (!amb) return null;
+        const diam = lamaDiam(k);
+        if (diam == null || diam < amb) return null;
+        return { ...k, diam, amb, acuan: tglAcuanDiam(k), perkiraan: k.arah === 'BASELINE' };
+      }).filter(Boolean).sort((a, b) => (b.diam - b.amb) - (a.diam - a.amb));
+      csStuckRows = rows;
+      renderCsStuckTable(rows);
+    }
+    function renderCsStuckTable(rows) {
+      document.getElementById('csStuckCnt').textContent = `${rows.length} lead perlu disentuh`;
+      document.getElementById('csStuckBody').innerHTML = rows.length ? rows.slice(0, 40).map(r => {
+        const lewat = r.diam - r.amb;
+        const cls = lewat >= 7 ? 'age-old' : lewat >= 3 ? 'age-mid' : 'age-new';
+        const tanda = r.perkiraan
+          ? ` <span class="chip" title="Lead ini belum pernah berubah sejak baseline. Tanggal diambil dari kolom TGL FU di sheet.">≈ TGL FU</span>` : '';
+        return `<tr><td><span class="age-pill ${cls}">${r.diam}h</span></td><td><strong>${esc(r.cs)}</strong></td><td>${esc(r.nama)}</td><td>${skorBadge(r.skor)}</td><td>${esc(r.acuan)}${tanda}</td><td style="max-width:300px;word-break:break-word;color:var(--muted)">${esc(r.aktivitas || '—')}</td></tr>`;
+      }).join('') : '<tr><td colspan="6" class="empty">Tidak ada lead yang mandek 🎉</td></tr>';
+    }
+    function filterCsStuck() {
+      const q = document.getElementById('csStuckSearch').value.toLowerCase();
+      renderCsStuckTable(csStuckRows.filter(r => [r.cs, r.nama, r.aktivitas].join(' ').toLowerCase().includes(q)));
+    }
+
+    function renderCsDetail(name, kondisiSemua) {
+      const wrap = document.getElementById('csDetail');
+      if (!name) { wrap.style.display = 'none'; return; }
+      wrap.style.display = 'block';
+      document.getElementById('csScoreTitle').textContent = `Distribusi skor — ${name}`;
+      document.getElementById('csHistTitle').textContent = `Riwayat perubahan skor — ${name}`;
+
+      const ev = dataLog.filter(e => e.cs === name);
+      const kondisi = kondisiSemua.filter(k => k.cs === name);
+      const evRange = csDalamRange(ev);
+
+      const aktif = kondisi.filter(k => k.skor <= 5).length;
+      const hot = kondisi.filter(k => k.skor === 3).length;
+      const finish = kondisi.filter(k => k.skor === 6).length;
+      const dorman = kondisi.filter(k => k.skor === 7).length;
+      const naik = evRange.filter(e => ARAH_POSITIF.includes(e.arah)).length;
+      const konv3 = csKonversi(ev, 3, KONVERSI_JENDELA);
+
+      document.getElementById('csStats').innerHTML = `
+    <div class="stat-box"><div class="stat-box-label">Lead Aktif</div><div class="stat-box-value">${aktif}</div></div>
+    <div class="stat-box"><div class="stat-box-label">Hot (skor 3)</div><div class="stat-box-value" style="color:${skorMeta(3).warna}">${hot}</div></div>
+    <div class="stat-box"><div class="stat-box-label">Finish</div><div class="stat-box-value" style="color:${skorMeta(6).warna}">${finish}</div></div>
+    <div class="stat-box"><div class="stat-box-label">Dorman</div><div class="stat-box-value" style="color:${skorMeta(7).warna}">${dorman}</div></div>
+    <div class="stat-box"><div class="stat-box-label">Kenaikan (rentang)</div><div class="stat-box-value" style="color:var(--green)">${naik}</div></div>
+    <div class="stat-box"><div class="stat-box-label">Konversi 3→4</div><div class="stat-box-value">${konv3.denom ? konv3.rate + '%' : '—'}</div></div>`;
+
+      const cnt = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 };
+      kondisi.forEach(k => { if (cnt[k.skor] != null) cnt[k.skor]++; });
+      const sKeys = [1, 2, 3, 4, 5, 6, 7];
+      dc('cCsSkor');
+      chartInst['cCsSkor'] = new Chart(document.getElementById('cCsSkor'), {
+        type: 'bar',
+        data: { labels: sKeys.map(s => `${s} · ${skorMeta(s).nama}`), datasets: [{ label: 'Lead', data: sKeys.map(s => cnt[s]), backgroundColor: sKeys.map(s => skorMeta(s).warna), borderRadius: 6, borderSkipped: false }] },
+        options: { ...baseOpts, scales: { x: { ticks: { font: { size: 9 }, maxRotation: 40, minRotation: 30 } }, y: { beginAtZero: true, ticks: { font: { size: 10 }, precision: 0 } } } }
+      });
+
+      const bucket = csKecepatan(ev);
+      const tahap = [1, 2, 3, 4, 5];
+      const med = tahap.map(t => median(bucket[t]));
+      dc('cCsSpeed');
+      chartInst['cCsSpeed'] = new Chart(document.getElementById('cCsSpeed'), {
+        type: 'bar',
+        data: {
+          labels: tahap.map(t => `${skorMeta(t).nama} → ${skorMeta(t + 1).nama}`),
+          datasets: [{ label: 'Median hari', data: med.map(v => v == null ? 0 : v), backgroundColor: tahap.map(t => skorMeta(t).warna), borderRadius: 6, borderSkipped: false }]
+        },
+        options: {
+          ...baseOpts,
+          plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => med[c.dataIndex] == null ? ' Belum ada data' : ` Median ${med[c.dataIndex]} hari (${bucket[tahap[c.dataIndex]].length} lead)` } } },
+          scales: { x: { ticks: { font: { size: 9 }, maxRotation: 40, minRotation: 30 } }, y: { beginAtZero: true, title: { display: true, text: 'hari', font: { size: 10 } }, ticks: { font: { size: 10 } } } }
+        }
+      });
+
+      csHistRows = logTerurut(evRange).reverse();
+      renderCsHistTable(csHistRows);
+    }
+    function renderCsHistTable(rows) {
+      document.getElementById('csHistCnt').textContent = `${rows.length} perubahan`;
+      document.getElementById('csHistBody').innerHTML = rows.length ? rows.slice(0, 60).map(r => `<tr>
+        <td>${esc(r.tgl)}</td>
+        <td><strong>${esc(r.nama)}</strong></td>
+        <td>${r.lama == null ? '<span style="color:var(--faint)">—</span>' : skorBadge(r.lama)}</td>
+        <td>${skorBadge(r.baru)}</td>
+        <td>${arahBadge(r.arah)}</td>
+        <td style="max-width:280px;word-break:break-word;color:var(--muted)">${esc(r.aktivitas || '—')}</td></tr>`).join('')
+        : '<tr><td colspan="6" class="empty">Tidak ada perubahan pada rentang ini.</td></tr>';
+    }
+    function filterCsHist() {
+      const q = document.getElementById('csHistSearch').value.toLowerCase();
+      renderCsHistTable(csHistRows.filter(r => [r.nama, r.arah, r.aktivitas].join(' ').toLowerCase().includes(q)));
+    }
+
+    // ── Bagian keuangan CS (export_kpi) — boleh tidak ada ──
+    function csMonthsAvailable() { const set = new Set(); Object.values(dataCS).forEach(c => Object.keys(c.months).forEach(m => set.add(m))); return ID_MONTHS.filter(m => set.has(m)); }
+    function csAggMoney(name, month) {
+      const cm = dataCS[name]?.months; if (!cm) return null;
+      const blocks = month ? (cm[month] ? [cm[month]] : []) : Object.values(cm);
+      if (!blocks.length) return null;
+      let dp = 0, lunas = 0, nominal = 0, harga = 0;
+      blocks.forEach(b => { dp += b.dp; lunas += b.lunas; nominal += b.nominal; harga += b.harga; });
+      const deal = dp + lunas;
+      return { name, dp, lunas, nominal, harga, deal, lunasRate: deal > 0 ? pct(lunas, deal) : 0, collect: harga > 0 ? pct(nominal, harga) : 0 };
+    }
+    function renderCsMoney() {
+      const note = document.getElementById('csMoneyNote'), main = document.getElementById('csMoneyMain');
+      const names = Object.keys(dataCS);
+      if (!names.length) {
+        main.style.display = 'none'; note.style.display = 'block';
+        note.innerHTML = `<div class="tbl-card"><div style="padding:16px 18px;font-size:13px;color:var(--muted);line-height:1.6">Tab <b>export_kpi</b> belum terbaca di satu pun spreadsheet CS. Bagian keuangan disembunyikan — grafik prospek di atas tetap berjalan normal.</div></div>`;
+        return;
+      }
+      note.style.display = 'none'; main.style.display = 'block';
+
       const months = csMonthsAvailable();
       if (csMonth == null || (csMonth !== '' && !months.includes(csMonth))) csMonth = months[months.length - 1] || '';
       const sel = document.getElementById('csMonthSel');
       sel.innerHTML = '<option value="">Semua bulan (gabungan)</option>' + months.map(m => `<option value="${m}">${m.charAt(0) + m.slice(1).toLowerCase()}</option>`).join('');
       sel.value = csMonth;
-      const periodeLbl = csMonth ? (csMonth.charAt(0) + csMonth.slice(1).toLowerCase()) : 'Semua bulan';
-      const aggs = names.map(n => csAgg(n, csMonth)).filter(Boolean);
-      const tot = aggs.reduce((a, x) => ({ interaksi: a.interaksi + x.interaksi, deal: a.deal + x.deal, nominal: a.nominal + x.nominal, harga: a.harga + x.harga }), { interaksi: 0, deal: 0, nominal: 0, harga: 0 });
-      const totCollect = tot.harga > 0 ? pct(tot.nominal, tot.harga) : 0;
-      document.getElementById('csKpiGrid').innerHTML = `
-    <div class="kpi-card"><div class="kpi-lbl">👥 Total Interaksi</div><div class="kpi-val">${tot.interaksi}</div><div class="kpi-foot"><span class="kpi-sub">${aggs.length} CS · ${tot.deal} deal</span></div></div>
-    <div class="kpi-card ok"><div class="kpi-lbl">💰 Total Nominal Masuk</div><div class="kpi-val" style="font-size:20px">${fmtRp(tot.nominal)}</div><div class="kpi-foot"><span class="kpi-sub">dari ${fmtRp(tot.harga)} nilai</span></div></div>
-    <div class="kpi-card warn"><div class="kpi-lbl">📊 % Tertagih</div><div class="kpi-val">${totCollect}%</div><div class="kpi-foot"><span class="kpi-sub">nominal ÷ harga</span></div></div>
-    <div class="kpi-card"><div class="kpi-lbl">✅ Total Lunas</div><div class="kpi-val">${aggs.reduce((a, x) => a + x.lunas, 0)}</div><div class="kpi-foot"><span class="kpi-sub">${aggs.reduce((a, x) => a + x.dp, 0)} DP</span></div></div>`;
+
+      const aggs = names.map(n => csAggMoney(n, csMonth)).filter(Boolean);
       const labels = aggs.map(a => a.name);
-      const cols = labels.map(n => CS_COLORS[n] || '#3b5bdb');
-      dc('cCsCust');
-      chartInst['cCsCust'] = new Chart(document.getElementById('cCsCust'), { type: 'bar', data: { labels, datasets: [{ label: 'Interaksi', data: aggs.map(a => a.interaksi), backgroundColor: cols, borderRadius: 6, borderSkipped: false }] }, options: { ...baseOpts, scales: { x: { ticks: { font: { size: 11 } } }, y: { beginAtZero: true, ticks: { font: { size: 10 } } } } } });
+
       document.getElementById('lgCsPay').innerHTML = `<span class="li"><span class="ld" style="background:#f59e0b"></span>DP</span><span class="li"><span class="ld" style="background:#15803d"></span>Lunas</span>`;
       dc('cCsPay');
-      chartInst['cCsPay'] = new Chart(document.getElementById('cCsPay'), { type: 'bar', data: { labels, datasets: [{ label: 'DP', data: aggs.map(a => a.dp), backgroundColor: '#f59e0b', borderSkipped: false }, { label: 'Lunas', data: aggs.map(a => a.lunas), backgroundColor: '#15803d', borderRadius: 6, borderSkipped: false }] }, options: { ...baseOpts, scales: { x: { stacked: true, ticks: { font: { size: 11 } } }, y: { stacked: true, beginAtZero: true, ticks: { font: { size: 10 } } } } } });
+      chartInst['cCsPay'] = new Chart(document.getElementById('cCsPay'), {
+        type: 'bar',
+        data: { labels, datasets: [{ label: 'DP', data: aggs.map(a => a.dp), backgroundColor: '#f59e0b', borderSkipped: false }, { label: 'Lunas', data: aggs.map(a => a.lunas), backgroundColor: '#15803d', borderRadius: 6, borderSkipped: false }] },
+        options: { ...baseOpts, scales: { x: { stacked: true, ticks: { font: { size: 11 } } }, y: { stacked: true, beginAtZero: true, ticks: { font: { size: 10 } } } } }
+      });
+
       dc('cCsRev');
-      chartInst['cCsRev'] = new Chart(document.getElementById('cCsRev'), { data: { labels, datasets: [{ type: 'bar', label: 'Harga', data: aggs.map(a => a.harga), backgroundColor: '#cbd5e1', borderRadius: 5, borderSkipped: false, yAxisID: 'y', order: 3 }, { type: 'bar', label: 'Nominal', data: aggs.map(a => a.nominal), backgroundColor: '#3b5bdb', borderRadius: 5, borderSkipped: false, yAxisID: 'y', order: 2 }, { type: 'line', label: '% tertagih', data: aggs.map(a => a.collect), borderColor: '#15803d', backgroundColor: '#15803d', borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#15803d', tension: .3, yAxisID: 'y1', order: 1 }] }, options: { ...baseOpts, plugins: { legend: { display: true, position: 'top', labels: { font: { size: 11 }, usePointStyle: true, boxWidth: 8 } }, tooltip: { callbacks: { label: c => c.dataset.yAxisID === 'y1' ? ` ${c.dataset.label}: ${c.parsed.y}%` : ` ${c.dataset.label}: ${fmtRp(c.parsed.y)}` } } }, scales: { y: { position: 'left', beginAtZero: true, ticks: { font: { size: 10 }, callback: v => fmtJt(v) } }, y1: { position: 'right', beginAtZero: true, max: 100, grid: { drawOnChartArea: false }, ticks: { font: { size: 10 }, callback: v => v + '%' } }, x: { ticks: { font: { size: 11 } } } } } });
-      document.getElementById('csTblCnt').textContent = `${aggs.length} CS · ${periodeLbl}`;
-      document.getElementById('csTblBody').innerHTML = aggs.slice().sort((a, b) => b.nominal - a.nominal).map(a => `<tr><td><strong style="color:${CS_COLORS[a.name] || '#3b5bdb'}">${esc(a.name)}</strong></td><td>${a.interaksi}</td><td>${a.dp}</td><td style="color:var(--green);font-weight:600">${a.lunas}</td><td>${a.lunasRate}%</td><td>${fmtRp(a.harga)}</td><td><strong>${fmtRp(a.nominal)}</strong></td><td><span class="badge ${a.collect >= 80 ? 'b-done' : a.collect >= 60 ? 'b-prog' : 'b-pend'}">${a.collect}%</span></td><td>${a.avgScore ? a.avgScore.toFixed(1) : '-'}</td></tr>`).join('');
-      if (!csSel || !names.includes(csSel)) csSel = names[0];
-      document.getElementById('csChips').innerHTML = names.map(n => `<button class="dk-chip${csSel === n ? ' active' : ''}" onclick="setCsSel('${esc(n).replace(/'/g, "\\'")}')">${esc(n)}</button>`).join('');
-      renderCsDetail(csAgg(csSel, csMonth));
-    }
-    function renderCsDetail(a) {
-      const wrap = document.getElementById('csDetail');
-      if (!a) { wrap.style.display = 'none'; return; }
-      wrap.style.display = 'block';
-      document.getElementById('csScoreTitle').textContent = `Distribusi skor — ${csSel}`;
-      document.getElementById('csStats').innerHTML = `
-    <div class="stat-box"><div class="stat-box-label">Interaksi</div><div class="stat-box-value">${a.interaksi}</div></div>
-    <div class="stat-box"><div class="stat-box-label">Lunas</div><div class="stat-box-value" style="color:var(--green)">${a.lunas}</div></div>
-    <div class="stat-box"><div class="stat-box-label">DP</div><div class="stat-box-value" style="color:var(--amber)">${a.dp}</div></div>
-    <div class="stat-box"><div class="stat-box-label">% Lunas</div><div class="stat-box-value" style="color:var(--accent)">${a.lunasRate}%</div></div>
-    <div class="stat-box"><div class="stat-box-label">Nominal Masuk</div><div class="stat-box-value" style="font-size:16px">${fmtRp(a.nominal)}</div></div>
-    <div class="stat-box"><div class="stat-box-label">% Tertagih</div><div class="stat-box-value" style="color:${a.collect >= 80 ? 'var(--green)' : a.collect >= 60 ? 'var(--amber)' : 'var(--red)'}">${a.collect}%</div></div>`;
-      const sKeys = Object.keys(a.scores).sort((x, y) => (+x) - (+y));
-      dc('cCsScore');
-      chartInst['cCsScore'] = new Chart(document.getElementById('cCsScore'), { type: 'bar', data: { labels: sKeys.map(k => 'Skor ' + k), datasets: [{ label: 'Jumlah', data: sKeys.map(k => a.scores[k]), backgroundColor: CS_COLORS[a.name] || '#3b5bdb', borderRadius: 6, borderSkipped: false }] }, options: { ...baseOpts, scales: { x: { ticks: { font: { size: 10 } } }, y: { beginAtZero: true, ticks: { font: { size: 10 } } } } } });
-      document.getElementById('lgCsStatus').innerHTML = `<span class="li"><span class="ld" style="background:#f59e0b"></span>DP ${a.dp}</span><span class="li"><span class="ld" style="background:#15803d"></span>Lunas ${a.lunas}</span>`;
-      dc('cCsStatus');
-      chartInst['cCsStatus'] = new Chart(document.getElementById('cCsStatus'), { type: 'doughnut', data: { labels: ['DP', 'Lunas'], datasets: [{ data: [a.dp, a.lunas], backgroundColor: ['#f59e0b', '#15803d'], borderWidth: 0 }] }, options: { ...baseOpts, cutout: '62%' } });
-      dc('cCsNom');
-      chartInst['cCsNom'] = new Chart(document.getElementById('cCsNom'), { type: 'bar', data: { labels: ['Harga', 'Nominal'], datasets: [{ data: [a.harga, a.nominal], backgroundColor: ['#cbd5e1', '#3b5bdb'], borderRadius: 6, borderSkipped: false }] }, options: { ...baseOpts, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ` ${fmtRp(c.parsed.y)}` } } }, scales: { x: { ticks: { font: { size: 11 } } }, y: { beginAtZero: true, ticks: { font: { size: 10 }, callback: v => fmtJt(v) } } } } });
+      chartInst['cCsRev'] = new Chart(document.getElementById('cCsRev'), {
+        data: {
+          labels, datasets: [
+            { type: 'bar', label: 'Harga', data: aggs.map(a => a.harga), backgroundColor: '#cbd5e1', borderRadius: 5, borderSkipped: false, yAxisID: 'y', order: 3 },
+            { type: 'bar', label: 'Nominal', data: aggs.map(a => a.nominal), backgroundColor: '#3b5bdb', borderRadius: 5, borderSkipped: false, yAxisID: 'y', order: 2 },
+            { type: 'line', label: '% tertagih', data: aggs.map(a => a.collect), borderColor: '#15803d', backgroundColor: '#15803d', borderWidth: 2.5, pointRadius: 4, tension: .3, yAxisID: 'y1', order: 1 }]
+        },
+        options: { ...baseOpts, plugins: { legend: { display: true, position: 'top', labels: { font: { size: 11 }, usePointStyle: true, boxWidth: 8 } }, tooltip: { callbacks: { label: c => c.dataset.yAxisID === 'y1' ? ` ${c.dataset.label}: ${c.parsed.y}%` : ` ${c.dataset.label}: ${fmtRp(c.parsed.y)}` } } }, scales: { y: { position: 'left', beginAtZero: true, ticks: { font: { size: 10 }, callback: v => fmtJt(v) } }, y1: { position: 'right', beginAtZero: true, max: 100, grid: { drawOnChartArea: false }, ticks: { font: { size: 10 }, callback: v => v + '%' } }, x: { ticks: { font: { size: 11 } } } } }
+      });
+
+      document.getElementById('csTblCnt').textContent = `${aggs.length} CS · ${csMonth ? csMonth.charAt(0) + csMonth.slice(1).toLowerCase() : 'Semua bulan'}`;
+      document.getElementById('csTblBody').innerHTML = aggs.slice().sort((a, b) => b.nominal - a.nominal).map(a =>
+        `<tr><td><strong>${esc(a.name)}</strong></td><td>${a.dp}</td><td style="color:var(--green);font-weight:600">${a.lunas}</td><td>${a.lunasRate}%</td><td>${fmtRp(a.harga)}</td><td><strong>${fmtRp(a.nominal)}</strong></td><td><span class="badge ${a.collect >= 80 ? 'b-done' : a.collect >= 60 ? 'b-prog' : 'b-pend'}">${a.collect}%</span></td></tr>`).join('');
     }
 
-    // ===== FINANCE =====
+    // ══════════════════ FINANCE RENDER ══════════════════
     function fmtJtInput(rp) { return Math.round((rp || 0) / 1000000); }
     function saveFinTarget() { try { localStorage.setItem('akses_fin_target', JSON.stringify(finTarget)); } catch (e) { } }
     function syncFinTargetInputs() { const o = document.getElementById('finTgtOmset'), l = document.getElementById('finTgtLaba'); if (o) o.value = fmtJtInput(finTarget.omset); if (l) l.value = fmtJtInput(finTarget.laba); }
@@ -2952,41 +3416,6 @@
       saveFinTarget();
       if (!firstLoad && financeUnlocked) renderFinance();
     }
-    function setFinMonthRange(which, end, val) { finFilters[which][end] = val; reRenderFinChart(which); }
-    function setFinDateRange(which, end, val) { finFilters[which][end] = val; reRenderFinChart(which); }
-    function reRenderFinChart(which) {
-      if (which === 'summary') renderFinSummary();
-      else if (which === 'month') renderFinMonth(finGroupMonthly(finRowsMonthRange(finFilters.month.from, finFilters.month.to)));
-      else if (which === 'growth') renderFinGrowth(finGroupMonthly(finRowsMonthRange(finFilters.growth.from, finFilters.growth.to)));
-      else if (which === 'mk') renderFinMK(finGroupMonthly(finRowsMonthRange(finFilters.mk.from, finFilters.mk.to)));
-      else if (which === 'week') renderFinWeek(finGroupWeekly(finRowsDateRange(finFilters.week.from, finFilters.week.to)));
-      else if (which === 'day') renderFinDay();
-      else if (which === 'cum') renderFinCum(finRowsDateRange(finFilters.cum.from, finFilters.cum.to));
-    }
-    // isi dropdown bulan & input tanggal tiap chart; set default penuh hanya sekali
-    function populateFinFilters() {
-      const months = finMonthsList();
-      const b = finDateBounds();
-      const firstK = months.length ? months[0].key : '', lastK = months.length ? months[months.length - 1].key : '';
-      const monthOpts = months.map(m => `<option value="${m.key}">${esc(m.label)}</option>`).join('');
-      ['month', 'growth', 'mk'].forEach(w => {
-        if (!finFilters[w].from) finFilters[w].from = firstK;
-        if (!finFilters[w].to) finFilters[w].to = lastK;
-        const f = document.getElementById('fMonthFrom_' + w), t = document.getElementById('fMonthTo_' + w);
-        if (f) { f.innerHTML = monthOpts; f.value = finFilters[w].from; }
-        if (t) { t.innerHTML = monthOpts; t.value = finFilters[w].to; }
-      });
-      ['summary', 'week', 'day', 'cum'].forEach(w => {
-        const defFrom = b.min;
-        if (!finFilters[w].from) finFilters[w].from = defFrom;
-        if (!finFilters[w].to) finFilters[w].to = b.max;
-        const f = document.getElementById('fDateFrom_' + w), t = document.getElementById('fDateTo_' + w);
-        if (f) { f.min = b.min; f.max = b.max; f.value = finFilters[w].from; }
-        if (t) { t.min = b.min; t.max = b.max; t.value = finFilters[w].to; }
-      });
-      finPopulated = true;
-      syncFinTargetInputs();
-    }
     function renderFinLock(err) {
       const lock = document.getElementById('finLock');
       lock.innerHTML = `<div class="pin-wrap${err ? ' pin-shake' : ''}">
@@ -2994,7 +3423,7 @@
     <div class="pin-title">Tab Finance terkunci</div>
     <div class="pin-sub">Masukkan PIN 6 digit untuk membuka data keuangan.</div>
     <div class="pin-boxes" id="pinBoxes">${[0, 1, 2, 3, 4, 5].map(i => `<input type="password" inputmode="numeric" maxlength="1" data-i="${i}" oninput="pinInput(event,${i})" onkeydown="pinKey(event,${i})">`).join('')}</div>
-    <div class="pin-err" id="pinErr">${err ? 'PIN salah, coba lagi.' : ''}</div>
+    <div class="pin-err">${err ? 'PIN salah, coba lagi.' : ''}</div>
     <button class="pin-btn" onclick="submitPin()">Buka</button>`;
       setTimeout(() => { const f = lock.querySelector('.pin-boxes input'); if (f) f.focus(); }, 60);
     }
@@ -3009,11 +3438,10 @@
       else if (e.key === 'Enter') submitPin();
     }
     function submitPin() {
-      const boxes = [...document.querySelectorAll('.pin-boxes input')];
-      const pin = boxes.map(b => b.value).join('');
-      if (pin === String(FINANCE_PIN)) { financeUnlocked = true; renderFinance(); }
-      else { renderFinLock(true); }
+      const pin = [...document.querySelectorAll('.pin-boxes input')].map(b => b.value).join('');
+      if (pin === String(FINANCE_PIN)) { financeUnlocked = true; renderFinance(); } else renderFinLock(true);
     }
+    function fmtTgl(iso) { return iso ? new Date(iso + 'T00:00:00').toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) : '—'; }
     function renderFinance() {
       const lock = document.getElementById('finLock');
       const note = document.getElementById('finNote'), main = document.getElementById('finMain');
@@ -3021,14 +3449,13 @@
       lock.style.display = 'none';
       if (!dataFinance.length) {
         main.style.display = 'none'; note.style.display = 'block';
-        note.innerHTML = `<div class="tbl-card" style="max-width:720px;margin:10px auto"><div class="tbl-hdr"><span class="tbl-title">🔒 Data Finance belum dapat dimuat</span></div><div style="padding:16px 18px;font-size:13px;color:var(--muted);line-height:1.6">${esc(finDiag.msg || 'Belum ada data.')}<div style="margin-top:8px">Pastikan spreadsheet FINANCE diset <b>Bagikan → "Siapa saja yang memiliki link" → Pelihat</b>, dan sheet pertama memuat kolom <b>Tanggal, Bulan, Uang Masuk, Uang Keluar, Laba</b>. Lalu klik <b>Perbarui sekarang</b>.</div><div style="margin-top:8px"><a href="${csvUrlDefault(FINANCE_ID)}" target="_blank" style="color:var(--accent);font-size:12px">Tes akses CSV ↗</a></div></div></div>`;
+        note.innerHTML = `<div class="tbl-card" style="max-width:720px;margin:10px auto"><div class="tbl-hdr"><span class="tbl-title">🔒 Data Finance belum dapat dimuat</span></div><div style="padding:16px 18px;font-size:13px;color:var(--muted);line-height:1.6">${esc(finDiag.msg || 'Belum ada data.')}</div></div>`;
         return;
       }
       note.style.display = 'none'; main.style.display = 'block';
+      syncFinTargetInputs();
       const rows = finRowsDateRange(adminRange.from, adminRange.to);
-      const fromK = adminRange.from ? adminRange.from.slice(0, 7) : '';
-      const toK = adminRange.to ? adminRange.to.slice(0, 7) : '';
-      const monthly = finMonthlyInRange(fromK, toK);
+      const monthly = finMonthlyInRange(adminRange.from ? adminRange.from.slice(0, 7) : '', adminRange.to ? adminRange.to.slice(0, 7) : '');
       renderFinSummary(rows, monthly);
       renderFinMonth(monthly);
       renderFinGrowth(monthly);
@@ -3038,11 +3465,7 @@
       renderFinCum(rows);
       renderFinTable(monthly);
     }
-    function fmtTgl(iso) { return iso ? new Date(iso + 'T00:00:00').toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) : '—'; }
     function renderFinSummary(rows, monthly) {
-      rows = rows || finRowsDateRange(adminRange.from, adminRange.to);
-      monthly = monthly || finMonthlyInRange(adminRange.from ? adminRange.from.slice(0, 7) : '', adminRange.to ? adminRange.to.slice(0, 7) : '');
-      // KPI total dari sumber bulanan (TREND PER BULAN) agar cocok dengan spreadsheet
       const totMasuk = monthly.reduce((a, m) => a + m.masuk, 0);
       const totKeluar = monthly.reduce((a, m) => a + m.keluar, 0);
       const totLaba = monthly.reduce((a, m) => a + m.laba, 0);
@@ -3058,39 +3481,34 @@
         return `<span class="delta ${cls}">${arr} ${Math.abs(d)}%</span><span class="kpi-sub">bln terakhir vs sebelumnya</span>`;
       }
       document.getElementById('finKpiGrid').innerHTML = `
-    <div class="kpi-card ok"><div class="kpi-lbl">💵 Total Omset (Uang Masuk)</div><div class="kpi-val" style="font-size:20px">${fmtRp(totMasuk)}</div><div class="kpi-foot">${lastM && prevM ? fdelta(lastM.masuk, prevM.masuk, true) : `<span class="kpi-sub">${esc(rangeLbl)}</span>`}</div></div>
+    <div class="kpi-card ok"><div class="kpi-lbl">💵 Total Omset</div><div class="kpi-val" style="font-size:20px">${fmtRp(totMasuk)}</div><div class="kpi-foot">${lastM && prevM ? fdelta(lastM.masuk, prevM.masuk, true) : `<span class="kpi-sub">${esc(rangeLbl)}</span>`}</div></div>
     <div class="kpi-card bad"><div class="kpi-lbl">💸 Total Pengeluaran</div><div class="kpi-val" style="font-size:20px">${fmtRp(totKeluar)}</div><div class="kpi-foot">${lastM && prevM ? fdelta(lastM.keluar, prevM.keluar, false) : `<span class="kpi-sub">${esc(rangeLbl)}</span>`}</div></div>
-    <div class="kpi-card"><div class="kpi-lbl">📈 Total Laba (Untung)</div><div class="kpi-val" style="font-size:20px;color:${totLaba >= 0 ? 'var(--green)' : 'var(--red)'}">${fmtRp(totLaba)}</div><div class="kpi-foot">${lastM && prevM ? fdelta(lastM.laba, prevM.laba, true) : `<span class="kpi-sub">${esc(rangeLbl)}</span>`}</div></div>
+    <div class="kpi-card"><div class="kpi-lbl">📈 Total Laba</div><div class="kpi-val" style="font-size:20px;color:${totLaba >= 0 ? 'var(--green)' : 'var(--red)'}">${fmtRp(totLaba)}</div><div class="kpi-foot">${lastM && prevM ? fdelta(lastM.laba, prevM.laba, true) : `<span class="kpi-sub">${esc(rangeLbl)}</span>`}</div></div>
     <div class="kpi-card warn"><div class="kpi-lbl">🎯 Margin Laba</div><div class="kpi-val">${margin}%</div><div class="kpi-foot"><span class="kpi-sub">laba ÷ omset</span></div></div>`;
 
       if (!monthly.length && !rows.length) { document.getElementById('finSigGrid').innerHTML = '<div class="empty">Tidak ada data pada rentang ini.</div>'; return; }
       const bestOmsetMonth = monthly.slice().sort((a, b) => b.masuk - a.masuk)[0] || { label: '—', masuk: 0 };
       const bestLabaMonth = monthly.slice().sort((a, b) => b.laba - a.laba)[0] || { label: '—', laba: 0 };
       const bestOmsetDay = rows.slice().sort((a, b) => b.masuk - a.masuk)[0] || { masuk: 0, iso: '' };
-      const dailyMasuk = rows.reduce((a, d) => a + d.masuk, 0);
-      const avgDay = rows.length ? dailyMasuk / rows.length : 0;
-      // Sinyal pencapaian target (hanya bulan penuh dihitung; abaikan bulan berjalan jika harinya sedikit)
+      const avgDay = rows.length ? rows.reduce((a, d) => a + d.masuk, 0) / rows.length : 0;
       let tgtCards = '';
       if (finTarget.omset > 0 || finTarget.laba > 0) {
         const full = monthly.filter(m => m.days >= 20);
         const base = full.length ? full : monthly;
-        if (finTarget.omset > 0) {
+        if (finTarget.omset > 0 && base.length) {
           const hitO = base.filter(m => m.masuk >= finTarget.omset).length;
-          const rateO = pct(hitO, base.length);
-          const okO = rateO >= 50;
-          tgtCards += `<div class="sig-card"><div class="sig-ico ${okO ? 'green' : 'red'}">🎯</div><div><div class="sig-lbl">Capai target omset (≥ ${fmtRp(finTarget.omset)})</div><div class="sig-val" style="color:${okO ? 'var(--green)' : 'var(--red)'}">${hitO}/${base.length} bln</div><div class="sig-sub">${rateO}% bulan memenuhi target</div></div></div>`;
+          const rateO = pct(hitO, base.length); const okO = rateO >= 50;
+          tgtCards += `<div class="sig-card"><div class="sig-ico ${okO ? 'green' : 'red'}">🎯</div><div><div class="sig-lbl">Capai target omset</div><div class="sig-val" style="color:${okO ? 'var(--green)' : 'var(--red)'}">${hitO}/${base.length} bln</div><div class="sig-sub">${rateO}% bulan memenuhi target</div></div></div>`;
         }
-        if (finTarget.laba > 0) {
+        if (finTarget.laba > 0 && base.length) {
           const hitL = base.filter(m => m.laba >= finTarget.laba).length;
-          const rateL = pct(hitL, base.length);
-          const okL = rateL >= 50;
-          tgtCards += `<div class="sig-card"><div class="sig-ico ${okL ? 'green' : 'red'}">💰</div><div><div class="sig-lbl">Capai target laba (≥ ${fmtRp(finTarget.laba)})</div><div class="sig-val" style="color:${okL ? 'var(--green)' : 'var(--red)'}">${hitL}/${base.length} bln</div><div class="sig-sub">${rateL}% bulan memenuhi target</div></div></div>`;
+          const rateL = pct(hitL, base.length); const okL = rateL >= 50;
+          tgtCards += `<div class="sig-card"><div class="sig-ico ${okL ? 'green' : 'red'}">💰</div><div><div class="sig-lbl">Capai target laba</div><div class="sig-val" style="color:${okL ? 'var(--green)' : 'var(--red)'}">${hitL}/${base.length} bln</div><div class="sig-sub">${rateL}% bulan memenuhi target</div></div></div>`;
         }
       }
-      document.getElementById('finSigGrid').innerHTML = `
-    ${tgtCards}
-    <div class="sig-card"><div class="sig-ico green">🏆</div><div><div class="sig-lbl">Bulan OMSET tertinggi (pemasukan)</div><div class="sig-val">${esc(bestOmsetMonth.label)}</div><div class="sig-sub">${fmtRp(bestOmsetMonth.masuk)} masuk</div></div></div>
-    <div class="sig-card"><div class="sig-ico green">💎</div><div><div class="sig-lbl">Bulan LABA tertinggi (untung bersih)</div><div class="sig-val">${esc(bestLabaMonth.label)}</div><div class="sig-sub">${fmtRp(bestLabaMonth.laba)} laba</div></div></div>
+      document.getElementById('finSigGrid').innerHTML = `${tgtCards}
+    <div class="sig-card"><div class="sig-ico green">🏆</div><div><div class="sig-lbl">Bulan omset tertinggi</div><div class="sig-val">${esc(bestOmsetMonth.label)}</div><div class="sig-sub">${fmtRp(bestOmsetMonth.masuk)} masuk</div></div></div>
+    <div class="sig-card"><div class="sig-ico green">💎</div><div><div class="sig-lbl">Bulan laba tertinggi</div><div class="sig-val">${esc(bestLabaMonth.label)}</div><div class="sig-sub">${fmtRp(bestLabaMonth.laba)} laba</div></div></div>
     <div class="sig-card"><div class="sig-ico blue">📆</div><div><div class="sig-lbl">Hari omset tertinggi</div><div class="sig-val">${fmtRp(bestOmsetDay.masuk)}</div><div class="sig-sub">${fmtTgl(bestOmsetDay.iso)}</div></div></div>
     <div class="sig-card"><div class="sig-ico amber">📊</div><div><div class="sig-lbl">Rata-rata omset / hari</div><div class="sig-val">${fmtRp(avgDay)}</div><div class="sig-sub">${rows.length} hari tercatat</div></div></div>`;
     }
@@ -3099,112 +3517,84 @@
       document.getElementById('lgFinMonth').innerHTML = '';
       dc('cFinMonth');
       const tgtO = finTarget.omset, tgtL = finTarget.laba;
-      const omsetPtCol = monthly.map(m => tgtO > 0 ? (m.masuk >= tgtO ? FIN_UP : '#f59e0b') : FIN_UP);
       const datasets = [
-        { label: 'Dana Masuk', data: monthly.map(m => m.masuk), borderColor: FIN_UP, backgroundColor: 'rgba(21,128,61,.08)', borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: omsetPtCol, pointBorderColor: '#fff', pointBorderWidth: 1.5, tension: .3, fill: true, _showLabel: true, _labelPos: 'top' },
+        { label: 'Dana Masuk', data: monthly.map(m => m.masuk), borderColor: FIN_UP, backgroundColor: 'rgba(21,128,61,.08)', borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: monthly.map(m => tgtO > 0 ? (m.masuk >= tgtO ? FIN_UP : '#f59e0b') : FIN_UP), pointBorderColor: '#fff', pointBorderWidth: 1.5, tension: .3, fill: true, _showLabel: true, _labelPos: 'top' },
         { label: 'Dana Keluar', data: monthly.map(m => m.keluar), borderColor: FIN_DOWN, backgroundColor: 'rgba(185,28,28,.07)', borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: FIN_DOWN, pointBorderColor: '#fff', pointBorderWidth: 1.5, tension: .3, fill: true, _showLabel: true, _labelPos: 'bottom' },
         { label: 'Laba Usaha', data: monthly.map(m => m.laba), borderColor: FIN_NEU, backgroundColor: 'transparent', borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: FIN_NEU, pointBorderColor: '#fff', pointBorderWidth: 1.5, tension: .3, fill: false, _showLabel: true, _labelPos: 'top' }
       ];
-      if (tgtO > 0) datasets.push({ label: '🎯 Target Omset', data: labels.map(() => tgtO), borderColor: FIN_UP, borderDash: [7, 5], borderWidth: 1.4, pointRadius: 0, pointHoverRadius: 0, fill: false, tension: 0 });
-      if (tgtL > 0) datasets.push({ label: '🎯 Target Laba', data: labels.map(() => tgtL), borderColor: FIN_NEU, borderDash: [4, 4], borderWidth: 1.2, pointRadius: 0, pointHoverRadius: 0, fill: false, tension: 0 });
+      if (tgtO > 0) datasets.push({ label: '🎯 Target Omset', data: labels.map(() => tgtO), borderColor: FIN_UP, borderDash: [7, 5], borderWidth: 1.4, pointRadius: 0, fill: false, tension: 0 });
+      if (tgtL > 0) datasets.push({ label: '🎯 Target Laba', data: labels.map(() => tgtL), borderColor: FIN_NEU, borderDash: [4, 4], borderWidth: 1.2, pointRadius: 0, fill: false, tension: 0 });
       chartInst['cFinMonth'] = new Chart(document.getElementById('cFinMonth'), {
-        type: 'line',
-        data: { labels, datasets },
+        type: 'line', data: { labels, datasets },
         options: {
           ...baseOpts, layout: { padding: { top: 24, bottom: 6 } },
-          plugins: {
-            legend: { display: true, position: 'top', labels: { font: { size: 12 }, usePointStyle: true, boxWidth: 8, padding: 16 } },
-            tooltip: {
-              mode: 'index', intersect: false, callbacks: {
-                label: c => ` ${c.dataset.label}: ${fmtRp(c.parsed.y)}`,
-                afterBody: items => {
-                  const i = items[0].dataIndex, m = monthly[i]; if (!m) return '';
-                  const out = [];
-                  if (tgtO > 0) out.push(m.masuk >= tgtO ? `✓ Omset capai target (+${fmtRp(m.masuk - tgtO)})` : `✗ Omset kurang ${fmtRp(tgtO - m.masuk)}`);
-                  if (tgtL > 0) out.push(m.laba >= tgtL ? `✓ Laba capai target` : `✗ Laba kurang ${fmtRp(tgtL - m.laba)}`);
-                  return out.length ? '\n' + out.join('\n') : '';
-                }
-              }
-            }
-          },
+          plugins: { legend: { display: true, position: 'top', labels: { font: { size: 12 }, usePointStyle: true, boxWidth: 8, padding: 16 } }, tooltip: { mode: 'index', intersect: false, callbacks: { label: c => ` ${c.dataset.label}: ${fmtRp(c.parsed.y)}` } } },
           interaction: { mode: 'index', intersect: false },
-          scales: { x: { ticks: { font: { size: 11 } }, grid: { display: false } }, y: { beginAtZero: true, ticks: { font: { size: 10 }, callback: v => fmtJt(v) }, grid: { color: ctx => ctx.tick.value === 0 ? '#475569' : '#eef2f7' } } }
+          scales: { x: { ticks: { font: { size: 11 } }, grid: { display: false } }, y: { beginAtZero: true, ticks: { font: { size: 10 }, callback: v => fmtJt(v) } } }
         },
         plugins: [lineLabelPlugin]
       });
     }
     function renderFinGrowth(monthly) {
-      const labels = monthly.map(m => m.label);
       const growth = monthly.map((m, i) => i === 0 ? 0 : (monthly[i - 1].masuk > 0 ? Math.round((m.masuk - monthly[i - 1].masuk) / monthly[i - 1].masuk * 100) : 0));
-      const colors = growth.map((g, i) => i === 0 ? FIN_GREY : (g >= 0 ? FIN_UP : FIN_DOWN));
       dc('cFinGrowth');
       chartInst['cFinGrowth'] = new Chart(document.getElementById('cFinGrowth'), {
-        type: 'bar', data: { labels, datasets: [{ label: 'Pertumbuhan', data: growth, backgroundColor: colors, borderRadius: 6, borderSkipped: false }] },
-        options: { ...baseOpts, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ` ${c.parsed.y >= 0 ? '+' : ''}${c.parsed.y}% vs bln lalu` } } }, scales: { x: { ticks: { font: { size: 11 } } }, y: { ticks: { font: { size: 10 }, callback: v => v + '%' }, grid: { color: ctx => ctx.tick.value === 0 ? '#94a3b8' : '#eef0f5' } } } }
+        type: 'bar', data: { labels: monthly.map(m => m.label), datasets: [{ data: growth, backgroundColor: growth.map((g, i) => i === 0 ? FIN_GREY : (g >= 0 ? FIN_UP : FIN_DOWN)), borderRadius: 6, borderSkipped: false }] },
+        options: { ...baseOpts, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ` ${c.parsed.y >= 0 ? '+' : ''}${c.parsed.y}% vs bln lalu` } } }, scales: { x: { ticks: { font: { size: 11 } } }, y: { ticks: { font: { size: 10 }, callback: v => v + '%' } } } }
       });
     }
     function renderFinMK(monthly) {
-      const labels = monthly.map(m => m.label);
       document.getElementById('lgFinMK').innerHTML = `<span class="li"><span class="ld" style="background:${FIN_UP}"></span>Uang masuk</span><span class="li"><span class="ld" style="background:${FIN_DOWN}"></span>Uang keluar</span>`;
       dc('cFinMK');
       chartInst['cFinMK'] = new Chart(document.getElementById('cFinMK'), {
-        type: 'bar', data: { labels, datasets: [
-          { label: 'Uang masuk', data: monthly.map(m => m.masuk), backgroundColor: FIN_UP, borderRadius: 5, borderSkipped: false },
-          { label: 'Uang keluar', data: monthly.map(m => m.keluar), backgroundColor: FIN_DOWN, borderRadius: 5, borderSkipped: false }] },
+        type: 'bar', data: {
+          labels: monthly.map(m => m.label), datasets: [
+            { label: 'Uang masuk', data: monthly.map(m => m.masuk), backgroundColor: FIN_UP, borderRadius: 5, borderSkipped: false },
+            { label: 'Uang keluar', data: monthly.map(m => m.keluar), backgroundColor: FIN_DOWN, borderRadius: 5, borderSkipped: false }]
+        },
         options: { ...baseOpts, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ` ${c.dataset.label}: ${fmtRp(c.parsed.y)}` } } }, scales: { x: { ticks: { font: { size: 11 } } }, y: { beginAtZero: true, ticks: { font: { size: 10 }, callback: v => fmtJt(v) } } } }
       });
     }
     function renderFinWeek(weekly) {
-      const labels = weekly.map(w => w.label);
       const masuk = weekly.map(w => w.masuk);
-      const colors = upDownColors(masuk, false);
       document.getElementById('lgFinWeek').innerHTML = `<span class="li"><span class="ld" style="background:${FIN_UP}"></span>Omset naik</span><span class="li"><span class="ld" style="background:${FIN_DOWN}"></span>Omset turun</span><span class="li"><span class="ld" style="background:#0f172a"></span>Laba</span>`;
       dc('cFinWeek');
       chartInst['cFinWeek'] = new Chart(document.getElementById('cFinWeek'), {
-        data: { labels, datasets: [
-          { type: 'bar', label: 'Omset', data: masuk, backgroundColor: colors, borderRadius: 5, borderSkipped: false, order: 2 },
-          { type: 'line', label: 'Laba', data: weekly.map(w => w.laba), borderColor: '#0f172a', backgroundColor: '#0f172a', borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#0f172a', tension: .3, order: 1 }] },
-        options: { ...baseOpts, plugins: { legend: { display: false }, tooltip: { callbacks: { title: items => 'Minggu mulai ' + items[0].label, label: c => ` ${c.dataset.label}: ${fmtRp(c.parsed.y)}` } } }, scales: { x: { ticks: { font: { size: 10 }, maxRotation: 45, minRotation: 0, autoSkip: true, maxTicksLimit: 16 } }, y: { beginAtZero: true, ticks: { font: { size: 10 }, callback: v => fmtJt(v) } } } }
+        data: {
+          labels: weekly.map(w => w.label), datasets: [
+            { type: 'bar', label: 'Omset', data: masuk, backgroundColor: upDownColors(masuk), borderRadius: 5, borderSkipped: false, order: 2 },
+            { type: 'line', label: 'Laba', data: weekly.map(w => w.laba), borderColor: '#0f172a', backgroundColor: '#0f172a', borderWidth: 2, pointRadius: 3, tension: .3, order: 1 }]
+        },
+        options: { ...baseOpts, plugins: { legend: { display: false }, tooltip: { callbacks: { title: items => 'Minggu mulai ' + items[0].label, label: c => ` ${c.dataset.label}: ${fmtRp(c.parsed.y)}` } } }, scales: { x: { ticks: { font: { size: 10 }, autoSkip: true, maxTicksLimit: 16 } }, y: { beginAtZero: true, ticks: { font: { size: 10 }, callback: v => fmtJt(v) } } } }
       });
     }
     function renderFinDay(rows) {
-      rows = rows || finRowsDateRange(adminRange.from, adminRange.to);
-      if (!rows.length) { dc('cFinDay'); return; }
-      const labels = rows.map(d => new Date(d.iso + 'T00:00:00').toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }));
-      const dense = rows.length > 60;
       dc('cFinDay');
+      if (!rows.length) return;
       chartInst['cFinDay'] = new Chart(document.getElementById('cFinDay'), {
         type: 'line',
         data: {
-          labels,
+          labels: rows.map(d => new Date(d.iso + 'T00:00:00').toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })),
           datasets: [
-            { label: 'Uang Masuk', data: rows.map(d => d.masuk), borderColor: FIN_UP, backgroundColor: 'transparent', borderWidth: 1.4, pointRadius: 0, pointHoverRadius: 4, tension: .25, fill: false, order: 2 },
-            { label: 'Uang Keluar', data: rows.map(d => d.keluar), borderColor: FIN_DOWN, backgroundColor: 'transparent', borderWidth: 1.4, pointRadius: 0, pointHoverRadius: 4, tension: .25, fill: false, order: 1 },
-            { label: 'Laba', data: rows.map(d => d.laba), borderColor: '#2563eb', backgroundColor: 'rgba(37,99,235,.10)', borderWidth: 1.8, pointRadius: 0, pointHoverRadius: 4, tension: .25, fill: 'origin', order: 3 }
+            { label: 'Uang Masuk', data: rows.map(d => d.masuk), borderColor: FIN_UP, borderWidth: 1.4, pointRadius: 0, pointHoverRadius: 4, tension: .25, fill: false },
+            { label: 'Uang Keluar', data: rows.map(d => d.keluar), borderColor: FIN_DOWN, borderWidth: 1.4, pointRadius: 0, pointHoverRadius: 4, tension: .25, fill: false },
+            { label: 'Laba', data: rows.map(d => d.laba), borderColor: '#2563eb', backgroundColor: 'rgba(37,99,235,.10)', borderWidth: 1.8, pointRadius: 0, pointHoverRadius: 4, tension: .25, fill: 'origin' }
           ]
         },
         options: {
-          ...baseOpts,
-          interaction: { mode: 'index', intersect: false },
-          plugins: {
-            legend: { display: true, position: 'top', labels: { usePointStyle: true, pointStyle: 'line', boxWidth: 22, font: { size: 11 } } },
-            tooltip: { mode: 'index', intersect: false, callbacks: { title: items => items[0].label, label: c => ` ${c.dataset.label}: ${fmtRp(c.parsed.y)}` } }
-          },
-          scales: {
-            x: { ticks: { font: { size: 9 }, maxRotation: 60, minRotation: 45, autoSkip: true, maxTicksLimit: dense ? 22 : 16 }, grid: { display: false } },
-            y: { ticks: { font: { size: 10 }, callback: v => fmtJt(v) }, grid: { color: ctx => ctx.tick.value === 0 ? '#475569' : '#eef2f7', lineWidth: ctx => ctx.tick.value === 0 ? 1.2 : 1 } }
-          }
+          ...baseOpts, interaction: { mode: 'index', intersect: false },
+          plugins: { legend: { display: true, position: 'top', labels: { usePointStyle: true, pointStyle: 'line', boxWidth: 22, font: { size: 11 } } }, tooltip: { mode: 'index', intersect: false, callbacks: { label: c => ` ${c.dataset.label}: ${fmtRp(c.parsed.y)}` } } },
+          scales: { x: { ticks: { font: { size: 9 }, maxRotation: 60, minRotation: 45, autoSkip: true, maxTicksLimit: rows.length > 60 ? 22 : 16 }, grid: { display: false } }, y: { ticks: { font: { size: 10 }, callback: v => fmtJt(v) } } }
         }
       });
     }
     function renderFinCum(rows) {
       let run = 0;
-      const labels = rows.map(d => new Date(d.iso + 'T00:00:00').toLocaleDateString('id-ID', { day: '2-digit', month: 'short' }));
       const cum = rows.map(d => (run += d.laba));
       dc('cFinCum');
       chartInst['cFinCum'] = new Chart(document.getElementById('cFinCum'), {
-        type: 'line', data: { labels, datasets: [{ label: 'Akumulasi laba', data: cum, borderColor: FIN_UP, backgroundColor: 'rgba(21,128,61,.12)', borderWidth: 2, pointRadius: 0, pointHoverRadius: 4, fill: true, tension: .25 }] },
-        options: { ...baseOpts, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ` Akumulasi: ${fmtRp(c.parsed.y)}` } } }, scales: { x: { ticks: { font: { size: 8 }, maxRotation: 45, minRotation: 45, autoSkip: true, maxTicksLimit: 24 } }, y: { ticks: { font: { size: 10 }, callback: v => fmtJt(v) } } } }
+        type: 'line', data: { labels: rows.map(d => new Date(d.iso + 'T00:00:00').toLocaleDateString('id-ID', { day: '2-digit', month: 'short' })), datasets: [{ data: cum, borderColor: FIN_UP, backgroundColor: 'rgba(21,128,61,.12)', borderWidth: 2, pointRadius: 0, pointHoverRadius: 4, fill: true, tension: .25 }] },
+        options: { ...baseOpts, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ` Akumulasi: ${fmtRp(c.parsed.y)}` } } }, scales: { x: { ticks: { font: { size: 8 }, autoSkip: true, maxTicksLimit: 24 } }, y: { ticks: { font: { size: 10 }, callback: v => fmtJt(v) } } } }
       });
     }
     function renderFinTable(monthly) {
@@ -3216,13 +3606,13 @@
         let tTxt = '<span class="kpi-sub">—</span>';
         if (finTarget.omset > 0) {
           const ok = m.masuk >= finTarget.omset;
-          tTxt = `<span class="delta ${ok ? 'up' : 'down'}">${ok ? '✓ ' : '✗ '}${ok ? '+' : '−'}${fmtRp(Math.abs(m.masuk - finTarget.omset))}</span>`;
+          tTxt = `<span class="delta ${ok ? 'up' : 'down'}">${ok ? '✓ +' : '✗ −'}${fmtRp(Math.abs(m.masuk - finTarget.omset))}</span>`;
         }
         return `<tr><td><strong>${esc(m.label)}</strong></td><td>${m.days}</td><td>${fmtRp(m.masuk)}</td><td style="color:var(--red)">${fmtRp(m.keluar)}</td><td style="color:${m.laba >= 0 ? 'var(--green)' : 'var(--red)'};font-weight:600">${fmtRp(m.laba)}</td><td>${margin}%</td><td>${gTxt}</td><td>${tTxt}</td></tr>`;
       }).join('');
     }
 
-    // NAV
+    // ══════════════════ NAVIGASI ══════════════════
     const PAGE_TITLES = { overview: 'Overview', perorangan: 'Per Orang', divisi: 'Per Divisi', desain: 'Desain', cs: 'Data CS', finance: 'Finance' };
     function showPage(id) {
       curPage = id;
@@ -3231,19 +3621,15 @@
       document.getElementById(`page-${id}`)?.classList.add('active');
       document.querySelector(`.sb-item[data-page="${id}"]`)?.classList.add('active');
       document.getElementById('pgTitle').textContent = PAGE_TITLES[id] || id;
-      // Filter tanggal & divisi hanya relevan di halaman admin (overview/perorangan/divisi)
-      // Filter tanggal global: tampil di semua tab data kecuali CS (CS berbasis bulan)
-      const showDate = id !== 'cs';
-      const showDiv = ['overview', 'perorangan', 'divisi'].includes(id);
-      const drpA = document.getElementById('drp_admin'); if (drpA) drpA.style.display = showDate ? 'block' : 'none';
-      const fdv = document.getElementById('fDivisi'); if (fdv) fdv.style.display = showDiv ? '' : 'none';
+      // Rentang tanggal kini berlaku juga di tab CS, karena LOG_SKOR berbasis tanggal.
+      const drpA = document.getElementById('drp_admin'); if (drpA) drpA.style.display = 'block';
+      const fdv = document.getElementById('fDivisi'); if (fdv) fdv.style.display = ['overview', 'perorangan', 'divisi'].includes(id) ? '' : 'none';
       renderAll();
     }
     document.querySelectorAll('.sb-item[data-page]').forEach(el => el.addEventListener('click', () => showPage(el.dataset.page)));
 
     loadAllData(false);
     setInterval(() => loadAllData(true), 5 * 60 * 1000);
-
   </script>
 </body>
 
