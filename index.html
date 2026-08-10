@@ -2557,9 +2557,10 @@
     async function fetchAdminSheet(id, sheetName) {
       const txt = await fetchRaw(csvUrl(id, sheetName));
       if (butuhLogin(txt)) return [];
-      // Validasi: respons harus terlihat seperti CSV, bukan halaman error HTML.
-      // Google Sheets kadang mengembalikan HTML 200 untuk tab yang tidak ada.
-      if (txt.trimStart().startsWith('<')) return [];
+      // Validasi: tolak respons yang jelas bukan CSV (halaman error HTML penuh).
+      // Jangan terlalu ketat — CSV kadang mengandung karakter <.
+      const trimmed = txt.trimStart();
+      if (/^<!DOCTYPE|^<html/i.test(trimmed)) return [];
       const divisi = sheetName.replace(/\s*-\s*(JAN|FEB|MAR|APR|MEI|JUN|JUL|AGU|SEP|OKT|NOV|DES|JANUARI|FEBRUARI|MARET|APRIL|MEI|JUNI|JULI|AGUSTUS|SEPTEMBER|OKTOBER|NOVEMBER|DESEMBER).*$/i, '').trim();
       return parseAdminSheet(txt, divisi);
     }
